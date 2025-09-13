@@ -27,3 +27,6 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
 * Export character map as a PNG image.
 * Toggle between light and dark mode themes.
 * Interactive tutorial to guide new users.
+
+**Version 1.0.1** (September 12, 2025)
+* Added update functionality.
