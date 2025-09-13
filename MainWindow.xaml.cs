@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Net.Http;
 using System.Text.Json;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace SixteenCoreCharacterMapper
 {
@@ -66,52 +67,10 @@ namespace SixteenCoreCharacterMapper
                 ApplyTheme(_viewModel.IsDarkMode);
                 RedrawAllTraits();
                 _adornerLayer = AdornerLayer.GetAdornerLayer(CharactersList);
-                await CheckForUpdatesAsync();
+
+                // Now using the single, flexible method for the initial check.
+                await CheckForUpdatesWithResultAsync();
             };
-        }
-
-private async Task CheckForUpdatesAsync()
-        {
-            // IMPORTANT: Replace with the RAW URL to your version.json file on GitHub
-            string url = "https://raw.githubusercontent.com/YourUsername/16Core-Character-Mapper/main/version.json";
-
-            try
-            {
-                using (var httpClient = new HttpClient())
-                {
-                    // Add a user-agent header to avoid being blocked
-                    httpClient.DefaultRequestHeaders.Add("User-Agent", "16Core-Character-Mapper-Update-Check");
-
-                    string json = await httpClient.GetStringAsync(url);
-                    var updateInfo = JsonSerializer.Deserialize<UpdateInfo>(json);
-
-                    if (updateInfo == null) return;
-
-                    var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
-                    var latestVersion = new Version(updateInfo.version);
-
-                    if (latestVersion > currentVersion)
-                    {
-                        var result = MessageBox.Show(
-                            $"A new version ({latestVersion}) is available! You are currently using version {currentVersion}.\n\nRelease Notes:\n{updateInfo.releaseNotes}\n\nWould you like to go to the download page?",
-                            "Update Available",
-                            MessageBoxButton.YesNo,
-                            MessageBoxImage.Information);
-
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            // Opens the download URL in the user's default browser
-                            Process.Start(new ProcessStartInfo { FileName = updateInfo.url, UseShellExecute = true });
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Silently fail if there's no internet or the file is not found.
-                // You could log this error for debugging if you wanted.
-                Debug.WriteLine($"Update check failed: {ex.Message}");
-            }
         }
 
         private ICollectionView? GetCharactersView()
@@ -989,7 +948,7 @@ private async Task CheckForUpdatesAsync()
             var titlePanel = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
             Grid.SetColumn(titlePanel, 1);
             titlePanel.Children.Add(new TextBlock { Text = "16Core Character Mapper", FontWeight = FontWeights.Bold, FontSize = 16 });
-            titlePanel.Children.Add(new TextBlock { Text = "Version 1.0.0" }); // Updated version
+            titlePanel.Children.Add(new TextBlock { Text = "Version 1.0.1" }); // Updated version
             headerGrid.Children.Add(titlePanel);
             mainGrid.Children.Add(headerGrid);
 
@@ -1058,8 +1017,10 @@ private async Task CheckForUpdatesAsync()
             // --- Footer (Buttons) ---
             var buttonGrid = new Grid { Margin = new Thickness(0, 15, 0, 0) };
             Grid.SetRow(buttonGrid, 2);
+            buttonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            buttonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            buttonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            buttonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
             var donateButton = new Button
             {
@@ -1072,6 +1033,25 @@ private async Task CheckForUpdatesAsync()
             Grid.SetColumn(donateButton, 0);
             buttonGrid.Children.Add(donateButton);
 
+            var checkUpdatesButton = new Button
+            {
+                Content = "Check for Updates",
+                Padding = new Thickness(10, 5, 10, 5),
+                HorizontalAlignment = HorizontalAlignment.Right,
+                Style = _viewModel.IsDarkMode ? (Style)FindResource("DarkToolBarButtonStyle")! : (Style)FindResource("ToolBarButtonStyle")!
+            };
+            checkUpdatesButton.Click += async (s, args) =>
+            {
+                bool isUpdateAvailable = await CheckForUpdatesWithResultAsync();
+
+                if (!isUpdateAvailable)
+                {
+                    MessageBox.Show("You're using the latest version available.", "No Updates", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            };
+            Grid.SetColumn(checkUpdatesButton, 2);
+            buttonGrid.Children.Add(checkUpdatesButton);
+
             var okButton = new Button
             {
                 Content = "OK",
@@ -1082,13 +1062,60 @@ private async Task CheckForUpdatesAsync()
                 Style = _viewModel.IsDarkMode ? (Style)FindResource("DarkToolBarButtonStyle")! : (Style)FindResource("ToolBarButtonStyle")!
             };
             okButton.Click += (s, args) => aboutWindow.Close();
-            Grid.SetColumn(okButton, 1);
+            Grid.SetColumn(okButton, 3);
             buttonGrid.Children.Add(okButton);
             mainGrid.Children.Add(buttonGrid);
 
             aboutWindow.Content = mainGrid;
             aboutWindow.ShowDialog();
         }
+
+        private async Task<bool> CheckForUpdatesWithResultAsync()
+        {
+            // IMPORTANT: Replace with the RAW URL to your version.json file on GitHub
+            string url = "https://raw.githubusercontent.com/georgetsirogiannis/SixteenCoreCharacterMapper/master/version.json";
+
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    httpClient.DefaultRequestHeaders.Add("User-Agent", "16Core-Character-Mapper-Update-Check");
+
+                    string json = await httpClient.GetStringAsync(url);
+                    var updateInfo = JsonSerializer.Deserialize<UpdateInfo>(json);
+
+                    if (updateInfo?.Version == null || updateInfo.Url == null || updateInfo.ReleaseNotes == null) return false;
+
+                    var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+                    var latestVersion = new Version(updateInfo.Version);
+
+                    if (latestVersion > currentVersion)
+                    {
+                        var result = MessageBox.Show(
+                            $"A new version ({latestVersion}) is available! You are currently using version {currentVersion}.\n\nRelease Notes:\n{updateInfo.ReleaseNotes}\n\nWould you like to go to the download page?",
+                            "Update Available",
+                            MessageBoxButton.YesNo,
+                            MessageBoxImage.Information);
+
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            Process.Start(new ProcessStartInfo { FileName = updateInfo.Url, UseShellExecute = true });
+                        }
+                        return true; // An update was found
+                    }
+                    else
+                    {
+                        return false; // No update was found
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Update check failed: {ex.Message}");
+                return false; // An error occurred, so no update was found
+            }
+        }
+
         private void Donate_Click(object sender, RoutedEventArgs e) { try { Process.Start(new ProcessStartInfo("https://www.paypal.com/donate/?hosted_button_id=9QWZ6U22CL9KA") { UseShellExecute = true }); } catch (Exception ex) { MessageBox.Show($"Could not open the donation link. Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error); } }
         private void ApplyBorderTheme(Border border, int traitIndex) { var brushEven = _viewModel.IsDarkMode ? new SolidColorBrush(Color.FromRgb(35, 35, 35)) : new SolidColorBrush(Color.FromArgb(5, 0, 0, 0)); var brushOdd = _viewModel.IsDarkMode ? new SolidColorBrush(Color.FromRgb(45, 45, 45)) : new SolidColorBrush(Color.FromArgb(10, 0, 0, 0)); border.Background = (traitIndex / 4 + traitIndex % 4) % 2 == 0 ? brushEven : brushOdd; }
         private void ApplyTextBlockTheme(TextBlock textBlock) { textBlock.Foreground = _viewModel.IsDarkMode ? Brushes.White : Brushes.Black; }
@@ -1132,10 +1159,8 @@ private async Task CheckForUpdatesAsync()
 
     public class UpdateInfo
     {
-        public string version { get; set; }
-        public string url { get; set; }
-        public string releaseNotes { get; set; }
+        public string? Version { get; set; }
+        public string? Url { get; set; }
+        public string? ReleaseNotes { get; set; }
     }
 }
-
-
