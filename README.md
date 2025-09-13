@@ -30,3 +30,6 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
 
 **Version 1.0.1** (September 12, 2025)
 * Added update functionality.
+
+**Version 1.0.2** (September 12, 2025)
+* Minor UI fixes.

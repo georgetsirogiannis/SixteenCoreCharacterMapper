@@ -169,6 +169,14 @@ namespace SixteenCoreCharacterMapper
             }
         }
 
+        private void ProjectNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Keyboard.ClearFocus();
+            }
+        }
+
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             _viewModel.ClosingWindow(e);
@@ -948,7 +956,7 @@ namespace SixteenCoreCharacterMapper
             var titlePanel = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
             Grid.SetColumn(titlePanel, 1);
             titlePanel.Children.Add(new TextBlock { Text = "16Core Character Mapper", FontWeight = FontWeights.Bold, FontSize = 16 });
-            titlePanel.Children.Add(new TextBlock { Text = "Version 1.0.1" }); // Updated version
+            titlePanel.Children.Add(new TextBlock { Text = "Version 1.0.2" }); // Updated version
             headerGrid.Children.Add(titlePanel);
             mainGrid.Children.Add(headerGrid);
 
@@ -1058,6 +1066,7 @@ namespace SixteenCoreCharacterMapper
                 IsDefault = true,
                 Width = 80,
                 Padding = new Thickness(5),
+                Margin = new Thickness(5, 0, 0, 0),
                 HorizontalAlignment = HorizontalAlignment.Right,
                 Style = _viewModel.IsDarkMode ? (Style)FindResource("DarkToolBarButtonStyle")! : (Style)FindResource("ToolBarButtonStyle")!
             };
