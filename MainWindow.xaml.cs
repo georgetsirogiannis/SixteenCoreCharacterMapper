@@ -956,7 +956,9 @@ namespace SixteenCoreCharacterMapper
             var titlePanel = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
             Grid.SetColumn(titlePanel, 1);
             titlePanel.Children.Add(new TextBlock { Text = "16Core Character Mapper", FontWeight = FontWeights.Bold, FontSize = 16 });
-            titlePanel.Children.Add(new TextBlock { Text = "Version 1.0.2" }); // Updated version
+            var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            string versionString = $"Version {version.Major}.{version.Minor}.{version.Build}";
+            titlePanel.Children.Add(new TextBlock { Text = versionString });
             headerGrid.Children.Add(titlePanel);
             mainGrid.Children.Add(headerGrid);
 
