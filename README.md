@@ -20,7 +20,7 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
 * **Email:** For questions, support, or feedback, you can contact me at 16core@georgetsirogiannis.com.
 
 ### System Requirements
-* **Operating System:** Windows 7 or later.
+* **Operating System:** Windows 10 or later.
 * **Runtime:** This application is built on the .NET 8.0 framework and requires the **.NET 8.0 Desktop Runtime**. The installer will automatically handle this for you.
 * **Display:** For the best user experience, a screen resolution of 1920x1080 or higher is recommended.
 
