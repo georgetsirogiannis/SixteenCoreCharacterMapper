@@ -19,6 +19,13 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
 * **Donations:** If you find this tool helpful, please consider making an optional donation via PayPal: https://www.paypal.com/donate/?hosted_button_id=9QWZ6U22CL9KA.
 * **Email:** For questions, support, or feedback, you can contact me at 16core@georgetsirogiannis.com.
 
+### System Requirements
+* **Operating System:** Windows 7 or later.
+* **Runtime:** This application is built on the .NET 8.0 framework and requires the **.NET 8.0 Desktop Runtime**. The installer will automatically handle this for you.
+* **Display:** For the best user experience, a screen resolution of 1920x1080 or higher is recommended.
+
+---
+
 ### Changelog
 **Version 1.0.0** (September 12, 2025)
 * Initial release of the 16Core Character Mapper.
