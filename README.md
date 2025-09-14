@@ -40,3 +40,9 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
 
 **Version 1.0.2** (September 12, 2025)
 * Minor UI fixes.
+
+**Version 1.0.3** (September 13, 2025)
+* This is an important maintenance release that fixes the automatic update functionality and improves application stability:
+  * Fixed the **"Check for Updates"** functionality. The application will now correctly find and notify you when new versions are available.
+  * The installer has been updated and modernized for a smoother installation experience.
+  * Numerous behind-the-scenes improvements to the project structure for better reliability.
