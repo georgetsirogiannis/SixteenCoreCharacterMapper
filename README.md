@@ -15,7 +15,7 @@ By placing character bubbles on a chart, you can easily see how different charac
 This application is a creative tool, not a scientific or diagnostic instrument. It is not intended for psychological assessment, and the personality-related information is provided for creative inspiration only. The terminology used is based on public-domain concepts, primarily drawn from the International Personality Item Pool (IPIP).
 
 ### Support & Contact
-* **Website:** For more information, visit the official website at https://16corecharactermapper.my.canva.site/.
+* **Website:** For more information, visit the official website at https://georgetsirogiannis.com/16corecharactermapper.
 * **Donations:** If you find this tool helpful, please consider making an optional donation via PayPal: https://www.paypal.com/donate/?hosted_button_id=9QWZ6U22CL9KA.
 * **Email:** For questions, support, or feedback, you can contact me at 16core@georgetsirogiannis.com.
 
