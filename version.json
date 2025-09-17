@@ -1,5 +1,5 @@
 {
-  "version": "1.0.3",
-  "Url": "https://github.com/georgetsirogiannis/SixteenCoreCharacterMapper/releases/latest",
-  "ReleaseNotes": "Fixed update functionality and improved version display."
+  "version": "1.1.0",
+  "Url": "https://github.com/georgetsirogiannis/SixteenCoreCharacterMapper/releases/download/v1.1.0/16CoreCharacterMapper-Setup-v1.1.0.exe",
+  "ReleaseNotes": "• Added a localization feature for the trait grid. The grid can now be used in English, French, German, Spanish, Portuguese, Italian, Dutch, Polish and Greek. \n\n• Fixed a bug where the Project Title wasn't saved and reverted back to the savefile name the next time the savefile was loaded. \n\n• Fixed the Update Check functionality."
 }
