@@ -8,16 +8,16 @@
 		<UseWPF>true</UseWPF>
 		<Title>16Core Character Mapper</Title>
 		<Product>16Core Character Mapper</Product>
-		<Version>1.0.3</Version>
-		<AssemblyVersion>1.0.3.0</AssemblyVersion>
-		<FileVersion>1.0.3.0</FileVersion>
+		<Version>1.1.0</Version>
+		<AssemblyVersion>1.1.0.0</AssemblyVersion>
+		<FileVersion>1.1.0.0</FileVersion>
 		<ApplicationIcon>16Core logo icon v2.ico</ApplicationIcon>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<Company>George Tsirogiannis</Company>
 		<Authors>George Tsirogiannis</Authors>
 		<Copyright>© 2025 George Tsirogiannis. All Rights Reserved.</Copyright>
-		<PackageProjectUrl>https://16corecharactermapper.my.canva.site/</PackageProjectUrl>
+		<PackageProjectUrl>https://georgetsirogiannis.com/16corecharactermapper</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/georgetsirogiannis/SixteenCoreCharacterMapper</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -50,6 +50,21 @@
     <Resource Include="Assets\lock_light.png" />
     <Resource Include="Assets\unlock_dark.png" />
     <Resource Include="Assets\unlock_light.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

@@ -15,9 +15,16 @@ By placing character bubbles on a chart, you can easily see how different charac
 This application is a creative tool, not a scientific or diagnostic instrument. It is not intended for psychological assessment, and the personality-related information is provided for creative inspiration only. The terminology used is based on public-domain concepts, primarily drawn from the International Personality Item Pool (IPIP).
 
 ### Support & Contact
-* **Website:** For more information, visit the official website at https://16corecharactermapper.my.canva.site/.
+* **Website:** For more information, visit the official website at https://georgetsirogiannis.com/16corecharactermapper.
 * **Donations:** If you find this tool helpful, please consider making an optional donation via PayPal: https://www.paypal.com/donate/?hosted_button_id=9QWZ6U22CL9KA.
 * **Email:** For questions, support, or feedback, you can contact me at 16core@georgetsirogiannis.com.
+
+### System Requirements
+* **Operating System:** Windows 10 or later.
+* **Runtime:** This application is built on the .NET 8.0 framework and requires the **.NET 8.0 Desktop Runtime**. The installer will automatically handle this for you.
+* **Display:** For the best user experience, a screen resolution of 1920x1080 or higher is recommended.
+
+---
 
 ### Changelog
 **Version 1.0.0** (September 12, 2025)
@@ -33,3 +40,16 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
 
 **Version 1.0.2** (September 12, 2025)
 * Minor UI fixes.
+
+**Version 1.0.3** (September 13, 2025)
+* This is an important maintenance release that fixes the automatic update functionality and improves application stability:
+  * Fixed the **"Check for Updates"** functionality. The application will now correctly find and notify you when new versions are available.
+  * The installer has been updated and modernized for a smoother installation experience.
+  * Numerous behind-the-scenes improvements to the project structure for better reliability.
+
+**Version 1.1.0** (September 17, 2025)
+* A major localization update:
+  * Added support for multiple languages in the trait grid. You can now choose between English, French, German, Spanish, Portuguese, Italian, Dutch, Polish and Greek.
+* Bug fixes
+  * Fixed a bug where the Project Title wasn't saved and reverted back to the savefile name the next time the savefile was loaded.
+  * Fixed the Update Check functionality.

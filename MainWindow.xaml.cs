@@ -55,7 +55,7 @@ namespace SixteenCoreCharacterMapper
             _viewModel = new MainWindowViewModel();
             DataContext = _viewModel;
 
-            _viewModel.RedrawTraitsRequested += RedrawAllTraits;
+            _viewModel.RedrawTraitsRequested += RefreshTraitsUI;
             _viewModel.ApplyThemeRequested += () => ApplyTheme(_viewModel.IsDarkMode);
             _viewModel.CharacterAdded += OnCharacterAddedForTutorial;
             _viewModel.RefreshCharacterListRequested += () => GetCharactersView()?.Refresh();
@@ -65,7 +65,7 @@ namespace SixteenCoreCharacterMapper
                 SetPlaceholder();
                 InitializeTraits();
                 ApplyTheme(_viewModel.IsDarkMode);
-                RedrawAllTraits();
+                RefreshTraitsUI();
                 _adornerLayer = AdornerLayer.GetAdornerLayer(CharactersList);
 
                 // Now using the single, flexible method for the initial check.
@@ -119,6 +119,14 @@ namespace SixteenCoreCharacterMapper
                 ProjectNameTextBox.Text = PlaceholderText;
                 ProjectNameTextBox.FontStyle = FontStyles.Italic;
                 ProjectNameTextBox.Foreground = _viewModel.IsDarkMode ? Brushes.DarkGray : Brushes.Gray;
+
+                // Ensure the bound ProjectName remains empty (don't save the placeholder)
+                try
+                {
+                    _viewModel.ProjectName = string.Empty;
+                }
+                catch { }
+
                 _isSettingPlaceholder = false;
             }
         }
@@ -157,6 +165,10 @@ namespace SixteenCoreCharacterMapper
                 _isSettingPlaceholder = true;
                 ProjectNameTextBox.Text = "";
                 ApplyNormalTextStyle();
+
+                // Keep the project name empty in ViewModel when the placeholder was removed
+                try { _viewModel.ProjectName = string.Empty; } catch { }
+
                 _isSettingPlaceholder = false;
             }
         }
@@ -215,7 +227,7 @@ namespace SixteenCoreCharacterMapper
                 int rowIndex = traitIndex / columnsPerRow;
                 int columnIndex = traitIndex % columnsPerRow;
 
-                var containerBorder = new Border { Padding = new Thickness(15, 30, 15, 10) };
+                var containerBorder = new Border { Padding = new Thickness(15, 22, 15, 10) };
                 var innerGrid = new Grid();
                 innerGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 innerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(50) });
@@ -225,7 +237,22 @@ namespace SixteenCoreCharacterMapper
                 titleGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.4, GridUnitType.Star) });
                 titleGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.6, GridUnitType.Star) });
                 titleGrid.Margin = new Thickness(0, 0, 0, 20);
-                var title = new TextBlock { Text = trait.Name, FontWeight = FontWeights.Bold, FontSize = 16, VerticalAlignment = VerticalAlignment.Bottom };
+                // Reserve enough height for two lines of title text (15px * 2 + 12% spacing)
+                titleGrid.MinHeight = 15 * 2 * 1.12;
+                titleGrid.Margin = new Thickness(0, 0, 0, 12);
+                // Allow the trait name to wrap (max 2 lines) while keeping the block bottom-aligned
+                // so a second wrapped line appears above the original single-line baseline rather than pushing the canvas up.
+                var title = new TextBlock
+                {
+                    Text = trait.Name,
+                    FontWeight = FontWeights.Bold,
+                    FontSize = 15,
+                    VerticalAlignment = VerticalAlignment.Bottom,
+                    TextWrapping = TextWrapping.Wrap,
+                    TextTrimming = TextTrimming.CharacterEllipsis,
+                    LineStackingStrategy = LineStackingStrategy.BlockLineHeight
+                };
+                title.LineHeight = 15 * 1.12; // 12% extra spacing
                 Grid.SetColumn(title, 0);
                 titleGrid.Children.Add(title);
                 var description = new TextBlock { Text = trait.Description, FontSize = 9, HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Bottom, TextAlignment = TextAlignment.Right, TextWrapping = TextWrapping.Wrap };
@@ -251,9 +278,9 @@ namespace SixteenCoreCharacterMapper
                 innerGrid.Children.Add(canvas);
 
                 var labelsGrid = new Grid();
-                labelsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.30, GridUnitType.Star) });
-                labelsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.40, GridUnitType.Star) });
-                labelsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.30, GridUnitType.Star) });
+                labelsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.33, GridUnitType.Star) });
+                labelsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.34, GridUnitType.Star) });
+                labelsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.33, GridUnitType.Star) });
                 labelsGrid.Margin = new Thickness(0, 5, 0, 0);
                 var leftLabel = new TextBlock { Text = trait.LowLabel, HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top, FontSize = 9, FontStyle = FontStyles.Italic, TextWrapping = TextWrapping.Wrap };
                 Grid.SetColumn(leftLabel, 0);
@@ -487,6 +514,18 @@ namespace SixteenCoreCharacterMapper
                 }
             }
 
+            // Apply matching styles to the language ComboBox so it visually aligns with toolbar buttons
+            try
+            {
+                if (LanguageComboBox != null)
+                {
+                    var lightCombo = (Style)FindResource("ToolBarComboBoxStyle");
+                    var darkCombo = (Style)FindResource("DarkToolBarComboBoxStyle");
+                    LanguageComboBox.Style = isDarkMode ? darkCombo : lightCombo;
+                }
+            }
+            catch { }
+
             foreach (var item in CharacterListButtons.Children)
             {
                 if (item is Button button) button.Style = activeCharListStyle;
@@ -539,49 +578,12 @@ namespace SixteenCoreCharacterMapper
             RedrawAllTraits();
         }
 
-        private void RedrawAllTraits()
+        private void RefreshTraitsUI()
         {
-            if (TraitsGrid == null) return;
-            foreach (var border in TraitsGrid.Children.OfType<Border>())
-            {
-                if (border.Child is not Grid innerGrid) continue;
-                if (innerGrid.Children.OfType<Canvas>().FirstOrDefault() is not Canvas canvas) continue;
-                if (canvas.Tag is not Trait trait) continue;
-
-                canvas.Children.OfType<Ellipse>().Where(el => el.Tag is Character).ToList().ForEach(el => canvas.Children.Remove(el));
-
-                foreach (var ch in _viewModel.Project.Characters)
-                {
-                    if (!ch.IsVisible) continue;
-                    if (!ch.TraitPositions.ContainsKey(trait.Name)) ch.TraitPositions[trait.Name] = 0.5;
-
-                    double pos = ch.TraitPositions[trait.Name];
-                    double size = ch.Size switch { BubbleSize.Large => 40, BubbleSize.Medium => 25, _ => 15 };
-                    double usable = Math.Max(1, canvas.ActualWidth);
-                    double x = pos * (usable - size);
-                    double y = (canvas.ActualHeight - size) / 2;
-
-                    var ellipse = new Ellipse
-                    {
-                        Tag = ch,
-                        Width = size,
-                        Height = size,
-                        Fill = (SolidColorBrush)(new BrushConverter().ConvertFromString(ch.ColorHex))!,
-                        Stroke = ch.IsLocked ? _lockedStrokeBrush : Brushes.Transparent,
-                        StrokeThickness = ch.IsLocked ? 3 : 0
-                    };
-
-                    if (_isTutorialActive && _currentTutorialStage == TutorialStage.DragBubble && ch == _viewModel.Project.Characters.FirstOrDefault())
-                    {
-                        ellipse.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ad87ff"));
-                        ellipse.StrokeThickness = 2;
-                    }
-
-                    Canvas.SetLeft(ellipse, x);
-                    Canvas.SetTop(ellipse, y);
-                    canvas.Children.Add(ellipse);
-                }
-            }
+            // Reinitialize the trait UI so trait labels (from resources) update with new culture
+            InitializeTraits();
+            ApplyTheme(_viewModel.IsDarkMode);
+            RedrawAllTraits();
         }
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -615,7 +617,9 @@ namespace SixteenCoreCharacterMapper
             newX = Math.Max(0, Math.Min(newX, usable - _draggingEllipse.Width));
             Canvas.SetLeft(_draggingEllipse, newX);
             double ratio = newX / (usable - _draggingEllipse.Width);
-            draggingCharacter.TraitPositions[_draggingTrait.Name] = double.IsFinite(ratio) ? Math.Max(0, Math.Min(1, ratio)) : 0.5;
+            // Store using the stable trait.Id to avoid localization-related key issues.
+            double value = double.IsFinite(ratio) ? Math.Max(0, Math.Min(1, ratio)) : 0.5;
+            SetTraitPosition(draggingCharacter, _draggingTrait, value);
         }
 
         private void Canvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -751,7 +755,7 @@ namespace SixteenCoreCharacterMapper
                     var exportContainerGrid = new Grid();
                     exportContainerGrid.Background = _viewModel.IsDarkMode ? new SolidColorBrush(imageDarkBackgroundColor) : new SolidColorBrush(imageLightBackgroundColor);
                     exportContainerGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-                    exportContainerGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+                    exportContainerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }); // Content
 
                     var tempTraitsGrid = new Grid { Width = 1600 * scale, Height = 900 * scale };
                     Grid.SetRow(tempTraitsGrid, 0);
@@ -765,17 +769,32 @@ namespace SixteenCoreCharacterMapper
                     {
                         int rowIndex = traitIndex / columnsPerRow;
                         int columnIndex = traitIndex % columnsPerRow;
-                        var containerBorder = new Border { Padding = new Thickness(15 * scale, 30 * scale, 15 * scale, 10 * scale) };
+                        var containerBorder = new Border { Padding = new Thickness(15 * scale, 22 * scale, 15 * scale, 10 * scale) };
                         ApplyBorderTheme(containerBorder, traitIndex);
                         var innerGrid = new Grid();
                         innerGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                         innerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(50 * scale) });
                         innerGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                         var titleGrid = new Grid();
-                        titleGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                        titleGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                        // Use the same column proportions as the runtime UI and allow wrapping with a max of 2 lines
+                        titleGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.4, GridUnitType.Star) });
+                        titleGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.6, GridUnitType.Star) });
                         titleGrid.Margin = new Thickness(0, 0, 0, 25 * scale);
-                        var title = new TextBlock { Text = trait.Name, FontWeight = FontWeights.Bold, FontSize = 16 * scale, VerticalAlignment = VerticalAlignment.Bottom, Foreground = _viewModel.IsDarkMode ? Brushes.White : Brushes.Black };
+                        // Reserve enough height for two lines of title text (scaled, 15px)
+                        titleGrid.MinHeight = (15 * scale) * 2 * 1.12;
+                        titleGrid.Margin = new Thickness(0, 0, 0, 12 * scale);
+                        var title = new TextBlock
+                        {
+                            Text = trait.Name,
+                            FontWeight = FontWeights.Bold,
+                            FontSize = 15 * scale,
+                            VerticalAlignment = VerticalAlignment.Bottom,
+                            Foreground = _viewModel.IsDarkMode ? Brushes.White : Brushes.Black,
+                            TextWrapping = TextWrapping.Wrap,
+                            TextTrimming = TextTrimming.CharacterEllipsis,
+                            LineStackingStrategy = LineStackingStrategy.BlockLineHeight
+                        };
+                        title.LineHeight = (15 * scale) * 1.12;
                         Grid.SetColumn(title, 0);
                         titleGrid.Children.Add(title);
                         var description = new TextBlock { Text = trait.Description, FontSize = 9 * scale, HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Bottom, Foreground = _viewModel.IsDarkMode ? Brushes.DarkGray : Brushes.Gray };
@@ -790,9 +809,9 @@ namespace SixteenCoreCharacterMapper
                         canvas.Children.Add(baseline);
                         innerGrid.Children.Add(canvas);
                         var labelsGrid = new Grid();
-                        labelsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.25, GridUnitType.Star) });
-                        labelsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.5, GridUnitType.Star) });
-                        labelsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.25, GridUnitType.Star) });
+                        labelsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.33, GridUnitType.Star) });
+                        labelsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.34, GridUnitType.Star) });
+                        labelsGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.33, GridUnitType.Star) });
                         labelsGrid.Margin = new Thickness(0, 5 * scale, 0, 0);
                         var leftLabel = new TextBlock { Text = trait.LowLabel, HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top, FontSize = 9 * scale, FontStyle = FontStyles.Italic, TextWrapping = TextWrapping.Wrap };
                         ApplyTextBlockTheme(leftLabel);
@@ -813,8 +832,9 @@ namespace SixteenCoreCharacterMapper
                         foreach (var ch in _viewModel.Project.Characters)
                         {
                             if (!ch.IsVisible) continue;
-                            if (!ch.TraitPositions.ContainsKey(trait.Name)) ch.TraitPositions[trait.Name] = 0.5;
-                            double pos = Math.Max(0, Math.Min(1, ch.TraitPositions[trait.Name]));
+                            // Use helper to read/migrate positions keyed by stable Id
+                          double pos = GetOrCreateTraitPosition(ch, trait);
+
                             double size = ch.Size switch { BubbleSize.Large => 40 * scale, BubbleSize.Medium => 25 * scale, _ => 15 * scale };
                             double x = pos * (canvasWidth - (30 * scale) - size);
                             double y = (canvasHeight - size) / 2;
@@ -1016,7 +1036,7 @@ namespace SixteenCoreCharacterMapper
             contentPanel.Children.Add(donationTb);
 
             addLink("For questions, support, or feedback, please contact: ", "16core@georgetsirogiannis.com", "mailto:16core@georgetsirogiannis.com");
-            addLink("Official Website: ", "16corecharactermapper.my.canva.site", "https://16corecharactermapper.my.canva.site/");
+            addLink("Official Website: ", "georgetsirogiannis.com/16corecharactermapper", "https://georgetsirogiannis.com/16corecharactermapper");
 
             contentPanel.Children.Add(new Separator { Margin = new Thickness(0, 10, 0, 10) });
 
@@ -1093,12 +1113,20 @@ namespace SixteenCoreCharacterMapper
                     httpClient.DefaultRequestHeaders.Add("User-Agent", "16Core-Character-Mapper-Update-Check");
 
                     string json = await httpClient.GetStringAsync(url);
-                    var updateInfo = JsonSerializer.Deserialize<UpdateInfo>(json);
+
+                    // Make deserialization case-insensitive so keys like "version" or "Version" both work.
+                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                    var updateInfo = JsonSerializer.Deserialize<UpdateInfo>(json, options);
 
                     if (updateInfo?.Version == null || updateInfo.Url == null || updateInfo.ReleaseNotes == null) return false;
 
-                    var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
-                    var latestVersion = new Version(updateInfo.Version);
+                    var currentVersion = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0, 0);
+
+                    if (!Version.TryParse(updateInfo.Version.Trim(), out var latestVersion))
+                    {
+                        Debug.WriteLine($"Update check: invalid version string in JSON: '{updateInfo.Version}'");
+                        return false;
+                    }
 
                     if (latestVersion > currentVersion)
                     {
@@ -1110,7 +1138,14 @@ namespace SixteenCoreCharacterMapper
 
                         if (result == MessageBoxResult.Yes)
                         {
-                            Process.Start(new ProcessStartInfo { FileName = updateInfo.Url, UseShellExecute = true });
+                            try
+                            {
+                                Process.Start(new ProcessStartInfo { FileName = updateInfo.Url, UseShellExecute = true });
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine($"Failed to open update URL: {ex.Message}");
+                            }
                         }
                         return true; // An update was found
                     }
@@ -1132,6 +1167,76 @@ namespace SixteenCoreCharacterMapper
         private void ApplyTextBlockTheme(TextBlock textBlock) { textBlock.Foreground = _viewModel.IsDarkMode ? Brushes.White : Brushes.Black; }
         private void ApplyLineTheme(Line line) { line.Stroke = _viewModel.IsDarkMode ? Brushes.LightGray : Brushes.DarkGray; }
         #endregion
+
+        private void RedrawAllTraits()
+        {
+            if (TraitsGrid == null) return;
+            foreach (var border in TraitsGrid.Children.OfType<Border>())
+            {
+                if (border.Child is not Grid innerGrid) continue;
+                if (innerGrid.Children.OfType<Canvas>().FirstOrDefault() is not Canvas canvas) continue;
+                if (canvas.Tag is not Trait trait) continue;
+
+                canvas.Children.OfType<Ellipse>().Where(el => el.Tag is Character).ToList().ForEach(el => canvas.Children.Remove(el));
+
+                foreach (var ch in _viewModel.Project.Characters)
+                {
+                    if (!ch.IsVisible) continue;
+                    // Use stable trait.Id for position keys, migrate if needed
+                    double pos = GetOrCreateTraitPosition(ch, trait);
+
+                    double size = ch.Size switch { BubbleSize.Large => 40, BubbleSize.Medium => 25, _ => 15 };
+                    double usable = Math.Max(1, canvas.ActualWidth);
+                    double x = pos * (usable - size);
+                    double y = (canvas.ActualHeight - size) / 2;
+
+                    var ellipse = new Ellipse
+                    {
+                        Tag = ch,
+                        Width = size,
+                        Height = size,
+                        Fill = (SolidColorBrush)(new BrushConverter().ConvertFromString(ch.ColorHex))!,
+                        Stroke = ch.IsLocked ? _lockedStrokeBrush : Brushes.Transparent,
+                        StrokeThickness = ch.IsLocked ? 3 : 0
+                    };
+
+                    if (_isTutorialActive && _currentTutorialStage == TutorialStage.DragBubble && ch == _viewModel.Project.Characters.FirstOrDefault())
+                    {
+                        ellipse.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ad87ff"));
+                        ellipse.StrokeThickness = 2;
+                    }
+
+                    Canvas.SetLeft(ellipse, x);
+                    Canvas.SetTop(ellipse, y);
+                    canvas.Children.Add(ellipse);
+                }
+            }
+        }
+
+        private double GetOrCreateTraitPosition(Character ch, Trait trait)
+        {
+            // Prefer stable Id key; migrate old localized keys if present
+            if (ch.TraitPositions.ContainsKey(trait.Id))
+                return ch.TraitPositions[trait.Id];
+
+            if (!string.IsNullOrEmpty(trait.Name) && ch.TraitPositions.ContainsKey(trait.Name))
+            {
+                var v = ch.TraitPositions[trait.Name];
+                // migrate to Id key and remove old localized key
+                ch.TraitPositions.Remove(trait.Name);
+                ch.TraitPositions[trait.Id] = v;
+                return v;
+            }
+
+            // fallback default
+            ch.TraitPositions[trait.Id] = 0.5;
+            return 0.5;
+        }
+
+        private void SetTraitPosition(Character ch, Trait trait, double value)
+        {
+            ch.TraitPositions[trait.Id] = value;
+        }
     }
 
     internal class DropIndicatorAdorner : Adorner

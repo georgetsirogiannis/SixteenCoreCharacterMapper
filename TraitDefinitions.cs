@@ -1,25 +1,37 @@
-﻿namespace SixteenCoreCharacterMapper
+﻿using SixteenCoreCharacterMapper.Properties;
+using System.Collections.Generic;
+using System.Globalization;
+
+namespace SixteenCoreCharacterMapper
 {
     public static class TraitDefinitions
     {
-        public static List<Trait> All { get; } = new List<Trait>
+        // Generate trait definitions dynamically so they reflect current resource culture
+        // Use stable IDs for trait identity so TraitPositions are not affected by localization
+        public static IEnumerable<Trait> All
         {
-            new Trait("Warmth", "how empathetic one is to others", "reserved, emotionally distant, detached, disinterested in others' problems, keeps to oneself", "empathetic, comforting, interested in others, feels others' emotions, brings people together, makes others feel at ease"),
-            new Trait("Intellect", "how analytical one's thinking is", "concrete, straightforward, avoids complexity, gets confused by abstract ideas, has a simple vocabulary", "analytical, insightful, quick to learn, enjoys abstract ideas and complex arguments, reflects before acting"),
-            new Trait("Emotional Stability", "how composed one is under pressure", "reactive, emotionally changeable, easily discouraged, prone to feeling blue, dislikes oneself, feels desperate under stress", "resilient, emotionally stable, relaxed, calm under pressure, readily overcomes setbacks, comfortable with oneself"),
-            new Trait("Assertiveness", "how assertive one is with others", "accommodating, conflict-averse, lets others lead, avoids challenges, can be pushed around, defers to others", "assertive, takes charge, says what they think, directs others, takes control of situations, unafraid of criticism"),
-            new Trait("Gregariousness", "how expressive and energetic one is", "serious, restrained, introspective, quiet, dislikes crowds and loud events, sober in demeanor", "lively, energetic, spontaneous, expressive, loves parties and crowds, jokes around, can be wild and crazy"),
-            new Trait("Dutifulness", "how much one abides by rules and duties", "non-conforming, expedient, resists authority, breaks rules, values personal freedom over convention", "dutiful, rule-conscious, respects authority, follows rules, believes in order and enforcement, conventional"),
-            new Trait("Social Confidence", "how socially confident one is", "shy, socially hesitant, quiet around strangers, keeps in the background, uncomfortable with attention, finds it hard to approach others", "socially bold, outgoing, makes friends easily, comfortable with attention, starts conversations, at ease with people"),
-            new Trait("Sensitivity", "how attuned one is to aesthetics/emotion", "unsentimental, objective, tough-minded, practical, not drawn to art or poetry, rarely notices emotional reactions", "tender-minded, sensitive, aesthetic, intuitive, enjoys art and fiction, emotionally responsive, moved by beauty"),
-            new Trait("Distrust", "how suspicious one is of others", "trusting, accepting, believes what people say, assumes good intentions, sees people as basically moral", "suspicious, vigilant, skeptical, wary of others, suspects hidden motives, finds it hard to forgive, distrustful"),
-            new Trait("Imagination", "how imaginative and abstract one is", "grounded, practical, conventional, solution-oriented, does things by the book, seldom daydreams", "imaginative, abstract, absorbed in ideas, loves to daydream and fantasize, can be unconventional or strange"),
-            new Trait("Reserve", "how guarded one is with personal info", "forthright, open, genuine, shares feelings and thoughts, easy to get to know, transparent, willing to talk about self", "private, discreet, reserved, nondisclosing, hard to get to know, bottles up feelings, keeps thoughts to oneself"),
-            new Trait("Anxiety", "how prone one is to worry and self-doubt", "self-assured, confident, unworried, secure, not easily bothered, resilient to discouragement, free of guilt", "worried, self-doubting, apprehensive, insecure, easily hurt, prone to guilt, dwells on past mistakes"),
-            new Trait("Complexity", "how receptive to new ideas and experiences one is", "traditional, conventional, prefers the familiar and routine, avoids abstract or philosophical discussions", "experimental, open to new ideas, prefers variety, enjoys complexity and theoretical discussions, thinks up new ways of doing things"),
-            new Trait("Introversion", "how self-reliant and solitary one is", "group-oriented, affiliative, enjoys teamwork, needs the company of others, collaborative, a joiner", "self-reliant, solitary, individualistic, enjoys privacy and quiet, prefers to be alone, self-sufficient"),
-            new Trait("Orderliness", "how organized and disciplined one is", "flexible, tolerates disorder, unexacting, lax, spontaneous, not bothered by mess, puts off unpleasant tasks", "perfectionistic, organized, self-disciplined, exacting, likes order, wants things 'just right', finishes tasks right away"),
-            new Trait("Emotionality", "how easily frustrated or irritated one is", "relaxed, placid, patient, calm, not easily annoyed, quick to forgive, tranquil, composed", "tense, impatient, easily irritated, quick to anger, frustrated, annoyed by others' mistakes, easily put out")
-        };
+            get
+            {
+                return new List<Trait>
+                {
+                    new Trait("Warmth", Strings.Trait_Warmth_Name, Strings.Trait_Warmth_Description, Strings.Trait_Warmth_Low, Strings.Trait_Warmth_High),
+                    new Trait("Intellect", Strings.Trait_Intellect_Name, Strings.Trait_Intellect_Description, Strings.Trait_Intellect_Low, Strings.Trait_Intellect_High),
+                    new Trait("EmotionalStability", Strings.Trait_EmotionalStability_Name, Strings.Trait_EmotionalStability_Description, Strings.Trait_EmotionalStability_Low, Strings.Trait_EmotionalStability_High),
+                    new Trait("Assertiveness", Strings.Trait_Assertiveness_Name, Strings.Trait_Assertiveness_Description, Strings.Trait_Assertiveness_Low, Strings.Trait_Assertiveness_High),
+                    new Trait("Gregariousness", Strings.Trait_Gregariousness_Name, Strings.Trait_Gregariousness_Description, Strings.Trait_Gregariousness_Low, Strings.Trait_Gregariousness_High),
+                    new Trait("Dutifulness", Strings.Trait_Dutifulness_Name, Strings.Trait_Dutifulness_Description, Strings.Trait_Dutifulness_Low, Strings.Trait_Dutifulness_High),
+                    new Trait("SocialConfidence", Strings.Trait_SocialConfidence_Name, Strings.Trait_SocialConfidence_Description, Strings.Trait_SocialConfidence_Low, Strings.Trait_SocialConfidence_High),
+                    new Trait("Sensitivity", Strings.Trait_Sensitivity_Name, Strings.Trait_Sensitivity_Description, Strings.Trait_Sensitivity_Low, Strings.Trait_Sensitivity_High),
+                    new Trait("Distrust", Strings.Trait_Distrust_Name, Strings.Trait_Distrust_Description, Strings.Trait_Distrust_Low, Strings.Trait_Distrust_High),
+                    new Trait("Imagination", Strings.Trait_Imagination_Name, Strings.Trait_Imagination_Description, Strings.Trait_Imagination_Low, Strings.Trait_Imagination_High),
+                    new Trait("Reserve", Strings.Trait_Reserve_Name, Strings.Trait_Reserve_Description, Strings.Trait_Reserve_Low, Strings.Trait_Reserve_High),
+                    new Trait("Anxiety", Strings.Trait_Anxiety_Name, Strings.Trait_Anxiety_Description, Strings.Trait_Anxiety_Low, Strings.Trait_Anxiety_High),
+                    new Trait("Complexity", Strings.Trait_Complexity_Name, Strings.Trait_Complexity_Description, Strings.Trait_Complexity_Low, Strings.Trait_Complexity_High),
+                    new Trait("Introversion", Strings.Trait_Introversion_Name, Strings.Trait_Introversion_Description, Strings.Trait_Introversion_Low, Strings.Trait_Introversion_High),
+                    new Trait("Orderliness", Strings.Trait_Orderliness_Name, Strings.Trait_Orderliness_Description, Strings.Trait_Orderliness_Low, Strings.Trait_Orderliness_High),
+                    new Trait("Emotionality", Strings.Trait_Emotionality_Name, Strings.Trait_Emotionality_Description, Strings.Trait_Emotionality_Low, Strings.Trait_Emotionality_High)
+                };
+            }
+        }
     }
 }

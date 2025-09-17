@@ -1,14 +1,23 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace SixteenCoreCharacterMapper.ViewModels
 {
+    public class LanguageOption
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Code { get; set; } = string.Empty;
+        public override string ToString() => Name;
+    }
+
     public class MainWindowViewModel : ViewModelBase
     {
         private Project _project;
@@ -17,12 +26,26 @@ namespace SixteenCoreCharacterMapper.ViewModels
         private bool _isDarkMode = true;
         private Character? _selectedCharacter;
         private string _windowTitle = "16Core Character Mapper";
+        private readonly LocalizationService _localizationService; // Localization service instance
 
         public event Action? RedrawTraitsRequested;
         public event Action? ApplyThemeRequested;
         public event Action<Character>? CharacterAdded;
         public event Action? RefreshCharacterListRequested;
 
+        private LanguageOption? _selectedLanguage;
+        public ObservableCollection<LanguageOption> AvailableLanguages { get; }
+        public LanguageOption? SelectedLanguage
+        {
+            get => _selectedLanguage;
+            set
+            {
+                if (SetProperty(ref _selectedLanguage, value) && value != null)
+                {
+                    ChangeLanguage(value.Code);
+                }
+            }
+        }
 
         public Project Project
         {
@@ -41,10 +64,16 @@ namespace SixteenCoreCharacterMapper.ViewModels
             get => Project.Name;
             set
             {
+                // Always set dirty and update title if user edits the field, even if value is the same
                 if (Project.Name != value)
                 {
                     Project.Name = value;
                     OnPropertyChanged();
+                    SetDirty(true);
+                }
+                else
+                {
+                    // If value is the same but user edited, still mark dirty
                     SetDirty(true);
                 }
             }
@@ -101,6 +130,44 @@ namespace SixteenCoreCharacterMapper.ViewModels
             ToggleThemeCommand = new RelayCommand(() => IsDarkMode = !IsDarkMode);
             ToggleLockCommand = new RelayCommand<Character>(ToggleLock);
             ToggleVisibilityCommand = new RelayCommand<Character>(ToggleVisibility);
+
+            _localizationService = new LocalizationService(); // Initialize localization service
+
+            AvailableLanguages = new ObservableCollection<LanguageOption>
+            {
+                new LanguageOption { Name = "English", Code = "en" },
+                new LanguageOption { Name = "Français", Code = "fr" },
+                new LanguageOption { Name = "Deutsch", Code = "de" },
+                new LanguageOption { Name = "Español", Code = "es" },
+                new LanguageOption { Name = "Português", Code = "pt" },
+                new LanguageOption { Name = "Italiano", Code = "it" },
+                new LanguageOption { Name = "Nederlands", Code = "nl" },
+                new LanguageOption { Name = "Polski", Code = "pl" },
+                new LanguageOption { Name = "Ελληνικά", Code = "el" },
+            
+            };
+            SelectedLanguage = AvailableLanguages.First();
+        }
+
+        public string MenuDashboard => _localizationService.GetString("MenuDashboard");
+        public string MenuProducts => _localizationService.GetString("MenuProducts");
+
+        public ICommand ChangeLanguageCommand => new RelayCommand<string>(execute: ChangeLanguage);
+
+        private void ChangeLanguage(string languageCode)
+        {
+            _localizationService.SetCulture(languageCode);
+
+            // Notify all properties to refresh bindings
+            OnPropertyChanged(string.Empty);
+
+            // Trigger redraw for traits and other UI elements
+            RedrawTraitsRequested?.Invoke();
+
+            // Set SelectedLanguage if changed from command
+            var match = AvailableLanguages.FirstOrDefault(l => l.Code == languageCode);
+            if (match != null && !Equals(SelectedLanguage, match))
+                SelectedLanguage = match;
         }
 
         public void SetDirty(bool isDirty)
@@ -140,7 +207,15 @@ namespace SixteenCoreCharacterMapper.ViewModels
                         Project = ProjectService.Load(dlg.FileName);
                         _currentFilePath = dlg.FileName;
                         SetDirty(false);
+                        OnPropertyChanged(nameof(ProjectName)); // Ensure UI updates
                         RedrawTraitsRequested?.Invoke();
+
+                        // Apply the saved language setting.
+                        if (!string.IsNullOrEmpty(Project.SelectedLanguage))
+                        {
+                            _localizationService.SetCulture(Project.SelectedLanguage);
+                            SelectedLanguage = AvailableLanguages.FirstOrDefault(lang => lang.Code == Project.SelectedLanguage);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -160,6 +235,12 @@ namespace SixteenCoreCharacterMapper.ViewModels
             {
                 try
                 {
+                    // Save the current language setting to the project.
+                    if (SelectedLanguage != null)
+                    {
+                        Project.SelectedLanguage = SelectedLanguage.Code;
+                    }
+
                     ProjectService.Save(Project, _currentFilePath);
                     SetDirty(false);
                     return true;
@@ -183,8 +264,10 @@ namespace SixteenCoreCharacterMapper.ViewModels
             if (dlg.ShowDialog() == true)
             {
                 _currentFilePath = dlg.FileName;
-                Project.Name = System.IO.Path.GetFileNameWithoutExtension(dlg.FileName);
-                OnPropertyChanged(nameof(ProjectName));
+                // Do not overwrite Project.Name with the filename. The project title is a user-editable
+                // value and should be preserved independently of the savefile's name.
+                // If you want to initialize the project name only when it is empty, you could do so,
+                // but here we purposely keep the user's Project.Name intact.
                 return SaveProject();
             }
             return false;
