@@ -52,4 +52,4 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
   * Added support for multiple languages in the trait grid. You can now choose between English, French, German, Spanish, Portuguese, Italian, Dutch, Polish and Greek.
 * Bug fixes
   * Fixed a bug where the Project Title wasn't saved and reverted back to the savefile name the next time the savefile was loaded.
-  * Fixed the Update Check functionality.
+  * Fixed the Update Check functionality. 
