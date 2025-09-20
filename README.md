@@ -8,6 +8,7 @@ By placing character bubbles on a chart, you can easily see how different charac
 * **Intuitive Interface:** Map characters onto a chart of 16 core personality traits.
 * **Customizable Characters:** Add, edit, and delete characters, and adjust their name, color, and bubble size.
 * **Export Functionality:** Save your character map as a high-quality PNG image for use in your creative projects.
+* **Localization:** The trait grid is available in 9 languages (as of version 1.1.0)
 * **Donationware Model:** The app is completely free to use, with optional donations.
 * **Privacy-Focused:** The application operates entirely on your local computer and does not collect or transmit any of your personal data or user-generated content.
 
