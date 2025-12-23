@@ -49,6 +49,9 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
         [ObservableProperty]
         private bool _hasNotes;
 
+        [ObservableProperty]
+        private bool _hasCharacters;
+
         public event Action? RedrawTraitsRequested;
         public event Action? ApplyThemeRequested;
         public event Action<Character>? CharacterAdded;
@@ -67,6 +70,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
             _project = new Project();
             _isDirty = false;
             UpdateWindowTitle();
+            UpdateHasCharacters();
 
             AvailableLanguages = new ObservableCollection<LanguageOption>
             {
@@ -100,6 +104,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
         partial void OnProjectChanged(Project value)
         {
             OnPropertyChanged(nameof(ProjectName));
+            UpdateHasCharacters();
         }
 
         partial void OnIsDarkModeChanged(bool value)
@@ -163,6 +168,11 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
             HasNotes = Project?.TraitNotes != null && Project.TraitNotes.Any(n => !string.IsNullOrWhiteSpace(n.Value));
         }
 
+        public void UpdateHasCharacters()
+        {
+            HasCharacters = Project?.Characters?.Count > 0;
+        }
+
         private void UpdateWindowTitle()
         {
             var title = "16Core Character Mapper";
@@ -180,6 +190,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                 CurrentFilePath = null;
                 SetDirty(false);
                 UpdateHasNotes();
+                UpdateHasCharacters();
                 RedrawTraitsRequested?.Invoke();
                 RefreshCharacterListRequested?.Invoke();
             }
@@ -199,6 +210,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                         CurrentFilePath = fileName;
                         SetDirty(false);
                         UpdateHasNotes();
+                        UpdateHasCharacters();
                         OnPropertyChanged(nameof(ProjectName));
                         RedrawTraitsRequested?.Invoke();
                         RefreshCharacterListRequested?.Invoke();
@@ -273,6 +285,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                 newCharacter.DisplayOrder = Project.Characters.Count;
                 Project.Characters.Add(newCharacter);
                 SetDirty(true);
+                UpdateHasCharacters();
                 RedrawTraitsRequested?.Invoke();
                 RefreshCharacterListRequested?.Invoke();
                 CharacterAdded?.Invoke(newCharacter);
@@ -301,6 +314,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
             {
                 Project.Characters.Remove(SelectedCharacter);
                 SetDirty(true);
+                UpdateHasCharacters();
                 RedrawTraitsRequested?.Invoke();
                 RefreshCharacterListRequested?.Invoke();
             }

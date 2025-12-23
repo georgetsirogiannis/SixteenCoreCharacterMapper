@@ -140,7 +140,7 @@ namespace SixteenCoreCharacterMapper.Avalonia.Services
                 };
                 Grid.SetRow(bottomRowGrid, 1);
                 bottomRowGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                bottomRowGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                bottomRowGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
                 exportContainerGrid.Children.Add(bottomRowGrid);
 
                 var legendWrapPanel = new WrapPanel
@@ -153,9 +153,21 @@ namespace SixteenCoreCharacterMapper.Avalonia.Services
                 foreach (var ch in sortedCharacters)
                 {
                     double bubbleSize = ch.Size switch { BubbleSize.Large => 40 * scale, BubbleSize.Medium => 25 * scale, _ => 15 * scale };
-                    var legendItemPanel = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 0, 35 * scale, 10 * scale), VerticalAlignment = VerticalAlignment.Center, };
+                    var legendItemPanel = new StackPanel 
+                    { 
+                        Orientation = Orientation.Horizontal, 
+                        Margin = new Thickness(0, 0, 20 * scale, 10 * scale), 
+                        VerticalAlignment = VerticalAlignment.Center, 
+                    };
                     var ellipse = new Ellipse { Width = bubbleSize, Height = bubbleSize, Fill = Brush.Parse(ch.ColorHex ?? "#000000"), Margin = new Thickness(0, 0, 10 * scale, 0), };
-                    var textBlock = new TextBlock { Text = ch.Name, Foreground = isDarkMode ? Brushes.White : Brushes.Black, VerticalAlignment = VerticalAlignment.Center, FontSize = 11 * scale };
+                    var textBlock = new TextBlock 
+                    { 
+                        Text = ch.Name, 
+                        Foreground = isDarkMode ? Brushes.White : Brushes.Black, 
+                        VerticalAlignment = VerticalAlignment.Center, 
+                        FontSize = 11 * scale,
+                        TextTrimming = TextTrimming.CharacterEllipsis
+                    };
                     legendItemPanel.Children.Add(ellipse);
                     legendItemPanel.Children.Add(textBlock);
                     legendWrapPanel.Children.Add(legendItemPanel);

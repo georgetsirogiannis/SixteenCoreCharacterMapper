@@ -738,6 +738,42 @@ namespace SixteenCoreCharacterMapper.Avalonia
                     i++;
                 }
             }
+
+            ApplyNotePopupTheme(isDarkMode);
+        }
+
+        private void ApplyNotePopupTheme(bool isDarkMode, TextBox? noteTextBox = null)
+        {
+            var notePopupBorder = this.FindControl<Border>("NotePopupBorder");
+            if (notePopupBorder != null)
+            {
+                notePopupBorder.Background = isDarkMode ? new SolidColorBrush(Color.FromRgb(25, 25, 25)) : new SolidColorBrush(Colors.WhiteSmoke);
+            }
+
+            var notePopupTitle = this.FindControl<TextBlock>("NotePopupTitle");
+            if (notePopupTitle != null)
+            {
+                notePopupTitle.Foreground = isDarkMode ? Brushes.White : Brushes.Black;
+            }
+
+            if (noteTextBox == null)
+            {
+                noteTextBox = this.FindControl<TextBox>("NoteTextBox");
+            }
+
+            if (noteTextBox != null)
+            {
+                var bgColor = isDarkMode ? Color.FromRgb(20, 20, 20) : Colors.White;
+                var bgBrush = new SolidColorBrush(bgColor);
+
+                noteTextBox.Background = bgBrush;
+                noteTextBox.Foreground = isDarkMode ? Brushes.White : Brushes.Black;
+                noteTextBox.BorderBrush = isDarkMode ? new SolidColorBrush(Color.FromRgb(100, 100, 100)) : new SolidColorBrush(Color.Parse("#ABADB3"));
+
+                // Override theme resources to ensure the color persists on Focus and PointerOver
+                noteTextBox.Resources["TextControlBackgroundFocused"] = bgBrush;
+                noteTextBox.Resources["TextControlBackgroundPointerOver"] = bgBrush;
+            }
         }
 
         private void Donate_Click(object? sender, RoutedEventArgs e) 
@@ -1075,7 +1111,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
                 
                 if (popup != null && textBox != null && title != null)
                 {
-                    title.Text = $"{trait.Name} Notes";
+                    title.Text = $"{trait.Name} - Notes";
                     
                     if (_viewModel?.Project?.TraitNotes != null && 
                         _viewModel.Project.TraitNotes.TryGetValue(trait.Id, out var note))
@@ -1088,7 +1124,8 @@ namespace SixteenCoreCharacterMapper.Avalonia
                     }
 
                     // Target the container border to keep the trait line visible
-                    if (btn.Parent is Grid titleGrid && 
+                    if (btn.Parent is Grid noteContainer && 
+                        noteContainer.Parent is Grid titleGrid && 
                         titleGrid.Parent is Grid innerGrid && 
                         innerGrid.Parent is Border containerBorder)
                     {
@@ -1104,6 +1141,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
                     }
 
                     popup.IsOpen = true;
+                    ApplyNotePopupTheme(_viewModel?.IsDarkMode ?? true, textBox);
                     textBox.Focus();
                 }
             }
