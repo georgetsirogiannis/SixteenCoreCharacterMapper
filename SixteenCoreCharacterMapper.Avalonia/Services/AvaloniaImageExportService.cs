@@ -8,6 +8,7 @@ using SixteenCoreCharacterMapper.Core;
 using SixteenCoreCharacterMapper.Core.Models;
 using SixteenCoreCharacterMapper.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace SixteenCoreCharacterMapper.Avalonia.Services
 {
     public class AvaloniaImageExportService : IImageExportService
     {
-        public async Task ExportImageAsync(Project project, bool isDarkMode, string filePath)
+        public async Task ExportImageAsync(Project project, IEnumerable<Character> charactersToExport, bool isDarkMode, string filePath)
         {
             await global::Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(async () =>
             {
@@ -112,7 +113,7 @@ namespace SixteenCoreCharacterMapper.Avalonia.Services
                     
                     double canvasWidth = (1600 * scale) / columnsPerRow;
                     double canvasHeight = 50 * scale;
-                    foreach (var ch in project.Characters)
+                    foreach (var ch in charactersToExport)
                     {
                         if (!ch.IsVisible) continue;
                         double pos = ch.GetTraitPosition(trait);
@@ -148,7 +149,7 @@ namespace SixteenCoreCharacterMapper.Avalonia.Services
                     VerticalAlignment = VerticalAlignment.Center,
                     Margin = new Thickness(15 * scale, 0, 0, 0)
                 };
-                var sortedCharacters = project.Characters.OrderBy(ch => ch.Size switch { BubbleSize.Large => 0, BubbleSize.Medium => 1, _ => 2 });
+                var sortedCharacters = charactersToExport.OrderBy(ch => ch.Size switch { BubbleSize.Large => 0, BubbleSize.Medium => 1, _ => 2 });
                 foreach (var ch in sortedCharacters)
                 {
                     double bubbleSize = ch.Size switch { BubbleSize.Large => 40 * scale, BubbleSize.Medium => 25 * scale, _ => 15 * scale };

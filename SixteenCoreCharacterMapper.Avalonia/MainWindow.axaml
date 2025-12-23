@@ -17,6 +17,8 @@
         <local:BooleanToVisibilityTooltipConverter x:Key="BoolToVisibilityTooltipConverter"/>
         <local:BubbleSizeToGroupHeaderConverter x:Key="BubbleSizeConverter"/>
         <local:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter"/>
+        <local:BooleanToDimOpacityConverter x:Key="BooleanToDimOpacityConverter"/>
+        <local:BooleanToFontWeightConverter x:Key="BooleanToFontWeightConverter"/>
         <local:HexToBrushConverter x:Key="HexToBrushConverter"/>
         <local:StatusToGeometryConverter x:Key="StatusToGeometryConverter"/>
         <local:BooleanToIconBrushConverter x:Key="BooleanToIconBrushConverter"/>
@@ -36,11 +38,13 @@
                              Opacity="{Binding IsVisible, Converter={StaticResource BooleanToOpacityConverter}}"/>
                     
                     <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" 
-                               FontWeight="500" FontSize="12"/>
+                               FontWeight="{Binding IsLocked, Converter={StaticResource BooleanToFontWeightConverter}}" 
+                               Opacity="{Binding IsVisible, Converter={StaticResource BooleanToDimOpacityConverter}}"
+                               FontSize="12"/>
                     
                     <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="2" VerticalAlignment="Center" x:CompileBindings="False">
                         <Grid>
-                            <Button x:Name="LockButton" Classes="IconButton" Width="24" Height="24" VerticalAlignment="Center" Command="{Binding DataContext.ToggleLockCommand, ElementName=RootWindow}" CommandParameter="{Binding}"
+                            <Button x:Name="LockButton" Classes="IconButton" Width="24" Height="24" VerticalAlignment="Center" Command="{Binding $parent[Window].DataContext.ToggleLockCommand}" CommandParameter="{Binding}"
                                     ToolTip.Tip="{Binding IsLocked, Converter={StaticResource BoolToLockTooltipConverter}}"
                                     Click="IconButton_Click">
                                 <PathIcon Width="16" Height="16" Margin="0,0,0,2" Data="{Binding IsLocked, Converter={StaticResource StatusToGeometryConverter}, ConverterParameter=Lock}"
@@ -49,7 +53,7 @@
                             <Border x:Name="LockHighlight" BorderBrush="#ad87ff" BorderThickness="2" IsVisible="False" IsHitTestVisible="False"/>
                         </Grid>
                         <Grid>
-                            <Button x:Name="VisibilityButton" Classes="IconButton" Width="24" Height="24" VerticalAlignment="Center" Command="{Binding DataContext.ToggleVisibilityCommand, ElementName=RootWindow}" CommandParameter="{Binding}"
+                            <Button x:Name="VisibilityButton" Classes="IconButton" Width="24" Height="24" VerticalAlignment="Center" Command="{Binding $parent[Window].DataContext.ToggleVisibilityCommand}" CommandParameter="{Binding}"
                                     ToolTip.Tip="{Binding IsVisible, Converter={StaticResource BoolToVisibilityTooltipConverter}}"
                                     Click="IconButton_Click">
                                 <PathIcon Width="16" Height="16" Margin="0,0,0,0" Data="{Binding IsVisible, Converter={StaticResource StatusToGeometryConverter}, ConverterParameter=Visibility}"
@@ -209,7 +213,7 @@
             </Grid>
             
             <!-- Tutorial Popup -->
-            <Popup Name="TutorialPopup" PlacementMode="Bottom" IsLightDismissEnabled="False">
+            <Popup Name="TutorialPopup" Placement="Bottom" IsLightDismissEnabled="False">
                 <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,Auto,Auto">
                     <!-- Top Arrow -->
                     <Path Name="TutorialArrowTop" Grid.Row="0" Grid.Column="1" 
@@ -250,7 +254,7 @@
             </Popup>
 
             <!-- Note Popup -->
-            <Popup Name="NotePopup" PlacementMode="Bottom" IsLightDismissEnabled="True" Closed="NotePopup_Closed">
+            <Popup Name="NotePopup" Placement="Bottom" IsLightDismissEnabled="True" Closed="NotePopup_Closed">
                 <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" BorderThickness="1" BorderBrush="Gray" Padding="10" CornerRadius="5" Width="300" Height="200">
                     <Grid RowDefinitions="Auto,*,Auto">
                         <TextBlock Name="NotePopupTitle" Text="Notes" FontWeight="Bold" Margin="0,0,0,5"/>

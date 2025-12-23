@@ -266,12 +266,12 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                 {
                     var baseName = "Character";
                     int n = 1;
-                    var names = new HashSet<string>(_project.Characters.Select(c => c.Name), StringComparer.OrdinalIgnoreCase);
+                    var names = new HashSet<string>(Project.Characters.Select(c => c.Name), StringComparer.OrdinalIgnoreCase);
                     while (names.Contains($"{baseName} {n}")) n++;
                     newCharacter.Name = $"{baseName} {n}";
                 }
-                newCharacter.DisplayOrder = _project.Characters.Count;
-                _project.Characters.Add(newCharacter);
+                newCharacter.DisplayOrder = Project.Characters.Count;
+                Project.Characters.Add(newCharacter);
                 SetDirty(true);
                 RedrawTraitsRequested?.Invoke();
                 RefreshCharacterListRequested?.Invoke();
@@ -336,7 +336,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
 
         private bool ConfirmUnsavedChanges()
         {
-            if (!_isDirty) return true;
+            if (!IsDirty) return true;
 
             var result = _dialogService.AskUnsavedChanges();
             if (result == DialogResult.Yes)
@@ -349,7 +349,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
 
         private async Task<bool> ConfirmUnsavedChangesAsync()
         {
-            if (!_isDirty) return true;
+            if (!IsDirty) return true;
 
             var result = await _dialogService.AskUnsavedChangesAsync();
             if (result == DialogResult.Yes)
@@ -366,7 +366,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
         {
             if (_isExiting) return;
 
-            if (_isDirty)
+            if (IsDirty)
             {
                 e.Cancel = true;
                 _ = HandleUnsavedChangesOnExitAsync();

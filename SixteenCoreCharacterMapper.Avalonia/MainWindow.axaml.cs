@@ -463,7 +463,12 @@ namespace SixteenCoreCharacterMapper.Avalonia
 
         private async void ExportImage_Click(object? sender, RoutedEventArgs e)
         {
-            if (_viewModel == null) return;
+            if (_viewModel == null || _viewModel.Project == null) return;
+
+            var selectionDialog = new ExportSelectionWindow(_viewModel.Project.Characters, _viewModel.IsDarkMode);
+            var selectedCharacters = await selectionDialog.ShowDialog<List<Character>>(this);
+
+            if (selectedCharacters == null) return;
 
             var saveOptions = new FilePickerSaveOptions
             {
@@ -488,7 +493,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
                     string? localPath = file.Path.LocalPath;
                     if (localPath != null)
                     {
-                        await _imageExportService.ExportImageAsync(_viewModel.Project, _viewModel.IsDarkMode, localPath);
+                        await _imageExportService.ExportImageAsync(_viewModel.Project, selectedCharacters, _viewModel.IsDarkMode, localPath);
                         var msgBox = new SimpleMessageBox("Image exported successfully!", "Export Complete", SimpleMessageBox.MessageBoxButtons.OK);
                         await msgBox.ShowDialog(this);
                     }
@@ -830,9 +835,11 @@ namespace SixteenCoreCharacterMapper.Avalonia
                     if (control.DataContext is Character character)
                     {
                         _isPotentialDrag = false; // Reset to prevent multiple drags
+#pragma warning disable CS0618
                         var dragData = new DataObject();
                         dragData.Set("Character", character);
                         var result = await DragDrop.DoDragDrop(e, dragData, DragDropEffects.Move);
+#pragma warning restore CS0618
                     }
                 }
             }
@@ -842,7 +849,9 @@ namespace SixteenCoreCharacterMapper.Avalonia
         {
             e.DragEffects = DragDropEffects.None;
 
+#pragma warning disable CS0618
             var droppedCharacter = e.Data.Get("Character") as Character;
+#pragma warning restore CS0618
             if (droppedCharacter == null) return;
 
             if (sender is ListBox list)
@@ -920,7 +929,9 @@ namespace SixteenCoreCharacterMapper.Avalonia
             ClearDropIndicator();
 
             if (_viewModel == null) return;
+#pragma warning disable CS0618
             var droppedCharacter = e.Data.Get("Character") as Character;
+#pragma warning restore CS0618
             if (droppedCharacter == null) return;
 
             var list = sender as ListBox;
@@ -983,6 +994,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
 
         private void PerformReorder(Character droppedCharacter, Character targetCharacter, bool insertAfter)
         {
+            if (_viewModel?.Project == null) return;
             if (droppedCharacter.Size != targetCharacter.Size) return;
 
             var group = _viewModel.Project.Characters
@@ -1081,13 +1093,13 @@ namespace SixteenCoreCharacterMapper.Avalonia
                         innerGrid.Parent is Border containerBorder)
                     {
                         popup.PlacementTarget = containerBorder;
-                        popup.PlacementMode = PlacementMode.Bottom;
+                        popup.Placement = PlacementMode.Bottom;
                         popup.VerticalOffset = 5;
                     }
                     else
                     {
                         popup.PlacementTarget = btn;
-                        popup.PlacementMode = PlacementMode.Bottom;
+                        popup.Placement = PlacementMode.Bottom;
                         popup.VerticalOffset = 0;
                     }
 
