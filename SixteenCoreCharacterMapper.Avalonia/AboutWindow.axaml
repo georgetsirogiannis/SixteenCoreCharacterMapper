@@ -6,6 +6,20 @@
         x:Class="SixteenCoreCharacterMapper.Avalonia.AboutWindow"
         Title="About 16Core Character Mapper" Width="550" Height="600"
         WindowStartupLocation="CenterOwner" CanResize="False">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="LinkForegroundBrush" Color="#0066CC"/>
+                    <SolidColorBrush x:Key="LinkHoverForegroundBrush" Color="#512BD4"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="LinkForegroundBrush" Color="#66B2FF"/>
+                    <SolidColorBrush x:Key="LinkHoverForegroundBrush" Color="#ad87ff"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid Margin="20" RowDefinitions="Auto,*,Auto">
         <!-- Header -->
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*" Margin="0,0,0,20">
@@ -62,15 +76,17 @@
         <Style Selector="Button.link">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="Foreground" Value="{DynamicResource LinkForegroundBrush}"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
-            <Setter Property="Margin" Value="0,0,0,-2"/>
+            <Setter Property="Margin" Value="0,0,0,-3"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
         </Style>
         <Style Selector="Button.link:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="Foreground" Value="{DynamicResource LinkHoverForegroundBrush}"/>
         </Style>
     </Window.Styles>
 </Window>
