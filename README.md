@@ -8,6 +8,7 @@ By placing character bubbles on a chart, you can easily see how different charac
 * **Intuitive Interface:** Map characters onto a chart of 16 core personality traits.
 * **Customizable Characters:** Add, edit, and delete characters, and adjust their name, color, and bubble size.
 * **Export Functionality:** Save your character map as a high-quality PNG image for use in your creative projects.
+* **Localization:** The trait grid is available in 9 languages (as of version 1.1.0)
 * **Donationware Model:** The app is completely free to use, with optional donations.
 * **Privacy-Focused:** The application operates entirely on your local computer and does not collect or transmit any of your personal data or user-generated content.
 
@@ -53,6 +54,7 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
 * Bug fixes
   * Fixed a bug where the Project Title wasn't saved and reverted back to the savefile name the next time the savefile was loaded.
   * Fixed the Update Check functionality. 
+<<<<<<< HEAD
 
 **Version 2.0.0** (Yet unreleased / Committed December 23, 2025)
 * This is a major update that transitions 16Core Character Mapper to a natively cross-platform architecture:
@@ -60,3 +62,5 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
     * **Reimagined User Interface**: The UI has been rebuilt from the ground up. While preserving the intuitive design language of v1.1.0, the interface is now optimized for better scaling and a smoother user experience across various display resolutions.
     * **New File Format**: Project saves now use a custom **.16core** extension for improved file association and organization.
     * **Backward Compatibility**: Full support for loading and saving "legacy" **.json** files remains available, ensuring a seamless transition for existing projects.
+=======
+>>>>>>> 22d1d7e34b7d12fa3ecdb96416a9ca108c3fb3e7
