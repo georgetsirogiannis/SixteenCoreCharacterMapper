@@ -54,6 +54,7 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
 * Bug fixes
   * Fixed a bug where the Project Title wasn't saved and reverted back to the savefile name the next time the savefile was loaded.
   * Fixed the Update Check functionality. 
+<<<<<<< HEAD
 
 **Version 2.0.0** (Yet unreleased / Committed December 23, 2025)
 * This is a major update that transitions 16Core Character Mapper to a natively cross-platform architecture:
