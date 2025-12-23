@@ -62,5 +62,3 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
     * **Reimagined User Interface**: The UI has been rebuilt from the ground up. While preserving the intuitive design language of v1.1.0, the interface is now optimized for better scaling and a smoother user experience across various display resolutions.
     * **New File Format**: Project saves now use a custom **.16core** extension for improved file association and organization.
     * **Backward Compatibility**: Full support for loading and saving "legacy" **.json** files remains available, ensuring a seamless transition for existing projects.
-=======
->>>>>>> 22d1d7e34b7d12fa3ecdb96416a9ca108c3fb3e7
