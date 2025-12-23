@@ -57,8 +57,8 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
 
 **Version 2.0.0** (Yet unreleased / Committed December 23, 2025)
 * This is a major update that transitions 16Core Character Mapper to a natively cross-platform architecture:
-    * **Cross-Platform Migration**: The application has migrated to the Avalonia UI framework. This transition enables native support across different operating systems and includes a comprehensive restructuring of the code-behind to optimize performance.
+    * **Native Cross-Platform Support**: The app has been fully migrated from WPF to the **Avalonia UI framework**. This major architectural shift means 16Core Character Mapper is now natively cross-platform, featuring a completely restructured code-behind to ensure high performance and stability across different operating systems.
     * **Reimagined User Interface**: The UI has been rebuilt from the ground up. While preserving the intuitive design language of v1.1.0, the interface is now optimized for better scaling and a smoother user experience across various display resolutions.
-    * **New File Format**: Project saves now use a custom **.16core** extension for improved file association and organization.
-    * **Backward Compatibility**: Full support for loading and saving "legacy" **.json** files remains available, ensuring a seamless transition for existing projects.
+    * **Trait Notes**: A dedicated space has been integrated for each personality trait to document character-specific decisions, trait manifestations, or narrative dynamics. All entries can be exported as a **.txt** file for external reference.
+    * **Enhanced File Management**: Introducing the new **.16core** file extension for project saves. This custom format allows for better file association and organization. To ensure a seamless transition for early adopters, full support for loading and saving "legacy" **.json** files has been retained.
 

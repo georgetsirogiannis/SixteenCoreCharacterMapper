@@ -46,6 +46,9 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
         [ObservableProperty]
         private LanguageOption? _selectedLanguage;
 
+        [ObservableProperty]
+        private bool _hasNotes;
+
         public event Action? RedrawTraitsRequested;
         public event Action? ApplyThemeRequested;
         public event Action<Character>? CharacterAdded;
@@ -152,6 +155,12 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
         {
             IsDirty = isDirty;
             UpdateWindowTitle();
+            UpdateHasNotes();
+        }
+
+        public void UpdateHasNotes()
+        {
+            HasNotes = Project?.TraitNotes != null && Project.TraitNotes.Any(n => !string.IsNullOrWhiteSpace(n.Value));
         }
 
         private void UpdateWindowTitle()
@@ -170,6 +179,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                 Project = new Project();
                 CurrentFilePath = null;
                 SetDirty(false);
+                UpdateHasNotes();
                 RedrawTraitsRequested?.Invoke();
                 RefreshCharacterListRequested?.Invoke();
             }
@@ -188,6 +198,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                         Project = ProjectService.Load(fileName);
                         CurrentFilePath = fileName;
                         SetDirty(false);
+                        UpdateHasNotes();
                         OnPropertyChanged(nameof(ProjectName));
                         RedrawTraitsRequested?.Invoke();
                         RefreshCharacterListRequested?.Invoke();

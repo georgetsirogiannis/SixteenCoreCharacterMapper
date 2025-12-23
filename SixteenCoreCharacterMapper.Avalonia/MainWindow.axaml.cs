@@ -42,6 +42,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
         private Point _dragStartPoint;
         private bool _isPotentialDrag; // New field
         private ListBoxItem? _currentDropTarget;
+        private Trait? _currentNoteTrait;
 
         public MainWindow()
         {
@@ -205,7 +206,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
                 int rowIndex = traitIndex / columnsPerRow;
                 int columnIndex = traitIndex % columnsPerRow;
 
-                var containerBorder = new Border { Padding = new Thickness(15, 22, 15, 10) };
+                var containerBorder = new Border { Padding = new Thickness(15, 22, 15, 10), Tag = trait };
                 var innerGrid = new Grid();
                 innerGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 innerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(50) });
@@ -247,6 +248,54 @@ namespace SixteenCoreCharacterMapper.Avalonia
                 };
                 Grid.SetColumn(description, 1);
                 titleGrid.Children.Add(description);
+
+                var noteContainer = new Grid
+                {
+                    Width = 20,
+                    Height = 20,
+                    VerticalAlignment = VerticalAlignment.Top,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    Margin = new Thickness(0, -10, 0, 0)
+                };
+
+                var noteButton = new Button
+                {
+                    Classes = { "IconButton" },
+                    Width = 20,
+                    Height = 20,
+                    Tag = trait
+                };
+                ToolTip.SetTip(noteButton, "Notes");
+                noteButton.Click += NoteButton_Click;
+
+                bool hasNote = _viewModel?.Project?.TraitNotes != null && 
+                               _viewModel.Project.TraitNotes.TryGetValue(trait.Id, out var note) && 
+                               !string.IsNullOrWhiteSpace(note);
+                noteButton.Opacity = hasNote ? 1.0 : 0.3;
+
+                var noteIcon = new PathIcon
+                {
+                    Data = StreamGeometry.Parse("M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M8,12H16V14H8V12M8,16H16V18H8V16Z"),
+                    Width = 12,
+                    Height = 12
+                };
+                noteButton.Content = noteIcon;
+                
+                var noteHighlight = new Border
+                {
+                    BorderBrush = Brush.Parse("#ad87ff"),
+                    BorderThickness = new Thickness(2),
+                    IsVisible = false,
+                    IsHitTestVisible = false,
+                    CornerRadius = new CornerRadius(3),
+                    Tag = "NoteHighlight"
+                };
+
+                noteContainer.Children.Add(noteButton);
+                noteContainer.Children.Add(noteHighlight);
+
+                Grid.SetColumn(noteContainer, 1);
+                titleGrid.Children.Add(noteContainer);
                 
                 innerGrid.Children.Add(titleGrid);
                 Grid.SetRow(titleGrid, 0);
@@ -457,6 +506,59 @@ namespace SixteenCoreCharacterMapper.Avalonia
             }
         }
 
+        private async void ExportNotes_Click(object? sender, RoutedEventArgs e)
+        {
+            if (_viewModel?.Project?.TraitNotes == null) return;
+
+            var saveOptions = new FilePickerSaveOptions
+            {
+                Title = "Export Notes",
+                DefaultExtension = "txt",
+                FileTypeChoices = new List<FilePickerFileType>
+                {
+                    new FilePickerFileType("Text File") { Patterns = new[] { "*.txt" } }
+                }
+            };
+
+            var file = await StorageProvider.SaveFilePickerAsync(saveOptions);
+            if (file != null)
+            {
+                try
+                {
+                    string? localPath = file.Path.LocalPath;
+                    if (localPath != null)
+                    {
+                        var sb = new System.Text.StringBuilder();
+                        sb.AppendLine($"Notes for Project: {_viewModel.Project.Name}");
+                        sb.AppendLine(new string('-', 30));
+                        sb.AppendLine();
+
+                        foreach (var trait in TraitDefinitions.All)
+                        {
+                            if (_viewModel.Project.TraitNotes.TryGetValue(trait.Id, out var note) && !string.IsNullOrWhiteSpace(note))
+                            {
+                                sb.AppendLine($"[{trait.Name}]");
+                                sb.AppendLine(note);
+                                sb.AppendLine();
+                                sb.AppendLine(new string('-', 20));
+                                sb.AppendLine();
+                            }
+                        }
+
+                        await File.WriteAllTextAsync(localPath, sb.ToString());
+                        
+                        var msgBox = new SimpleMessageBox("Notes exported successfully!", "Export Complete", SimpleMessageBox.MessageBoxButtons.OK);
+                        await msgBox.ShowDialog(this);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var msgBox = new SimpleMessageBox($"An error occurred: {ex.Message}", "Export Error", SimpleMessageBox.MessageBoxButtons.OK);
+                    await msgBox.ShowDialog(this);
+                }
+            }
+        }
+
         private void About_Click(object? sender, RoutedEventArgs e)
         {
             var aboutWindow = new AboutWindow();
@@ -608,6 +710,10 @@ namespace SixteenCoreCharacterMapper.Avalonia
                                             tb.Foreground = isDarkMode ? Brushes.DarkGray : Brushes.DimGray;
                                         else if (tb.Classes.Contains("TraitLabel"))
                                             tb.Foreground = isDarkMode ? Brushes.LightGray : Brushes.DimGray;
+                                    }
+                                    else if (gridChild is Button btn && btn.Content is PathIcon icon)
+                                    {
+                                        icon.Foreground = isDarkMode ? Brushes.LightGray : Brushes.Gray;
                                     }
                                 }
                             }
@@ -943,6 +1049,140 @@ namespace SixteenCoreCharacterMapper.Avalonia
             }
             
             return false;
+        }
+
+        private void NoteButton_Click(object? sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is Trait trait)
+            {
+                _currentNoteTrait = trait;
+                DimOtherTraits(trait);
+                var popup = this.FindControl<Popup>("NotePopup");
+                var textBox = this.FindControl<TextBox>("NoteTextBox");
+                var title = this.FindControl<TextBlock>("NotePopupTitle");
+                
+                if (popup != null && textBox != null && title != null)
+                {
+                    title.Text = $"{trait.Name} Notes";
+                    
+                    if (_viewModel?.Project?.TraitNotes != null && 
+                        _viewModel.Project.TraitNotes.TryGetValue(trait.Id, out var note))
+                    {
+                        textBox.Text = note;
+                    }
+                    else
+                    {
+                        textBox.Text = string.Empty;
+                    }
+
+                    // Target the container border to keep the trait line visible
+                    if (btn.Parent is Grid titleGrid && 
+                        titleGrid.Parent is Grid innerGrid && 
+                        innerGrid.Parent is Border containerBorder)
+                    {
+                        popup.PlacementTarget = containerBorder;
+                        popup.PlacementMode = PlacementMode.Bottom;
+                        popup.VerticalOffset = 5;
+                    }
+                    else
+                    {
+                        popup.PlacementTarget = btn;
+                        popup.PlacementMode = PlacementMode.Bottom;
+                        popup.VerticalOffset = 0;
+                    }
+
+                    popup.IsOpen = true;
+                    textBox.Focus();
+                }
+            }
+        }
+
+        private void NoteTextBox_TextChanged(object? sender, TextChangedEventArgs e)
+        {
+            if (_currentNoteTrait != null && _viewModel?.Project != null && sender is TextBox tb)
+            {
+                if (_viewModel.Project.TraitNotes == null)
+                    _viewModel.Project.TraitNotes = new Dictionary<string, string>();
+
+                string text = tb.Text ?? string.Empty;
+                _viewModel.Project.TraitNotes[_currentNoteTrait.Id] = text;
+                _viewModel.SetDirty(true);
+                
+                UpdateNoteIconOpacity(_currentNoteTrait, !string.IsNullOrWhiteSpace(text));
+
+                if (_isTutorialActive && _currentTutorialStage == TutorialStage.TraitNotes && !string.IsNullOrWhiteSpace(text))
+                {
+                    ProceedToNextTutorialStage();
+                }
+            }
+        }
+
+        private void UpdateNoteIconOpacity(Trait trait, bool hasNote)
+        {
+            if (_traitsGrid == null) return;
+            foreach (var child in _traitsGrid.Children)
+            {
+                if (child is Border border && border.Child is Grid inner && inner.Children.Count > 0 && inner.Children[0] is Grid titleGrid)
+                {
+                    foreach (var titleChild in titleGrid.Children)
+                    {
+                        if (titleChild is Grid noteContainer)
+                        {
+                            foreach (var noteChild in noteContainer.Children)
+                            {
+                                if (noteChild is Button btn && btn.Tag == trait)
+                                {
+                                    btn.Opacity = hasNote ? 1.0 : 0.3;
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CloseNotePopup_Click(object? sender, RoutedEventArgs e)
+        {
+            var popup = this.FindControl<Popup>("NotePopup");
+            if (popup != null) popup.IsOpen = false;
+        }
+
+        private void NotePopup_Closed(object? sender, EventArgs e)
+        {
+            _currentNoteTrait = null;
+            RestoreTraitsOpacity();
+        }
+
+        private void DimOtherTraits(Trait activeTrait)
+        {
+            if (_traitsGrid == null) return;
+            foreach (var child in _traitsGrid.Children)
+            {
+                if (child is Border border)
+                {
+                    if (border.Tag == activeTrait)
+                    {
+                        border.Opacity = 1.0;
+                    }
+                    else
+                    {
+                        border.Opacity = 0.3;
+                    }
+                }
+            }
+        }
+
+        private void RestoreTraitsOpacity()
+        {
+            if (_traitsGrid == null) return;
+            foreach (var child in _traitsGrid.Children)
+            {
+                if (child is Border border)
+                {
+                    border.Opacity = 1.0;
+                }
+            }
         }
     }
 }

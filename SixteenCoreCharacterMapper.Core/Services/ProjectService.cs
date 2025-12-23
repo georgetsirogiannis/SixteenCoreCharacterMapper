@@ -27,6 +27,12 @@ namespace SixteenCoreCharacterMapper.Core.Services
 
             // Ensure the Characters collection is an ObservableCollection
             project.Characters = new System.Collections.ObjectModel.ObservableCollection<Character>(project.Characters.ToList());
+            
+            if (project.TraitNotes == null)
+            {
+                project.TraitNotes = new System.Collections.Generic.Dictionary<string, string>();
+            }
+
             return project;
         }
     }

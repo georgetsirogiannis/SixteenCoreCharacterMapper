@@ -111,6 +111,10 @@
                             <Border x:Name="ExportImageHighlight" BorderBrush="#ad87ff" BorderThickness="3" IsVisible="False" IsHitTestVisible="False" CornerRadius="3"/>
                         </Grid>
                         <Grid>
+                            <Button x:Name="ExportNotesButton" Content="Export Notes" Classes="ToolBarButton" Click="ExportNotes_Click" IsEnabled="{Binding HasNotes}"/>
+                            <Border x:Name="ExportNotesHighlight" BorderBrush="#ad87ff" BorderThickness="3" IsVisible="False" IsHitTestVisible="False" CornerRadius="3"/>
+                        </Grid>
+                        <Grid>
                             <Button x:Name="ToggleThemeButton" Content="Toggle Theme" Classes="ToolBarButton" Command="{Binding ToggleThemeCommand}" Click="ToggleThemeButton_Click"/>
                             <Border x:Name="ToggleThemeHighlight" BorderBrush="#ad87ff" BorderThickness="3" IsVisible="False" IsHitTestVisible="False" CornerRadius="3"/>
                         </Grid>
@@ -206,11 +210,53 @@
             
             <!-- Tutorial Popup -->
             <Popup Name="TutorialPopup" PlacementMode="Bottom" IsLightDismissEnabled="False">
-                <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" BorderThickness="1" BorderBrush="Gray" Padding="10" CornerRadius="5">
-                    <StackPanel MaxWidth="250">
-                        <TextBlock Name="TutorialTextBlock" TextWrapping="Wrap" Margin="0,0,0,10"/>
-                        <Button Name="TutorialButton" Content="Next" HorizontalAlignment="Right" Click="TutorialButton_Click"/>
-                    </StackPanel>
+                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,Auto,Auto">
+                    <!-- Top Arrow -->
+                    <Path Name="TutorialArrowTop" Grid.Row="0" Grid.Column="1" 
+                          Data="M0,10 L5,0 L10,10 Z" 
+                          Fill="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" 
+                          Stroke="Gray" StrokeThickness="1"
+                          HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,-1" IsVisible="False"/>
+                    
+                    <!-- Left Arrow -->
+                    <Path Name="TutorialArrowLeft" Grid.Row="1" Grid.Column="0" 
+                          Data="M10,0 L0,5 L10,10 Z" 
+                          Fill="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" 
+                          Stroke="Gray" StrokeThickness="1"
+                          VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,-1,0" IsVisible="False"/>
+
+                    <!-- Content -->
+                    <Border Grid.Row="1" Grid.Column="1" Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" BorderThickness="1" BorderBrush="Gray" Padding="10" CornerRadius="5">
+                        <StackPanel MaxWidth="250">
+                            <TextBlock Name="TutorialTextBlock" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                            <Button Name="TutorialButton" Content="Next" HorizontalAlignment="Right" Click="TutorialButton_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Right Arrow -->
+                    <Path Name="TutorialArrowRight" Grid.Row="1" Grid.Column="2" 
+                          Data="M0,0 L10,5 L0,10 Z" 
+                          Fill="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" 
+                          Stroke="Gray" StrokeThickness="1"
+                          VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-1,0,0,0" IsVisible="False"/>
+
+                    <!-- Bottom Arrow -->
+                    <Path Name="TutorialArrowBottom" Grid.Row="2" Grid.Column="1" 
+                          Data="M0,0 L5,10 L10,0 Z" 
+                          Fill="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" 
+                          Stroke="Gray" StrokeThickness="1"
+                          HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-1,0,0" IsVisible="False"/>
+                </Grid>
+            </Popup>
+
+            <!-- Note Popup -->
+            <Popup Name="NotePopup" PlacementMode="Bottom" IsLightDismissEnabled="True" Closed="NotePopup_Closed">
+                <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" BorderThickness="1" BorderBrush="Gray" Padding="10" CornerRadius="5" Width="300" Height="200">
+                    <Grid RowDefinitions="Auto,*,Auto">
+                        <TextBlock Name="NotePopupTitle" Text="Notes" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <TextBox Name="NoteTextBox" Grid.Row="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="0,0,0,10" TextChanged="NoteTextBox_TextChanged"/>
+                        <Button Content="Close" Grid.Row="2" HorizontalAlignment="Right" Click="CloseNotePopup_Click"/>
+                    </Grid>
                 </Border>
             </Popup>
         </Grid>

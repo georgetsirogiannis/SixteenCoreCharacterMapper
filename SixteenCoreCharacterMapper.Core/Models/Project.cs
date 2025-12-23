@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace SixteenCoreCharacterMapper.Core.Models
@@ -7,5 +8,6 @@ namespace SixteenCoreCharacterMapper.Core.Models
         public string Name { get; set; } = string.Empty;
         public ObservableCollection<Character> Characters { get; set; } = new ObservableCollection<Character>();
         public string SelectedLanguage { get; set; } = "en";
+        public Dictionary<string, string> TraitNotes { get; set; } = new Dictionary<string, string>();
     }
 }

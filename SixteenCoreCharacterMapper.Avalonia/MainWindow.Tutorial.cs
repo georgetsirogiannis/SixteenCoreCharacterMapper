@@ -1,6 +1,8 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Shapes;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 using Avalonia.VisualTree;
 using SixteenCoreCharacterMapper.Core.Models;
 using System;
@@ -19,7 +21,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
 
         private enum TutorialStage
         {
-            None, ProjectName, AddCharacter, DragBubble, LockCharacter,
+            None, ProjectName, AddCharacter, DragBubble, TraitNotes, ExportNotes, LockCharacter,
             ShowHideCharacter, ToggleTheme, ExportImage, Final
         }
 
@@ -34,6 +36,8 @@ namespace SixteenCoreCharacterMapper.Avalonia
             SetHighlight("CharacterButtonsHighlight", false);
             SetHighlight("ToggleThemeHighlight", false);
             SetHighlight("ExportImageHighlight", false);
+            SetHighlight("ExportNotesHighlight", false);
+            SetNoteHighlights(false);
             
             var popup = this.FindControl<Popup>("TutorialPopup");
             if (popup != null) popup.IsOpen = false;
@@ -69,6 +73,8 @@ namespace SixteenCoreCharacterMapper.Avalonia
             SetHighlight("CharacterButtonsHighlight", false);
             SetHighlight("ToggleThemeHighlight", false);
             SetHighlight("ExportImageHighlight", false);
+            SetHighlight("ExportNotesHighlight", false);
+            SetNoteHighlights(false);
             
             HideHighlightsInList(this.FindControl<ListBox>("MainList"));
             HideHighlightsInList(this.FindControl<ListBox>("SupportingList"));
@@ -91,6 +97,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
             button.IsVisible = false;
 
             Control? target = null;
+            Func<Control?>? dynamicTarget = null;
             PlacementMode placement = PlacementMode.Bottom;
 
             switch (stage)
@@ -108,30 +115,36 @@ namespace SixteenCoreCharacterMapper.Avalonia
                 case TutorialStage.DragBubble: 
                     if (_viewModel?.Project.Characters.Any() != true) { StopTutorial(); return; } 
                     textBlock.Text = "Drag your character's bubble on the 16 trait lines."; 
-                    // Find first bubble
-                    // We need to wait for layout?
-                    // Just target TraitsGrid for now or find bubble
-                    target = _traitsGrid;
-                    placement = PlacementMode.Center;
-                    popup.IsOpen = true; 
-                    RedrawBubblesInTraits(); 
-                    return;
+                    dynamicTarget = () => GetFirstBubble();
+                    placement = PlacementMode.Top;
+                    break;
+                case TutorialStage.TraitNotes:
+                    textBlock.Text = "You can keep notes about their characters in relation to each trait.\n\nTry adding a note now!";
+                    dynamicTarget = () => GetFirstTraitNoteButton();
+                    placement = PlacementMode.Bottom;
+                    SetNoteHighlights(true);
+                    break;
+                case TutorialStage.ExportNotes:
+                    textBlock.Text = "You can export all your notes as a TXT file here!";
+                    target = this.FindControl<Control>("ExportNotesButton");
+                    SetHighlight("ExportNotesHighlight", true);
+                    button.IsVisible = true;
+                    button.Content = "Got it!";
+                    break;
                 case TutorialStage.LockCharacter: 
                     _tutorialLockToggled = false; _tutorialUnlockToggled = false; 
                     textBlock.Text = "You can lock and unlock the position of your character's bubbles here.\n\nTry it now!"; 
                     
-                    target = FindButtonInLists("LockButton", "LockHighlight");
-                    if (target != null) placement = PlacementMode.Right;
-                    else StopTutorial();
+                    dynamicTarget = () => FindButtonInLists("LockButton", "LockHighlight");
+                    placement = PlacementMode.Right;
                     break;
 
                 case TutorialStage.ShowHideCharacter: 
                     _tutorialHideToggled = false; _tutorialShowToggled = false; 
                     textBlock.Text = "You can hide and show your character's bubbles here.\n\nTry it now!"; 
                     
-                    target = FindButtonInLists("VisibilityButton", "VisibilityHighlight");
-                    if (target != null) placement = PlacementMode.Right;
-                    else StopTutorial();
+                    dynamicTarget = () => FindButtonInLists("VisibilityButton", "VisibilityHighlight");
+                    placement = PlacementMode.Right;
                     break;
                 case TutorialStage.ToggleTheme: 
                     textBlock.Text = "You can toggle between Light and Dark Mode here.\n\nTry it now!"; 
@@ -157,12 +170,110 @@ namespace SixteenCoreCharacterMapper.Avalonia
                 default: StopTutorial(); break;
             }
 
-            if (target != null)
+            Dispatcher.UIThread.Post(() => 
             {
-                popup.PlacementTarget = target;
-                popup.Placement = placement;
-                popup.IsOpen = true;
+                if (!_isTutorialActive || _currentTutorialStage != stage) return;
+                
+                if (dynamicTarget != null)
+                {
+                    target = dynamicTarget();
+                    if (target == null && (stage == TutorialStage.LockCharacter || stage == TutorialStage.ShowHideCharacter))
+                    {
+                        StopTutorial();
+                        return;
+                    }
+                }
+
+                if (target != null)
+                {
+                    popup.PlacementTarget = target;
+                    popup.Placement = placement;
+                    UpdateTutorialArrows(placement);
+                    popup.IsOpen = true;
+                }
+            }, DispatcherPriority.Background);
+        }
+
+        private void UpdateTutorialArrows(PlacementMode placement)
+        {
+            var top = this.FindControl<Control>("TutorialArrowTop");
+            var bottom = this.FindControl<Control>("TutorialArrowBottom");
+            var left = this.FindControl<Control>("TutorialArrowLeft");
+            var right = this.FindControl<Control>("TutorialArrowRight");
+
+            if (top != null) top.IsVisible = false;
+            if (bottom != null) bottom.IsVisible = false;
+            if (left != null) left.IsVisible = false;
+            if (right != null) right.IsVisible = false;
+
+            switch (placement)
+            {
+                case PlacementMode.Bottom:
+                    if (top != null) top.IsVisible = true;
+                    break;
+                case PlacementMode.Top:
+                    if (bottom != null) bottom.IsVisible = true;
+                    break;
+                case PlacementMode.Right:
+                    if (left != null) left.IsVisible = true;
+                    break;
+                case PlacementMode.Left:
+                    if (right != null) right.IsVisible = true;
+                    break;
             }
+        }
+
+        private Control? GetFirstBubble()
+        {
+            if (_traitsGrid != null && _traitsGrid.Children.Count > 0)
+            {
+                if (_traitsGrid.Children[0] is Border border && border.Child is Grid inner)
+                {
+                    var canvas = inner.Children.OfType<Canvas>().FirstOrDefault();
+                    if (canvas != null)
+                    {
+                        var firstChar = _viewModel?.Project.Characters.FirstOrDefault();
+                        if (firstChar != null)
+                        {
+                            var bubble = canvas.Children.OfType<Ellipse>().FirstOrDefault(e => e.Tag == firstChar);
+                            if (bubble != null) return bubble;
+                        }
+                        return canvas;
+                    }
+                }
+            }
+            return _traitsGrid;
+        }
+
+        private Control? GetFirstTraitContainer()
+        {
+            if (_traitsGrid != null && _traitsGrid.Children.Count > 0)
+            {
+                return _traitsGrid.Children[0] as Control;
+            }
+            return _traitsGrid;
+        }
+
+        private Control? GetFirstTraitNoteButton()
+        {
+            if (_traitsGrid != null && _traitsGrid.Children.Count > 0)
+            {
+                if (_traitsGrid.Children[0] is Border border && border.Child is Grid inner)
+                {
+                    foreach (var g in inner.Children.OfType<Grid>())
+                    {
+                        foreach (var child in g.Children)
+                        {
+                            if (child is Grid noteContainer)
+                            {
+                                var btn = noteContainer.Children.OfType<Button>().FirstOrDefault();
+                                if (btn != null) return btn;
+                            }
+                        }
+                    }
+                }
+            }
+            return _traitsGrid;
         }
 
         private Control? FindButtonInLists(string buttonName, string highlightName)
@@ -187,12 +298,36 @@ namespace SixteenCoreCharacterMapper.Avalonia
             return null;
         }
 
-        private void TutorialButton_Click(object? sender, RoutedEventArgs e) { if (_currentTutorialStage == TutorialStage.ExportImage) ProceedToNextTutorialStage(); else if (_currentTutorialStage == TutorialStage.Final) StopTutorial(); }
+        private void TutorialButton_Click(object? sender, RoutedEventArgs e) { if (_currentTutorialStage == TutorialStage.ExportImage || _currentTutorialStage == TutorialStage.ExportNotes) ProceedToNextTutorialStage(); else if (_currentTutorialStage == TutorialStage.Final) StopTutorial(); }
 
         private void SetHighlight(string name, bool visible)
         {
             var border = this.FindControl<Border>(name);
             if (border != null) border.IsVisible = visible;
+        }
+
+        private void SetNoteHighlights(bool visible)
+        {
+            if (_traitsGrid == null) return;
+            foreach (var child in _traitsGrid.Children)
+            {
+                if (child is Border border && border.Child is Grid inner && inner.Children.Count > 0 && inner.Children[0] is Grid titleGrid)
+                {
+                    foreach (var titleChild in titleGrid.Children)
+                    {
+                        if (titleChild is Grid noteContainer)
+                        {
+                            foreach (var noteChild in noteContainer.Children)
+                            {
+                                if (noteChild is Border highlight && highlight.Tag?.ToString() == "NoteHighlight")
+                                {
+                                    highlight.IsVisible = visible;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void OnCharacterAddedForTutorial(Character newCharacter)
