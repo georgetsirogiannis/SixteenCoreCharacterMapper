@@ -1,0 +1,23 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:SixteenCoreCharacterMapper.Avalonia"
+             x:Class="SixteenCoreCharacterMapper.Avalonia.App"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.Resources>
+        <local:ColorToBooleanConverter x:Key="ColorToBoolConverter"/>
+        <local:HexToBrushConverter x:Key="HexToBrushConverter"/>
+        <local:StatusIconConverter x:Key="StatusIconConverter"/>
+    </Application.Resources>
+
+    <Application.Styles>
+        <FluentTheme />
+        <Style Selector="Button">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="500"/>
+        </Style>
+    </Application.Styles>
+</Application>

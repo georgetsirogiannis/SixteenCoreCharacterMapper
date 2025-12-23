@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Trait_Warmth_Description" xml:space="preserve">
+    <value>o quão empático é com os outros</value>
+  </data>
+  <data name="Trait_Warmth_Name" xml:space="preserve">
+    <value>Afetuosidade</value>
+  </data>
+  <data name="Trait_Warmth_Low" xml:space="preserve">
+    <value>reservado, emocionalmente distante, desapegado, desinteressado nos problemas dos outros, prefere ficar na sua</value>
+  </data>
+  <data name="Trait_Warmth_High" xml:space="preserve">
+    <value>empático, reconfortante, interessado nos outros, sente as emoções alheias, une as pessoas, deixa os outros à vontade</value>
+  </data>
+  <data name="Trait_Intellect_Name" xml:space="preserve">
+    <value>Intelecto</value>
+  </data>
+  <data name="Trait_Intellect_Description" xml:space="preserve">
+    <value>a capacidade de pensamento analítico</value>
+  </data>
+  <data name="Trait_Intellect_Low" xml:space="preserve">
+    <value>concreto, direto, evita complexidade, se confunde com ideias abstratas, tem um vocabulário simples</value>
+  </data>
+  <data name="Trait_Intellect_High" xml:space="preserve">
+    <value>analítico, perspicaz, aprende rápido, aprecia ideias abstratas e argumentos complexos, reflete antes de agir</value>
+  </data>
+  <data name="Trait_EmotionalStability_Name" xml:space="preserve">
+    <value>Estabilidade Emocional</value>
+  </data>
+  <data name="Trait_EmotionalStability_Description" xml:space="preserve">
+    <value>o quão composto se mantém sob pressão</value>
+  </data>
+  <data name="Trait_EmotionalStability_Low" xml:space="preserve">
+    <value>reativo, emocionalmente instável, desanima fácil, propenso à tristeza, não gosta de si mesmo, se desespera sob estresse</value>
+  </data>
+  <data name="Trait_EmotionalStability_High" xml:space="preserve">
+    <value>resiliente, emocionalmente estável, relaxado, calmo sob pressão, supera reveses, à vontade consigo mesmo</value>
+  </data>
+  <data name="Trait_Assertiveness_Name" xml:space="preserve">
+    <value>Assertividade</value>
+  </data>
+  <data name="Trait_Assertiveness_Description" xml:space="preserve">
+    <value>o quão assertivo é com os outros</value>
+  </data>
+  <data name="Trait_Assertiveness_Low" xml:space="preserve">
+    <value>complacente, avesso a conflitos, deixa os outros liderarem, se deixa levar, cede aos outros, evita desafios</value>
+  </data>
+  <data name="Trait_Assertiveness_High" xml:space="preserve">
+    <value>assertivo, assume o controle, diz o que pensa, direciona os outros, controla situações, não teme críticas</value>
+  </data>
+  <data name="Trait_Gregariousness_Name" xml:space="preserve">
+    <value>Gregarismo</value>
+  </data>
+  <data name="Trait_Gregariousness_Description" xml:space="preserve">
+    <value>o quão expressivo e energético é</value>
+  </data>
+  <data name="Trait_Gregariousness_Low" xml:space="preserve">
+    <value>sério, contido, introspectivo, quieto, não gosta de multidões e eventos barulhentos, de postura sóbria</value>
+  </data>
+  <data name="Trait_Gregariousness_High" xml:space="preserve">
+    <value>vivaz, energético, espontâneo, expressivo, adora festas e multidões, faz piadas, pode ser selvagem e louco</value>
+  </data>
+  <data name="Trait_Dutifulness_Name" xml:space="preserve">
+    <value>Senso de Dever</value>
+  </data>
+  <data name="Trait_Dutifulness_Description" xml:space="preserve">
+    <value>o quanto segue regras e deveres</value>
+  </data>
+  <data name="Trait_Dutifulness_Low" xml:space="preserve">
+    <value>inconformista, pragmático, resiste à autoridade, quebra regras, valoriza a liberdade acima do convencional</value>
+  </data>
+  <data name="Trait_Dutifulness_High" xml:space="preserve">
+    <value>cumpridor, consciente das regras, respeita a autoridade, segue as normas, acredita na ordem, convencional</value>
+  </data>
+  <data name="Trait_SocialConfidence_Name" xml:space="preserve">
+    <value>Confiança Social</value>
+  </data>
+  <data name="Trait_SocialConfidence_Description" xml:space="preserve">
+    <value>o quão socialmente confiante é</value>
+  </data>
+  <data name="Trait_SocialConfidence_Low" xml:space="preserve">
+    <value>tímido, socialmente hesitante, quieto com estranhos, fica em segundo plano, desconfortável com atenção</value>
+  </data>
+  <data name="Trait_SocialConfidence_High" xml:space="preserve">
+    <value>socialmente audacioso, extrovertido, faz amigos facilmente, à vontade com atenção, inicia conversas</value>
+  </data>
+  <data name="Trait_Sensitivity_Name" xml:space="preserve">
+    <value>Sensibilidade</value>
+  </data>
+  <data name="Trait_Sensitivity_Description" xml:space="preserve">
+    <value>o quão sintonizado está com a estética e a emoção</value>
+  </data>
+  <data name="Trait_Sensitivity_Low" xml:space="preserve">
+    <value>pouco sentimental, objetivo, racional, prático, não se atrai por arte ou poesia, raramente nota reações emocionais</value>
+  </data>
+  <data name="Trait_Sensitivity_High" xml:space="preserve">
+    <value>de mente terna, sensível, esteta, intuitivo, aprecia arte e ficção, emocionalmente receptivo, se comove com a beleza</value>
+  </data>
+  <data name="Trait_Distrust_Name" xml:space="preserve">
+    <value>Desconfiança</value>
+  </data>
+  <data name="Trait_Distrust_Description" xml:space="preserve">
+    <value>o quão desconfiado é em relação aos outros</value>
+  </data>
+  <data name="Trait_Distrust_Low" xml:space="preserve">
+    <value>confiante, receptivo, acredita no que as pessoas dizem, assume boas intenções, vê as pessoas como boas</value>
+  </data>
+  <data name="Trait_Distrust_High" xml:space="preserve">
+    <value>desconfiado, vigilante, cético, receoso dos outros, suspeita de motivos ocultos, tem dificuldade em perdoar</value>
+  </data>
+  <data name="Trait_Imagination_Name" xml:space="preserve">
+    <value>Imaginação</value>
+  </data>
+  <data name="Trait_Imagination_Description" xml:space="preserve">
+    <value>o quão imaginativo e abstrato é</value>
+  </data>
+  <data name="Trait_Imagination_Low" xml:space="preserve">
+    <value>pés no chão, prático, convencional, focado em soluções, segue as regras, raramente sonha acordado</value>
+  </data>
+  <data name="Trait_Imagination_High" xml:space="preserve">
+    <value>imaginativo, abstrato, absorto em ideias, adora sonhar acordado e fantasiar, pode ser excêntrico</value>
+  </data>
+  <data name="Trait_Reserve_Name" xml:space="preserve">
+    <value>Reserva</value>
+  </data>
+  <data name="Trait_Reserve_Description" xml:space="preserve">
+    <value>o quão reservado é com informações pessoais</value>
+  </data>
+  <data name="Trait_Reserve_Low" xml:space="preserve">
+    <value>direto, aberto, genuíno, compartilha sentimentos e pensamentos, fácil de conhecer, transparente, fala sobre si</value>
+  </data>
+  <data name="Trait_Reserve_High" xml:space="preserve">
+    <value>privado, discreto, reservado, não revela informações, difícil de conhecer, guarda os sentimentos, mantém os pensamentos para si</value>
+  </data>
+  <data name="Trait_Anxiety_Name" xml:space="preserve">
+    <value>Ansiedade</value>
+  </data>
+  <data name="Trait_Anxiety_Description" xml:space="preserve">
+    <value>o quão propenso é à preocupação e à dúvida</value>
+  </data>
+  <data name="Trait_Anxiety_Low" xml:space="preserve">
+    <value>autoconfiante, seguro, despreocupado, não se abala facilmente, resiliente ao desânimo, livre de culpa</value>
+  </data>
+  <data name="Trait_Anxiety_High" xml:space="preserve">
+    <value>preocupado, inseguro, apreensivo, se magoa facilmente, propenso à culpa, remoendo erros do passado</value>
+  </data>
+  <data name="Trait_Complexity_Name" xml:space="preserve">
+    <value>Complexidade</value>
+  </data>
+  <data name="Trait_Complexity_Description" xml:space="preserve">
+    <value>o quão receptivo é a novas ideias e experiências</value>
+  </data>
+  <data name="Trait_Complexity_Low" xml:space="preserve">
+    <value>tradicional, convencional, prefere o familiar e a rotina, evita discussões abstratas ou filosóficas</value>
+  </data>
+  <data name="Trait_Complexity_High" xml:space="preserve">
+    <value>experimental, aberto a novas ideias, prefere variedade, aprecia a complexidade e debates teóricos</value>
+  </data>
+  <data name="Trait_Introversion_Name" xml:space="preserve">
+    <value>Introversão</value>
+  </data>
+  <data name="Trait_Introversion_Description" xml:space="preserve">
+    <value>o quão autossuficiente e solitário é</value>
+  </data>
+  <data name="Trait_Introversion_Low" xml:space="preserve">
+    <value>voltado para o grupo, sociável, gosta de trabalho em equipe, precisa da companhia de outros, colaborativo</value>
+  </data>
+  <data name="Trait_Introversion_High" xml:space="preserve">
+    <value>autossuficiente, solitário, individualista, aprecia a privacidade e o silêncio, prefere ficar só</value>
+  </data>
+  <data name="Trait_Orderliness_Name" xml:space="preserve">
+    <value>Organização</value>
+  </data>
+  <data name="Trait_Orderliness_Description" xml:space="preserve">
+    <value>o quão organizado e disciplinado é</value>
+  </data>
+  <data name="Trait_Orderliness_Low" xml:space="preserve">
+    <value>flexível, tolera a desordem, pouco exigente, relaxado, espontâneo, não se incomoda com a bagunça, adia tarefas</value>
+  </data>
+  <data name="Trait_Orderliness_High" xml:space="preserve">
+    <value>perfeccionista, organizado, autodisciplinado, exigente, gosta de ordem, quer as coisas perfeitas, termina as tarefas logo</value>
+  </data>
+  <data name="Trait_Emotionality_Name" xml:space="preserve">
+    <value>Emotividade</value>
+  </data>
+  <data name="Trait_Emotionality_Low" xml:space="preserve">
+    <value>relaxado, plácido, paciente, calmo, não se irrita facilmente, perdoa rápido, tranquilo, composto</value>
+  </data>
+  <data name="Trait_Emotionality_Description" xml:space="preserve">
+    <value>com que facilidade se frustra ou se irrita</value>
+  </data>
+  <data name="Trait_Emotionality_High" xml:space="preserve">
+    <value>tenso, impaciente, facilmente irritável, se enfurece rápido, frustrado, se incomoda com erros dos outros</value>
+  </data>
+</root>

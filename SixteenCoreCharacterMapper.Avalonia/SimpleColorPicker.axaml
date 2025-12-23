@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="150"
+             x:Class="SixteenCoreCharacterMapper.Avalonia.SimpleColorPicker"
+             x:Name="Root">
+    <StackPanel>
+        <Border Height="50" Margin="5" BorderBrush="Gray" BorderThickness="1">
+            <Border.Background>
+                <SolidColorBrush Color="{Binding #Root.SelectedColor}" />
+            </Border.Background>
+        </Border>
+        <Grid Margin="5" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
+            <TextBlock x:Name="RLabel" Text="R:" VerticalAlignment="Center" Margin="0,0,5,0" Grid.Row="0" Grid.Column="0"/>
+            <Slider Name="SliderR" Minimum="0" Maximum="255" Grid.Row="0" Grid.Column="1"/>
+            
+            <TextBlock x:Name="GLabel" Text="G:" VerticalAlignment="Center" Margin="0,0,5,0" Grid.Row="1" Grid.Column="0"/>
+            <Slider Name="SliderG" Minimum="0" Maximum="255" Grid.Row="1" Grid.Column="1"/>
+            
+            <TextBlock x:Name="BLabel" Text="B:" VerticalAlignment="Center" Margin="0,0,5,0" Grid.Row="2" Grid.Column="0"/>
+            <Slider Name="SliderB" Minimum="0" Maximum="255" Grid.Row="2" Grid.Column="1"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

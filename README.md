@@ -53,3 +53,10 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
 * Bug fixes
   * Fixed a bug where the Project Title wasn't saved and reverted back to the savefile name the next time the savefile was loaded.
   * Fixed the Update Check functionality. 
+
+**Version 2.0.0** (Yet unreleased / Committed December 23, 2025)
+* This is a major update that transitions 16Core Character Mapper to a natively cross-platform architecture:
+    * **Cross-Platform Migration**: The application has migrated to the Avalonia UI framework. This transition enables native support across different operating systems and includes a comprehensive restructuring of the code-behind to optimize performance.
+    * **Reimagined User Interface**: The UI has been rebuilt from the ground up. While preserving the intuitive design language of v1.1.0, the interface is now optimized for better scaling and a smoother user experience across various display resolutions.
+    * **New File Format**: Project saves now use a custom **.16core** extension for improved file association and organization.
+    * **Backward Compatibility**: Full support for loading and saving "legacy" **.json** files remains available, ensuring a seamless transition for existing projects.

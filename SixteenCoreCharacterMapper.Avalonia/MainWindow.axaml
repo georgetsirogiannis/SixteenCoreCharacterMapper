@@ -1,0 +1,218 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:SixteenCoreCharacterMapper.Core.ViewModels"
+        xmlns:local="using:SixteenCoreCharacterMapper.Avalonia"
+        xmlns:models="using:SixteenCoreCharacterMapper.Core.Models"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+        x:Class="SixteenCoreCharacterMapper.Avalonia.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        x:Name="RootWindow"
+        Title="{Binding WindowTitle}"
+        Icon="/Assets/16Core logo icon v2.png">
+
+    <Window.Resources>
+        <local:BooleanToLockTooltipConverter x:Key="BoolToLockTooltipConverter"/>
+        <local:BooleanToVisibilityTooltipConverter x:Key="BoolToVisibilityTooltipConverter"/>
+        <local:BubbleSizeToGroupHeaderConverter x:Key="BubbleSizeConverter"/>
+        <local:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter"/>
+        <local:HexToBrushConverter x:Key="HexToBrushConverter"/>
+        <local:StatusToGeometryConverter x:Key="StatusToGeometryConverter"/>
+        <local:BooleanToIconBrushConverter x:Key="BooleanToIconBrushConverter"/>
+        
+        <DataTemplate x:Key="CharacterItemTemplate" DataType="models:Character">
+            <Grid Background="Transparent"
+                  PointerPressed="CharacterItem_PointerPressed"
+                  PointerMoved="CharacterItem_PointerMoved"
+                  DoubleTapped="CharacterItem_DoubleTapped">
+                <Border x:Name="TopIndicator" Height="2" Background="#ad87ff" VerticalAlignment="Top" IsVisible="False"/>
+                <Border x:Name="BottomIndicator" Height="2" Background="#ad87ff" VerticalAlignment="Bottom" IsVisible="False"/>
+                
+                <Grid ColumnDefinitions="Auto,*,Auto" Background="Transparent" Margin="0,1">
+                    <Ellipse Grid.Column="0" Width="19" Height="19" 
+                             Fill="{Binding ColorHex, Converter={StaticResource HexToBrushConverter}}" 
+                             Margin="0,0,8,0"
+                             Opacity="{Binding IsVisible, Converter={StaticResource BooleanToOpacityConverter}}"/>
+                    
+                    <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" 
+                               FontWeight="500" FontSize="12"/>
+                    
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="2" VerticalAlignment="Center" x:CompileBindings="False">
+                        <Grid>
+                            <Button x:Name="LockButton" Classes="IconButton" Width="24" Height="24" VerticalAlignment="Center" Command="{Binding DataContext.ToggleLockCommand, ElementName=RootWindow}" CommandParameter="{Binding}"
+                                    ToolTip.Tip="{Binding IsLocked, Converter={StaticResource BoolToLockTooltipConverter}}"
+                                    Click="IconButton_Click">
+                                <PathIcon Width="16" Height="16" Margin="0,0,0,2" Data="{Binding IsLocked, Converter={StaticResource StatusToGeometryConverter}, ConverterParameter=Lock}"
+                                          Foreground="{Binding $parent[Window].DataContext.IsDarkMode, Converter={StaticResource BooleanToIconBrushConverter}}"/>
+                            </Button>
+                            <Border x:Name="LockHighlight" BorderBrush="#ad87ff" BorderThickness="2" IsVisible="False" IsHitTestVisible="False"/>
+                        </Grid>
+                        <Grid>
+                            <Button x:Name="VisibilityButton" Classes="IconButton" Width="24" Height="24" VerticalAlignment="Center" Command="{Binding DataContext.ToggleVisibilityCommand, ElementName=RootWindow}" CommandParameter="{Binding}"
+                                    ToolTip.Tip="{Binding IsVisible, Converter={StaticResource BoolToVisibilityTooltipConverter}}"
+                                    Click="IconButton_Click">
+                                <PathIcon Width="16" Height="16" Margin="0,0,0,0" Data="{Binding IsVisible, Converter={StaticResource StatusToGeometryConverter}, ConverterParameter=Visibility}"
+                                          Foreground="{Binding $parent[Window].DataContext.IsDarkMode, Converter={StaticResource BooleanToIconBrushConverter}}"/>
+                            </Button>
+                            <Border x:Name="VisibilityHighlight" BorderBrush="#ad87ff" BorderThickness="2" IsVisible="False" IsHitTestVisible="False"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Window.Styles>
+        <Style Selector="Button.ToolBarButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style Selector="Button.ToolBarButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#E0E0E0"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        
+        <Style Selector="Button.CharacterListButton">
+            <Setter Property="Padding" Value="5,2"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Background" Value="#F0F0F0"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="2"/>
+        </Style>
+        
+        <Style Selector="Button.IconButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+    </Window.Styles>
+
+    <LayoutTransformControl x:Name="RootLayoutControl">
+        <Grid x:Name="MainLayoutGrid" RowDefinitions="Auto,Auto,*" PointerPressed="MainGrid_PointerPressed" Background="Transparent" Focusable="True">
+            <!-- Toolbar -->
+            <Border x:Name="MainToolBarBorder" Grid.Row="0" BorderBrush="#CCCCCC" BorderThickness="0,0,0,1" Padding="5">
+                <Grid ColumnDefinitions="*,Auto">
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5">
+                        <Button Content="New Project" Classes="ToolBarButton" Command="{Binding NewProjectCommand}"/>
+                        <Border x:Name="ToolBarDivider1" Width="1" Background="#CCCCCC" Margin="5,2"/>
+                        <Button Content="Load" Classes="ToolBarButton" Command="{Binding LoadProjectCommand}"/>
+                        <Button Content="Save" Classes="ToolBarButton" Command="{Binding SaveProjectCommand}"/>
+                        <Button Content="Save As..." Classes="ToolBarButton" Command="{Binding SaveAsProjectCommand}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5">
+                        <Button Content="Tutorial" Classes="ToolBarButton" Click="Tutorial_Click"/>
+                        <Grid>
+                            <Button x:Name="ExportImageButton" Content="Export Image" Classes="ToolBarButton" Click="ExportImage_Click"/>
+                            <Border x:Name="ExportImageHighlight" BorderBrush="#ad87ff" BorderThickness="3" IsVisible="False" IsHitTestVisible="False" CornerRadius="3"/>
+                        </Grid>
+                        <Grid>
+                            <Button x:Name="ToggleThemeButton" Content="Toggle Theme" Classes="ToolBarButton" Command="{Binding ToggleThemeCommand}" Click="ToggleThemeButton_Click"/>
+                            <Border x:Name="ToggleThemeHighlight" BorderBrush="#ad87ff" BorderThickness="3" IsVisible="False" IsHitTestVisible="False" CornerRadius="3"/>
+                        </Grid>
+                        <Border x:Name="ToolBarDivider2" Width="1" Background="#CCCCCC" Margin="5,2"/>
+                        <TextBlock Text="Traits Language:" VerticalAlignment="Center" Margin="0,0,2,0" FontSize="13" FontWeight="300"/>
+                        <ComboBox x:Name="LanguageComboBox" ItemsSource="{Binding AvailableLanguages}" 
+                                  SelectedItem="{Binding SelectedLanguage}"
+                                  DisplayMemberBinding="{Binding Name}"
+                                  Width="120" VerticalAlignment="Center"
+                                  FontSize="13" FontWeight="500"/>
+                        <Border x:Name="ToolBarDivider3" Width="1" Background="#CCCCCC" Margin="5,2"/>
+                        <Button Content="About" Classes="ToolBarButton" Click="About_Click"/>
+                        <Button Content="Donate" Classes="ToolBarButton" Click="Donate_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Main Content -->
+            <Grid Grid.Row="2" ColumnDefinitions="250,*" Margin="10">
+                
+                <!-- Left Panel: Project Name & Character List -->
+                <Grid Grid.Column="0" RowDefinitions="Auto,*" Margin="0,0,10,0">
+                    
+                    <!-- Project Name -->
+                    <StackPanel Grid.Row="0" Margin="0,0,0,10">
+                        <TextBlock x:Name="ProjectNameLabel" Text="Project Title:" FontSize="12" FontWeight="Bold" Margin="0,0,0,8"/>
+                        <Grid>
+                            <TextBox x:Name="ProjectNameTextBox" Text="{Binding ProjectName}" FontSize="13" Watermark="Enter Project Title..." KeyDown="ProjectNameTextBox_KeyDown" TextChanged="ProjectNameTextBox_TextChanged"/>
+                            <Border x:Name="ProjectNameHighlight" BorderBrush="#ad87ff" BorderThickness="3" IsVisible="False" IsHitTestVisible="False" CornerRadius="3"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- Character List -->
+                    <Grid Grid.Row="1" RowDefinitions="Auto,*">
+                        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,15,0,5">
+                            <TextBlock x:Name="CharactersLabel" Text="Characters" FontSize="12" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <StackPanel x:Name="CharacterListButtons" Grid.Column="1" Orientation="Horizontal" Spacing="5">
+                                <Grid>
+                                    <Button x:Name="AddCharacterButton" Content="Add" Classes="CharacterListButton" Command="{Binding AddCharacterCommand}"/>
+                                    <Border x:Name="CharacterButtonsHighlight" BorderBrush="#ad87ff" BorderThickness="3" IsVisible="False" IsHitTestVisible="False" CornerRadius="2"/>
+                                </Grid>
+                                <Button Content="Edit" Classes="CharacterListButton" Command="{Binding EditCharacterCommand}"/>
+                                <Button Content="Delete" Classes="CharacterListButton" Command="{Binding DeleteCharacterCommand}"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <ScrollViewer Grid.Row="1">
+                            <StackPanel>
+                                <TextBlock x:Name="MainHeader" Text="Main" FontWeight="Bold" Margin="0,5,0,2" FontSize="13"/>
+                                <ListBox x:Name="MainList" 
+                                         ItemsSource="{Binding MainCharacters, ElementName=RootWindow}" 
+                                         ItemTemplate="{StaticResource CharacterItemTemplate}"
+                                         SelectedItem="{Binding SelectedCharacter}"
+                                         Background="White" BorderBrush="#CCCCCC" BorderThickness="1"
+                                         DragDrop.AllowDrop="True" DragDrop.Drop="CharactersList_Drop"
+                                         DragDrop.DragOver="CharactersList_DragOver"
+                                         DragDrop.DragLeave="CharactersList_DragLeave"/>
+
+                                <TextBlock x:Name="SupportingHeader" Text="Supporting" FontWeight="Bold" Margin="0,10,0,2" FontSize="13"/>
+                                <ListBox x:Name="SupportingList" 
+                                         ItemsSource="{Binding SupportingCharacters, ElementName=RootWindow}" 
+                                         ItemTemplate="{StaticResource CharacterItemTemplate}"
+                                         SelectedItem="{Binding SelectedCharacter}"
+                                         Background="White" BorderBrush="#CCCCCC" BorderThickness="1"
+                                         DragDrop.AllowDrop="True" DragDrop.Drop="CharactersList_Drop"
+                                         DragDrop.DragOver="CharactersList_DragOver"
+                                         DragDrop.DragLeave="CharactersList_DragLeave"/>
+
+                                <TextBlock x:Name="BackgroundHeader" Text="Background" FontWeight="Bold" Margin="0,10,0,2" FontSize="13"/>
+                                <ListBox x:Name="BackgroundList" 
+                                         ItemsSource="{Binding BackgroundCharacters, ElementName=RootWindow}" 
+                                         ItemTemplate="{StaticResource CharacterItemTemplate}"
+                                         SelectedItem="{Binding SelectedCharacter}"
+                                         Background="White" BorderBrush="#CCCCCC" BorderThickness="1"
+                                         DragDrop.AllowDrop="True" DragDrop.Drop="CharactersList_Drop"
+                                         DragDrop.DragOver="CharactersList_DragOver"
+                                         DragDrop.DragLeave="CharactersList_DragLeave"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+
+                <!-- Right Panel: Traits Grid -->
+                <Grid Grid.Column="1" x:Name="TraitsGrid" Background="#FAFAFA">
+                    <!-- Populated in Code-behind -->
+                    <TextBlock Text="Traits will appear here" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray"/>
+                </Grid>
+                
+                <!-- Highlights for Toolbar Buttons (Overlay on top of everything or inside the toolbar grid) -->
+                <!-- Since Toolbar is in Row 0, we can't easily overlay from here. 
+                     We should add highlights in the Toolbar Grid. -->
+            </Grid>
+            
+            <!-- Tutorial Popup -->
+            <Popup Name="TutorialPopup" PlacementMode="Bottom" IsLightDismissEnabled="False">
+                <Border Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" BorderThickness="1" BorderBrush="Gray" Padding="10" CornerRadius="5">
+                    <StackPanel MaxWidth="250">
+                        <TextBlock Name="TutorialTextBlock" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                        <Button Name="TutorialButton" Content="Next" HorizontalAlignment="Right" Click="TutorialButton_Click"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Grid>
+    </LayoutTransformControl>
+</Window>

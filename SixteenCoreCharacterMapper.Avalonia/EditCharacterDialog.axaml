@@ -1,0 +1,81 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="using:SixteenCoreCharacterMapper.Avalonia"
+        xmlns:models="using:SixteenCoreCharacterMapper.Core.Models"
+        xmlns:vm="using:SixteenCoreCharacterMapper.Core.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="400"
+        x:Class="SixteenCoreCharacterMapper.Avalonia.EditCharacterDialog"
+        x:CompileBindings="False"
+        Title="Edit Character" Width="350" SizeToContent="Height"
+        WindowStartupLocation="CenterOwner" CanResize="False">
+
+    <Window.Resources>
+        <local:ColorToBooleanConverter x:Key="ColorToBoolConverter"/>
+        <local:HexToBrushConverter x:Key="HexToBrushConverter"/>
+    </Window.Resources>
+
+    <StackPanel Margin="10" VerticalAlignment="Center">
+
+        <TextBlock x:Name="NameLabel" Text="Name" FontSize="14" FontWeight="700"/>
+        <TextBox x:Name="NameBox" Text="{Binding Character.Name}" Margin="0,5,0,20"/>
+
+        <TextBlock x:Name="ColorLabel" Text="Color" FontSize="14" FontWeight="700"/>
+        <TabControl x:Name="ColorTabControl" Margin="0,-5,0,0">
+            <TabItem x:Name="PaletteTab" Header="Palette" FontSize="13">
+                <ItemsControl x:Name="PresetColorsList" Margin="5" ItemsSource="{Binding AvailableColors}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="models:ColorItem">
+                            <RadioButton GroupName="PresetColor" Width="22" Height="22" Margin="2"
+                                         ToolTip.Tip="{Binding Name}"
+                                         Click="PresetColor_Click">
+                                <RadioButton.Styles>
+                                    <Style Selector="RadioButton">
+                                        <Setter Property="Template">
+                                            <ControlTemplate>
+                                                <Grid>
+                                                    <Ellipse x:Name="Highlight" Stroke="DodgerBlue" StrokeThickness="2" IsVisible="False"/>
+                                                    <Ellipse Width="18" Height="18" Fill="{Binding Hex, Converter={StaticResource HexToBrushConverter}}"/>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter>
+                                    </Style>
+                                    <Style Selector="RadioButton:checked /template/ Ellipse#Highlight">
+                                        <Setter Property="IsVisible" Value="True"/>
+                                    </Style>
+                                </RadioButton.Styles>
+                                <RadioButton.IsChecked>
+                                    <MultiBinding Converter="{StaticResource ColorToBoolConverter}" Mode="OneWay">
+                                        <Binding Path="."/>
+                                        <Binding ElementName="ColorPickerControl" Path="SelectedColor"/>
+                                    </MultiBinding>
+                                </RadioButton.IsChecked>
+                            </RadioButton>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </TabItem>
+            <TabItem x:Name="CustomTab" Header="Custom" FontSize="13">
+                <local:SimpleColorPicker x:Name="ColorPickerControl" Margin="5"/>
+            </TabItem>
+        </TabControl>
+
+        <TextBlock x:Name="CharacterTypeLabel" Text="Character Type" FontSize="14" FontWeight="700" Margin="0,20,0,0"/>
+        <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+            <RadioButton x:Name="MainRadioButton" Content="Main" FontSize="12" GroupName="CharacterType" Margin="5,0"/>
+            <RadioButton x:Name="SupportingRadioButton" Content="Supporting" FontSize="12" GroupName="CharacterType" Margin="10,0"/>
+            <RadioButton x:Name="BackgroundRadioButton" Content="Background" FontSize="12" GroupName="CharacterType" Margin="10,0"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="OkButton" Content="OK" FontSize="12" Width="60" Margin="5,15,5,5" Click="Ok_Click" IsDefault="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Button x:Name="CancelButton" Content="Cancel" FontSize="12"  Width="60" Margin="5,15,5,5" Click="Cancel_Click" IsCancel="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

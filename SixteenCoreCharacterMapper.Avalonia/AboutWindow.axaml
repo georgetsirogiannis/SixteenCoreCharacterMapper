@@ -1,0 +1,76 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
+        x:Class="SixteenCoreCharacterMapper.Avalonia.AboutWindow"
+        Title="About 16Core Character Mapper" Width="550" Height="600"
+        WindowStartupLocation="CenterOwner" CanResize="False">
+    <Grid Margin="20" RowDefinitions="Auto,*,Auto">
+        <!-- Header -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*" Margin="0,0,0,20">
+            <Image Grid.Column="0" Width="64" Height="64" Source="/Assets/16Core logo icon v2.png" Margin="0,0,15,0" VerticalAlignment="Top"/>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="16Core Character Mapper" FontWeight="Bold" FontSize="15"/>
+                <TextBlock Name="VersionText" FontSize="12" Text="Version 2.0.0"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Content -->
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Margin="0,0,0,15">
+                <TextBlock Text="A Tool for Storytellers" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBlock Text="16Core Character Mapper helps you develop deep characters by mapping their personalities across 16 core traits, letting you visualize how they interact with the world and each other." FontSize="12" TextWrapping="Wrap" Margin="0,0,0,5"/>
+
+                <TextBlock Text="Our Approach to Personality Traits" FontSize="12" FontWeight="Bold" Margin="0,15,0,5"/>
+                <TextBlock Text="This tool is inspired by established psychological trait theories. To ensure this application remains free and accessible to all, it exclusively uses public-domain terminology primarily drawn from the International Personality Item Pool (IPIP)." FontSize="12" TextWrapping="Wrap" Margin="0,0,0,5"/>
+
+                <TextBlock Text="Disclaimer:" FontSize="12" FontWeight="Bold" Margin="0,15,0,5"/>
+                <TextBlock Text="This is a creative tool, not a scientific or diagnostic instrument. It is not intended for psychological assessment." FontSize="12" TextWrapping="Wrap" Margin="0,0,0,5"/>
+
+                <Separator Margin="0,10"/>
+
+                <TextBlock Text="Support &amp; Feedback" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBlock TextWrapping="Wrap" FontSize="12" Margin="0,5">
+                    16Core Character Mapper is offered as free donationware. If you find it useful, please consider 
+                    <InlineUIContainer>
+                        <Button Content="donating via PayPal" Classes="link" Click="Donate_Click"/>
+                    </InlineUIContainer>.
+                </TextBlock>
+
+                <TextBlock FontSize="12" Margin="0,5">
+                    For questions, support, or feedback, please contact: <Button Content="16core@georgetsirogiannis.com" Classes="link" Click="Email_Click"/>
+                </TextBlock>
+                <TextBlock FontSize="12" Margin="0,5">
+                    Official Website: <Button Content="georgetsirogiannis.com/16corecharactermapper" Classes="link" Click="Website_Click"/>
+                </TextBlock>
+
+                <Separator Margin="0,10"/>
+                <TextBlock Text="Copyright 2025 George Tsirogiannis. All Rights Reserved." HorizontalAlignment="Center" FontSize="10"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Footer -->
+        <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto,Auto" Margin="0,15,0,0">
+            <Button Grid.Column="0" Content="Donate" Click="Donate_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Button Grid.Column="2" Content="Check for Updates" Click="CheckUpdates_Click" Margin="0,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Button Grid.Column="3" Content="OK" Click="Ok_Click" Width="80" IsDefault="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Grid>
+    </Grid>
+    
+    <Window.Styles>
+        <Style Selector="Button.link">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="0,0,0,-2"/>
+        </Style>
+        <Style Selector="Button.link:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Red"/>
+        </Style>
+    </Window.Styles>
+</Window>
