@@ -13,6 +13,8 @@
     <Company>George Tsirogiannis</Company>
     <Authors>George Tsirogiannis</Authors>
     <Copyright>© 2025 George Tsirogiannis. All Rights Reserved.</Copyright>
+    <PackageProjectUrl>https://georgetsirogiannis.com/16corecharactermapper</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/georgetsirogiannis/SixteenCoreCharacterMapper</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
