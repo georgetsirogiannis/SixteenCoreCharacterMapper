@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Class="SixteenCoreCharacterMapper.Avalonia.ExportNotesDialog"
+        Width="300" SizeToContent="WidthAndHeight" CanResize="False" WindowStartupLocation="CenterOwner"
+        Title="Export Notes"
+        Icon="/Assets/16Core logo icon v2.png">
+  <Grid RowDefinitions="Auto,Auto,Auto" Margin="20">
+    <StackPanel Grid.Row="0" Spacing="6">
+      <TextBlock Name="TitleText" Text="Export Format:" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+    </StackPanel>
+
+    <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,8,0,8">
+      <RadioButton Name="TxtRadio" Content="Plain Text (.txt)" IsChecked="True" Margin="0,0,0,0"/>
+      <RadioButton Name="RtfRadio" Content="Rich Text Format (.rtf)" Margin="0,0,0,20"/>
+    </StackPanel>
+
+    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+      <Button Name="CancelBtn" Content="Cancel" Width="80"/>
+      <Button Name="OkBtn" Content="OK" Width="80" Classes="accent"/>
+    </StackPanel>
+  </Grid>
+</Window>

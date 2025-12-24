@@ -15,11 +15,6 @@ namespace SixteenCoreCharacterMapper.Avalonia
             ApplyTheme();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-
         private void ApplyTheme()
         {
             var isDark = Application.Current?.ActualThemeVariant == ThemeVariant.Dark;
@@ -36,6 +31,24 @@ namespace SixteenCoreCharacterMapper.Avalonia
         private void Close_Click(object? sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void ScrollToSection_Click(object? sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is string targetName)
+            {
+                var target = this.FindControl<Control>(targetName);
+                var scrollViewer = this.FindControl<ScrollViewer>("MainScrollViewer");
+
+                if (target != null && scrollViewer != null && scrollViewer.Content is Control content)
+                {
+                    var offset = target.TranslatePoint(new Point(0, 0), content);
+                    if (offset.HasValue)
+                    {
+                        scrollViewer.Offset = new Vector(0, offset.Value.Y);
+                    }
+                }
+            }
         }
     }
 }

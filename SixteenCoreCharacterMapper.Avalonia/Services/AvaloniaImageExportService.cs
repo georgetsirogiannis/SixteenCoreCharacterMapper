@@ -9,6 +9,7 @@ using SixteenCoreCharacterMapper.Core.Models;
 using SixteenCoreCharacterMapper.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -207,13 +208,15 @@ namespace SixteenCoreCharacterMapper.Avalonia.Services
                 exportContainerGrid.Arrange(new Rect(size));
 
                 var pixelSize = new PixelSize((int)(layoutWidth * 150 / 96), (int)(layoutHeight * 150 / 96));
-                var bitmap = new RenderTargetBitmap(pixelSize, new Vector(150, 150));
+                using var bitmap = new RenderTargetBitmap(pixelSize, new Vector(150, 150));
                 bitmap.Render(exportContainerGrid);
 
-                using (var stream = System.IO.File.Create(filePath))
-                {
-                    bitmap.Save(stream);
-                }
+                using var memoryStream = new MemoryStream();
+                bitmap.Save(memoryStream);
+                memoryStream.Position = 0;
+
+                using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None, 4096, true);
+                await memoryStream.CopyToAsync(fileStream);
             });
         }
     }

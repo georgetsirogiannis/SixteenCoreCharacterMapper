@@ -22,11 +22,6 @@ namespace SixteenCoreCharacterMapper.Avalonia
         public SimpleColorPicker()
         {
             InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
             
             var sliderR = this.FindControl<Slider>("SliderR");
             var sliderG = this.FindControl<Slider>("SliderG");

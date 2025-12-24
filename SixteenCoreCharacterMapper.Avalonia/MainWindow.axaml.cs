@@ -47,6 +47,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
         public MainWindow()
         {
             InitializeComponent();
+            _traitsGrid = this.FindControl<Grid>("TraitsGrid");
             this.SizeChanged += Window_SizeChanged;
         }
 
@@ -72,12 +73,6 @@ namespace SixteenCoreCharacterMapper.Avalonia
                     WindowState = WindowState.Maximized;
                 }
             }
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-            _traitsGrid = this.FindControl<Grid>("TraitsGrid");
         }
 
         private void Window_SizeChanged(object? sender, SizeChangedEventArgs e)
@@ -516,13 +511,19 @@ namespace SixteenCoreCharacterMapper.Avalonia
         {
             if (_viewModel?.Project?.TraitNotes == null) return;
 
+            // Show dialog to choose format
+            var dialog = new ExportNotesDialog();
+            var dialogResult = await dialog.ShowDialog(this);
+            if (dialogResult != true) return; // User cancelled
+            bool wantRtf = dialog.IsRtf;
+
             var saveOptions = new FilePickerSaveOptions
             {
-                Title = "Export Notes",
-                DefaultExtension = "txt",
+                Title = wantRtf ? "Export Notes (RTF)" : "Export Notes",
+                DefaultExtension = wantRtf ? "rtf" : "txt",
                 FileTypeChoices = new List<FilePickerFileType>
                 {
-                    new FilePickerFileType("Text File") { Patterns = new[] { "*.txt" } }
+                    wantRtf ? new FilePickerFileType("RTF File") { Patterns = new[] { "*.rtf" } } : new FilePickerFileType("Text File") { Patterns = new[] { "*.txt" } }
                 }
             };
 
@@ -534,25 +535,36 @@ namespace SixteenCoreCharacterMapper.Avalonia
                     string? localPath = file.Path.LocalPath;
                     if (localPath != null)
                     {
-                        var sb = new System.Text.StringBuilder();
-                        sb.AppendLine($"Notes for Project: {_viewModel.Project.Name}");
-                        sb.AppendLine(new string('-', 30));
-                        sb.AppendLine();
-
-                        foreach (var trait in TraitDefinitions.All)
+                        if (wantRtf)
                         {
-                            if (_viewModel.Project.TraitNotes.TryGetValue(trait.Id, out var note) && !string.IsNullOrWhiteSpace(note))
+                            string rtf = GenerateRtfNotes(_viewModel.Project.Name, TraitDefinitions.All, _viewModel.Project.TraitNotes);
+                            await File.WriteAllTextAsync(localPath, rtf, System.Text.Encoding.ASCII);
+                        }
+                        else
+                        {
+                            var sb = new System.Text.StringBuilder();
+                            sb.AppendLine("16Core Character Mapper");
+                            sb.AppendLine();
+                            sb.AppendLine($"Notes for Project: {_viewModel.Project.Name}");
+                            sb.AppendLine($"Exported: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+                            sb.AppendLine(new string('-', 30));
+                            sb.AppendLine();
+
+                            foreach (var trait in TraitDefinitions.All)
                             {
-                                sb.AppendLine($"[{trait.Name}]");
-                                sb.AppendLine(note);
-                                sb.AppendLine();
-                                sb.AppendLine(new string('-', 20));
-                                sb.AppendLine();
+                                if (_viewModel.Project.TraitNotes.TryGetValue(trait.Id, out var note) && !string.IsNullOrWhiteSpace(note))
+                                {
+                                    sb.AppendLine($"[{trait.Name}]");
+                                    sb.AppendLine(note);
+                                    sb.AppendLine();
+                                    sb.AppendLine(new string('-', 20));
+                                    sb.AppendLine();
+                                }
                             }
+
+                            await File.WriteAllTextAsync(localPath, sb.ToString(), System.Text.Encoding.UTF8);
                         }
 
-                        await File.WriteAllTextAsync(localPath, sb.ToString());
-                        
                         var msgBox = new SimpleMessageBox("Notes exported successfully!", "Export Complete", SimpleMessageBox.MessageBoxButtons.OK);
                         await msgBox.ShowDialog(this);
                     }
@@ -563,6 +575,85 @@ namespace SixteenCoreCharacterMapper.Avalonia
                     await msgBox.ShowDialog(this);
                 }
             }
+        }
+
+        private string GenerateRtfNotes(string projectName, IEnumerable<Trait> traits, IDictionary<string, string>? notes)
+        {
+            var sb = new System.Text.StringBuilder();
+
+            // RTF Header
+            sb.Append(@"{\rtf1\ansi\deff0\ansicpg1252\uc1");
+            
+            // Font Table
+            sb.Append(@"{\fonttbl{\f0\fswiss\fprq2\fcharset0 Arial;}{\f1\fnil\fcharset0 Segoe UI;}}");
+            
+            // Color Table
+            sb.Append(@"{\colortbl;\red0\green0\blue0;\red0\green0\blue128;}");
+            
+            sb.Append(@"\viewkind4\uc1\pard\cf1\f0\fs24");
+
+            // Title
+            sb.Append(@"\pard\sa200\sl276\slmult1\b\f0\fs36 ");
+            sb.Append(EncodeRtf("16Core Character Mapper"));
+            sb.Append(@"\par");
+
+            // Project Info
+            sb.Append(@"\pard\sa200\sl276\slmult1\b0\fs24 ");
+            sb.Append(EncodeRtf($"Project: {projectName}"));
+            sb.Append(@"\par ");
+            sb.Append(EncodeRtf($"Exported: {DateTime.Now:g}"));
+            sb.Append(@"\par\par");
+
+            foreach (var trait in traits)
+            {
+                if (notes != null && notes.TryGetValue(trait.Id, out var note) && !string.IsNullOrWhiteSpace(note))
+                {
+                    // Trait Header
+                    sb.Append(@"\pard\sa100\sb100\keepn\b\f0\fs28\cf2 ");
+                    sb.Append(EncodeRtf(trait.Name));
+                    sb.Append(@"\par");
+
+                    // Note Content
+                    sb.Append(@"\pard\sa200\qj\b0\f0\fs24\cf1 ");
+                    sb.Append(EncodeRtf(note));
+                    sb.Append(@"\par");
+                }
+            }
+
+            sb.Append("}");
+            return sb.ToString();
+        }
+
+        private string EncodeRtf(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return string.Empty;
+            var sb = new System.Text.StringBuilder();
+            foreach (char c in text)
+            {
+                switch (c)
+                {
+                    case '\\': sb.Append("\\\\"); break;
+                    case '{': sb.Append("\\{"); break;
+                    case '}': sb.Append("\\}"); break;
+                    case '\r': break; // ignore, handle when \n encountered
+                    case '\n': sb.Append("\\par "); break;
+                    default:
+                        if (c <= 127)
+                        {
+                            sb.Append(c);
+                        }
+                        else
+                        {
+                            // RTF Unicode escape: \uN? where N is signed 16-bit value and ? is a fallback ascii char
+                            short val = (short)c;
+                            sb.Append("\\u");
+                            sb.Append(val);
+                            sb.Append("?");
+                        }
+                        break;
+                }
+            }
+            return sb.ToString();
         }
 
         private void About_Click(object? sender, RoutedEventArgs e)
@@ -1139,12 +1230,14 @@ namespace SixteenCoreCharacterMapper.Avalonia
                         popup.PlacementTarget = containerBorder;
                         popup.Placement = PlacementMode.Bottom;
                         popup.VerticalOffset = 5;
+                        popup.HorizontalOffset = 0;
                     }
                     else
                     {
                         popup.PlacementTarget = btn;
                         popup.Placement = PlacementMode.Bottom;
                         popup.VerticalOffset = 0;
+                        popup.HorizontalOffset = 0;
                     }
 
                     popup.IsOpen = true;
@@ -1239,6 +1332,90 @@ namespace SixteenCoreCharacterMapper.Avalonia
                 {
                     border.Opacity = 1.0;
                 }
+            }
+        }
+
+        private bool _isDraggingPopup;
+        private Point _popupDragStartPoint;
+        private Point _popupStartOffset;
+
+        private void NotePopupHeader_PointerPressed(object? sender, PointerPressedEventArgs e)
+        {
+            var popup = this.FindControl<Popup>("NotePopup");
+            if (popup != null && sender is IInputElement inputElement)
+            {
+                _isDraggingPopup = true;
+                _popupDragStartPoint = e.GetPosition(this);
+                _popupStartOffset = new Point(popup.HorizontalOffset, popup.VerticalOffset);
+                e.Pointer.Capture(inputElement);
+            }
+        }
+
+        private void NotePopupHeader_PointerMoved(object? sender, PointerEventArgs e)
+        {
+            if (!_isDraggingPopup) return;
+
+            var popup = this.FindControl<Popup>("NotePopup");
+            if (popup != null)
+            {
+                var currentPoint = e.GetPosition(this);
+                var delta = currentPoint - _popupDragStartPoint;
+
+                popup.HorizontalOffset = _popupStartOffset.X + delta.X;
+                popup.VerticalOffset = _popupStartOffset.Y + delta.Y;
+            }
+        }
+
+        private void NotePopupHeader_PointerReleased(object? sender, PointerReleasedEventArgs e)
+        {
+            if (_isDraggingPopup && sender is IInputElement inputElement)
+            {
+                _isDraggingPopup = false;
+                e.Pointer.Capture(null);
+            }
+        }
+
+        private bool _isResizingPopup;
+        private Point _popupResizeStartPoint;
+        private Size _popupStartSize;
+
+        private void NotePopupResize_PointerPressed(object? sender, PointerPressedEventArgs e)
+        {
+            var border = this.FindControl<Border>("NotePopupBorder");
+            if (border != null && sender is IInputElement inputElement)
+            {
+                _isResizingPopup = true;
+                _popupResizeStartPoint = e.GetPosition(this);
+                _popupStartSize = new Size(border.Bounds.Width, border.Bounds.Height);
+                e.Pointer.Capture(inputElement);
+                e.Handled = true;
+            }
+        }
+
+        private void NotePopupResize_PointerMoved(object? sender, PointerEventArgs e)
+        {
+            if (!_isResizingPopup) return;
+
+            var border = this.FindControl<Border>("NotePopupBorder");
+            if (border != null)
+            {
+                var currentPoint = e.GetPosition(this);
+                var delta = currentPoint - _popupResizeStartPoint;
+
+                double newWidth = Math.Max(150, _popupStartSize.Width + delta.X);
+                double newHeight = Math.Max(100, _popupStartSize.Height + delta.Y);
+
+                border.Width = newWidth;
+                border.Height = newHeight;
+            }
+        }
+
+        private void NotePopupResize_PointerReleased(object? sender, PointerReleasedEventArgs e)
+        {
+            if (_isResizingPopup && sender is IInputElement inputElement)
+            {
+                _isResizingPopup = false;
+                e.Pointer.Capture(null);
             }
         }
     }

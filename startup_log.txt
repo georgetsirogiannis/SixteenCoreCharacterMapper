@@ -1,0 +1,14 @@
+Program.Main started
+Exception in Main: System.ArgumentException: Unrecognized cursor type 'SizeNWSE'.
+   at Avalonia.Input.Cursor.Parse(String s)
+   at SixteenCoreCharacterMapper.Avalonia.MainWindow.!XamlIlPopulate(IServiceProvider, MainWindow) in P:\16PF CUSTOM PROGRAM\CROSSPLATFORM\SixteenCoreCharacterMapper\SixteenCoreCharacterMapper.Avalonia\MainWindow.axaml:line 267
+   at SixteenCoreCharacterMapper.Avalonia.MainWindow.!XamlIlPopulateTrampoline(MainWindow)
+   at SixteenCoreCharacterMapper.Avalonia.MainWindow.InitializeComponent(Boolean loadXaml, Boolean attachDevTools) in P:\16PF CUSTOM PROGRAM\CROSSPLATFORM\SixteenCoreCharacterMapper\SixteenCoreCharacterMapper.Avalonia\obj\Debug\net8.0\Avalonia.Generators\Avalonia.Generators.NameGenerator.AvaloniaNameSourceGenerator\SixteenCoreCharacterMapper.Avalonia.MainWindow.g.cs:line 102
+   at SixteenCoreCharacterMapper.Avalonia.MainWindow..ctor() in P:\16PF CUSTOM PROGRAM\CROSSPLATFORM\SixteenCoreCharacterMapper\SixteenCoreCharacterMapper.Avalonia\MainWindow.axaml.cs:line 50
+   at SixteenCoreCharacterMapper.Avalonia.App.OnFrameworkInitializationCompleted() in P:\16PF CUSTOM PROGRAM\CROSSPLATFORM\SixteenCoreCharacterMapper\SixteenCoreCharacterMapper.Avalonia\App.axaml.cs:line 30
+   at Avalonia.AppBuilder.SetupUnsafe()
+   at Avalonia.AppBuilder.Setup()
+   at Avalonia.AppBuilder.SetupWithLifetime(IApplicationLifetime lifetime)
+   at Avalonia.ClassicDesktopStyleApplicationLifetimeExtensions.StartWithClassicDesktopLifetime(AppBuilder builder, String[] args, Action`1 lifetimeBuilder)
+   at SixteenCoreCharacterMapper.Avalonia.Program.Main(String[] args) in P:\16PF CUSTOM PROGRAM\CROSSPLATFORM\SixteenCoreCharacterMapper\SixteenCoreCharacterMapper.Avalonia\Program.cs:line 17
+Program.Main finished

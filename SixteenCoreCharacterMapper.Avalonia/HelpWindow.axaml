@@ -5,7 +5,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
         x:Class="SixteenCoreCharacterMapper.Avalonia.HelpWindow"
         Title="Help - 16Core Character Mapper"
-        Width="900" Height="700"
+        Width="800" Height="730"
         WindowStartupLocation="CenterOwner"
         Icon="/Assets/16Core logo icon v2.png">
 
@@ -13,24 +13,34 @@
         <Style Selector="TextBlock.H1">
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Margin" Value="0,20,0,10"/>
+            <Setter Property="Margin" Value="10,20,20,10"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
         </Style>
         <Style Selector="TextBlock.H2">
-            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Margin" Value="0,15,0,8"/>
+            <Setter Property="Margin" Value="10,15,20,0"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
         </Style>
         <Style Selector="TextBlock.H3">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="Margin" Value="0,10,0,5"/>
+            <Setter Property="Margin" Value="10,15,20,10"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+        </Style>
+        <Style Selector="TextBlock.H4">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="10,15,20,10"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
         </Style>
         <Style Selector="TextBlock.Body">
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Margin" Value="10,0,20,0"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="LineHeight" Value="20"/>
         </Style>
@@ -41,26 +51,49 @@
         </Style>
         <Style Selector="TextBlock.ListBullet">
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="Margin" Value="10,0,20,0"/>
             <Setter Property="Text" Value="&#x2022;"/>
         </Style>
         <Style Selector="Grid.ListItemContainer">
-            <Setter Property="Margin" Value="15,0,0,5"/>
+            <Setter Property="Margin" Value="15,0,20,5"/>
+        </Style>
+        <Style Selector="Button.TOC">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+        </Style>
+        <Style Selector="Button.TOC:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundListLowBrush}"/>
         </Style>
     </Window.Styles>
 
     <Grid RowDefinitions="*,Auto">
-        <ScrollViewer Grid.Row="0" Padding="20">
-            <StackPanel MaxWidth="800" HorizontalAlignment="Center">
+        <Grid Grid.Row="0" ColumnDefinitions="200,*">
+            <Border Grid.Column="0" Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" BorderThickness="0,0,1,0" Padding="10">
+                <StackPanel>
+                    <TextBlock Text="Contents" Classes="H3" Margin="0,15,0,10"/>
+                    <Button Classes="TOC" Content="Introduction" Click="ScrollToSection_Click" Tag="SectionIntroduction"/>
+                    <Button Classes="TOC" Content="Getting Started" Click="ScrollToSection_Click" Tag="SectionGettingStarted"/>
+                    <Button Classes="TOC" Content="Project Management" Click="ScrollToSection_Click" Tag="SectionProjectManagement"/>
+                    <Button Classes="TOC" Content="Managing Characters" Click="ScrollToSection_Click" Tag="SectionManagingCharacters"/>
+                    <Button Classes="TOC" Content="Mapping Personalities" Click="ScrollToSection_Click" Tag="SectionMappingPersonalities"/>
+                    <Button Classes="TOC" Content="Tools &amp; Extras" Click="ScrollToSection_Click" Tag="SectionToolsExtras"/>
+                    <Button Classes="TOC" Content="Support" Click="ScrollToSection_Click" Tag="SectionSupport"/>
+                </StackPanel>
+            </Border>
+            <ScrollViewer Name="MainScrollViewer" Grid.Column="1" Padding="20" HorizontalScrollBarVisibility="Hidden">
+                <StackPanel HorizontalAlignment="Stretch" Width="{Binding Bounds.Width, ElementName=MainScrollViewer}" >
                 
                 <!-- Introduction -->
-                <TextBlock Classes="H1" Text="16Core Character Mapper - Help Documentation" Margin="0,0,0,20"/>
+                <TextBlock Classes="H1" Text="Welcome to 16Core Character Mapper!" Margin="10,0,20,20"/>
                 
-                <TextBlock Classes="H2" Text="Introduction"/>
-                <TextBlock Classes="Body">
-                    <Run>Welcome to </Run>
+                <TextBlock Name="SectionIntroduction" Classes="H2" Text="Introduction"/>
+                <TextBlock Classes="Body" Margin="10,10,20,10">
                     <Run FontWeight="Bold">16Core Character Mapper</Run>
-                    <Run> &#x2014; a dedicated tool for writers, game designers, and storytellers to visualize and organize character personalities. By mapping your cast across </Run>
+                    <Run> is a dedicated tool for writers, screenwriters, game designers, and storytellers to visualize and organize character personalities. By mapping your cast across </Run>
                     <Run FontWeight="Bold">16 core personality traits</Run>
                     <Run>, you can ensure consistency, spark narrative tension, and avoid 'cloned' characters.</Run>
                 </TextBlock>
@@ -68,10 +101,27 @@
                 <Separator Margin="0,10" Height="1" Background="Gray" Opacity="0.3"/>
 
                 <!-- Getting Started -->
-                <TextBlock Classes="H2" Text="Getting Started"/>
+                <TextBlock Name="SectionGettingStarted" Classes="H2" Text="Getting Started"/>
+
+                 <TextBlock Classes="Body" Margin="10,10,20,10">
+                    <Run>The application is designed to move you from abstract character concepts to</Run>
+                    <Run FontWeight="Bold">a concrete visual landscape</Run>
+                     <Run>.</Run>
+                 </TextBlock>
+
+                <TextBlock Classes="Body" Margin="10,0,20,10">
+                    <Run>To begin, you will define the individual traits of your cast using the</Run>
+                    <Run FontWeight="Bold">Trait Grid</Run>
+                    <Run>, which evaluates characters across 16 distinct psychological dimensions &#x2014; such as Assertiveness, Complexity, and Social Confidence.</Run>
+                </TextBlock>
+                    <TextBlock Classes="Body" Margin="10,0,20,10">
+                    <Run>The completed map allows you to see exactly who your characters are, where your protagonist's tendencies clash with an antagonist's, or where secondary characters might be overlapping too closely. By using this bird's-eye view of your cast's psychological makeup, you can have a reliable reference of your cast's personalities as you write, identify "blind spots" in your characterizations, and intentionally engineer personality-driven conflict throughout your narrative.</Run>
+
+                </TextBlock>
+
                 
                 <TextBlock Classes="H3" Text="Launching the Application"/>
-                <TextBlock Classes="Body" Text="When you open the app you'll see three main areas:"/>
+                <TextBlock Classes="Body" Margin="10,0,0,5" Text="When you open the app you'll see three main areas:"/>
                 
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
                     <TextBlock Classes="ListBullet"/>
@@ -90,7 +140,7 @@
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
                     <TextBlock Classes="ListBullet"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
-                        <Run FontWeight="Bold">Traits Grid (right)</Run>
+                        <Run FontWeight="Bold">Trait Grid (right)</Run>
                         <Run> &#x2014; where each character is shown on the personality map.</Run>
                     </TextBlock>
                 </Grid>
@@ -98,11 +148,11 @@
                 <Separator Margin="0,10" Height="1" Background="Gray" Opacity="0.3"/>
 
                 <!-- Project Management -->
-                <TextBlock Classes="H2" Text="Project Management"/>
+                <TextBlock Name="SectionProjectManagement" Classes="H2" Text="Project Management"/>
 
                 <TextBlock Classes="H3" Text="Creating a New Project"/>
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="1." Margin="0,0,5,0" FontSize="14"/>
+                    <TextBlock Text="1." Margin="10,0,5,0" FontSize="14"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run>Click </Run>
                         <Run FontWeight="Bold">New Project</Run>
@@ -110,7 +160,7 @@
                     </TextBlock>
                 </Grid>
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="2." Margin="0,0,5,0" FontSize="14"/>
+                    <TextBlock Text="2." Margin="10,0,5,0" FontSize="14"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run>Give it a name in the </Run>
                         <Run FontWeight="Bold">Project Title</Run>
@@ -120,7 +170,7 @@
 
                 <TextBlock Classes="H3" Text="Saving a Project"/>
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="1." Margin="0,0,5,0" FontSize="14"/>
+                    <TextBlock Text="1." Margin="10,0,5,0" FontSize="14"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run>Click </Run>
                         <Run FontWeight="Bold">Save</Run>
@@ -128,7 +178,7 @@
                     </TextBlock>
                 </Grid>
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="2." Margin="0,0,5,0" FontSize="14"/>
+                    <TextBlock Text="2." Margin="10,0,5,0" FontSize="14"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run>Click </Run>
                         <Run FontWeight="Bold">Save As...</Run>
@@ -136,7 +186,7 @@
                     </TextBlock>
                 </Grid>
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="3." Margin="0,0,5,0" FontSize="14"/>
+                    <TextBlock Text="3." Margin="10,0,5,0" FontSize="14"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run>Projects are saved with the </Run>
                         <Run FontWeight="Bold">.16core</Run>
@@ -148,7 +198,7 @@
 
                 <TextBlock Classes="H3" Text="Loading a Project"/>
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="1." Margin="0,0,5,0" FontSize="14"/>
+                    <TextBlock Text="1." Margin="10,0,5,0" FontSize="14"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run>Click </Run>
                         <Run FontWeight="Bold">Load</Run>
@@ -156,7 +206,7 @@
                     </TextBlock>
                 </Grid>
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="2." Margin="0,0,5,0" FontSize="14"/>
+                    <TextBlock Text="2." Margin="10,0,5,0" FontSize="14"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run>Pick a </Run>
                         <Run FontWeight="Bold">.16core</Run>
@@ -169,13 +219,13 @@
                 <Separator Margin="0,10" Height="1" Background="Gray" Opacity="0.3"/>
 
                 <!-- Managing Characters -->
-                <TextBlock Classes="H2" Text="Managing Characters"/>
+                <TextBlock Name="SectionManagingCharacters" Classes="H2" Text="Managing Characters"/>
 
                 <TextBlock Classes="H3" Text="Adding &amp; Editing Characters"/>
                 <TextBlock Classes="Body">
                     <Run>Click </Run>
                     <Run FontWeight="Bold">Add</Run>
-                    <Run> to create a new character or </Run>
+                    <Run> to create a new Character or </Run>
                     <Run FontWeight="Bold">Edit</Run>
                     <Run> (or double-click) to modify an existing one.</Run>
                 </TextBlock>
@@ -184,39 +234,39 @@
                     <TextBlock Classes="ListBullet"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run FontWeight="Bold">Name:</Run>
-                        <Run> What you call the character.</Run>
+                        <Run> What you call the Character.</Run>
                     </TextBlock>
                 </Grid>
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
                     <TextBlock Classes="ListBullet"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run FontWeight="Bold">Color:</Run>
-                        <Run> The specific color for their bubble on the Traits Grid.</Run>
+                        <Run> The specific color for their bubble on the Trait Grid.</Run>
                     </TextBlock>
                 </Grid>
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
                     <TextBlock Classes="ListBullet"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run FontWeight="Bold">Role:</Run>
-                        <Run> Determines the size of the character's bubble:</Run>
+                        <Run> Determines the size of the Character's bubble:</Run>
                     </TextBlock>
                 </Grid>
                 
-                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*" Margin="35,0,0,5">
+                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*" Margin="45,0,20,5">
                     <TextBlock Classes="ListBullet" Text="-"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run FontWeight="Bold">Main:</Run>
                         <Run> Large bubble (Protagonists/Antagonists).</Run>
                     </TextBlock>
                 </Grid>
-                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*" Margin="35,0,0,5">
+                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*" Margin="45,0,20,5">
                     <TextBlock Classes="ListBullet" Text="-"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run FontWeight="Bold">Supporting:</Run>
                         <Run> Medium bubble.</Run>
                     </TextBlock>
                 </Grid>
-                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*" Margin="35,0,0,5">
+                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*" Margin="45,0,20,5">
                     <TextBlock Classes="ListBullet" Text="-"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run FontWeight="Bold">Background:</Run>
@@ -224,7 +274,7 @@
                     </TextBlock>
                 </Grid>
                 
-                <TextBlock Classes="Body" Margin="0,10,0,10">
+                <TextBlock Classes="Body" Margin="10,10,0,10">
                     <Run>In this dialog, you can also take the built-in </Run>
                     <Run FontWeight="Bold">questionnaire</Run>
                     <Run> (more below).</Run>
@@ -235,43 +285,61 @@
                     <TextBlock Classes="ListBullet"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
                         <Run FontWeight="Bold">Drag and Drop:</Run>
-                        <Run> Reorder characters within their Role groups.</Run>
+                        <Run> Reorder Characters within their Role groups.</Run>
                     </TextBlock>
                 </Grid>
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
                     <TextBlock Classes="ListBullet"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
-                        <Run FontWeight="Bold">Visibility (Eye Icon):</Run>
-                        <Run> Hide characters to focus on specific relationships or sub-groups.</Run>
-                    </TextBlock>
-                </Grid>
-                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Classes="ListBullet"/>
-                    <TextBlock Grid.Column="1" Classes="ListItemContent">
-                        <Run FontWeight="Bold">Locking (Lock Icon):</Run>
-                        <Run> Protect a character's position on the grid from accidental changes.</Run>
-                    </TextBlock>
-                </Grid>
-                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Classes="ListBullet"/>
-                    <TextBlock Grid.Column="1" Classes="ListItemContent">
-                        <Run FontWeight="Bold">Deletion:</Run>
-                        <Run> Remove a character permanently from the project.</Run>
-                    </TextBlock>
-                </Grid>
+                        <Run FontWeight="Bold">Visibility (</Run>
+                        <InlineUIContainer>
+                            <Path Data="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+                                  Width="14" Height="14" Stretch="Uniform" VerticalAlignment="Center" Margin="0,0,0,0"
+                                  Fill="{DynamicResource SystemControlForegroundBaseHighBrush}">
+                                <Path.RenderTransform>
+                                    <TranslateTransform Y="4"/>
+                                </Path.RenderTransform>
+                            </Path>
+                        </InlineUIContainer>
+                        <Run FontWeight="Bold">Eye Icon):</Run>
+                         <Run> Hide Characters to focus on specific relationships or sub-groups.</Run>
+                     </TextBlock>
+                 </Grid>
+                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
+                     <TextBlock Classes="ListBullet"/>
+                     <TextBlock Grid.Column="1" Classes="ListItemContent">
+                        <Run FontWeight="Bold">Locking (</Run>
+                        <InlineUIContainer>
+                            <Path Data="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"
+                                  Width="12" Height="12" Stretch="Uniform" VerticalAlignment="Center" Margin="0,0,0,0"
+                                  Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+                        </InlineUIContainer>
+                        <Run FontWeight="Bold">Lock Icon):</Run>
+                         <Run> Protect a Character's position on the grid from accidental changes.</Run>
+                     </TextBlock>
+                 </Grid>
 
                 <Separator Margin="0,10" Height="1" Background="Gray" Opacity="0.3"/>
 
                 <!-- Mapping Personalities -->
-                <TextBlock Classes="H2" Text="Mapping Personalities"/>
-                <TextBlock Classes="Body" Text="The Traits Grid helps you see where each character sits on 16 personality traits. Each trait appears as a card with a horizontal line and a bubble for every visible character."/>
+                <TextBlock Name="SectionMappingPersonalities" Classes="H2" Text="Mapping Personalities"/>
+                <TextBlock Classes="Body" Margin="10,10,20,0" Text="The Trait Grid helps you see where each character sits on 16 personality traits. Each trait appears as a card with a horizontal line and a bubble for every visible character."/>
 
                 <TextBlock Classes="H3" Text="Manual Mapping"/>
                 <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
                     <TextBlock Classes="ListBullet"/>
                     <TextBlock Grid.Column="1" Classes="ListItemContent">
-                        <Run>Drag a character's bubble left or right on a trait card to set their position. </Run>
+                        <Run>Drag a Character's bubble left or right on a trait card to set their position. </Run>
                         <Run FontWeight="Bold">Left = Low, Right = High.</Run>
+                    </TextBlock>
+                    
+                </Grid>
+
+                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
+                    <TextBlock Classes="ListBullet"/>
+                    <TextBlock Grid.Column="1" Classes="ListItemContent">
+                        <Run>Remember, your Character can sit anywhere along the spectrum, not just at the extremes. Where the program really shines is when you start comparing multiple Characters side-by-side, deciding who has "more" or "less" of a trait </Run>
+                        <Run FontWeight="Bold">relative to others.</Run>
                     </TextBlock>
                 </Grid>
 
@@ -298,46 +366,44 @@
                 <TextBlock Classes="H3" Text="Trait Notes"/>
                 <TextBlock Classes="Body">
                     <Run>Click the </Run>
+                    <InlineUIContainer>
+                        <Path Data="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M8,12H16V14H8V12M8,16H16V18H8V16Z"
+                              Width="12" Height="12" Stretch="Uniform" VerticalAlignment="Center" Margin="0,0,0,0"
+                              Fill="{DynamicResource SystemControlForegroundBaseHighBrush}" >
+                        <Path.RenderTransform>
+                                    <TranslateTransform Y="1"/>
+                                </Path.RenderTransform>
+                            </Path>
+                    </InlineUIContainer>
                     <Run FontWeight="Bold">Note icon</Run>
-                    <Run> in the top-right of a trait card to add notes about that trait. Use them to record specific story beats, examples of how a character manifests a trait, reminders about why a character sits at a certain point on the scale, or story ideas related to that trait. Your notes are saved automatically with your project.</Run>
+                    <Run> in the top-right of a trait card to add notes about that trait. Use them to record specific story beats, examples of how a Character manifests a trait, ways that opposing trait values between your cast could create personality-driven conflict, or story ideas related to that trait. Your notes are saved automatically with your project.</Run>
                 </TextBlock>
 
                 <Separator Margin="0,10" Height="1" Background="Gray" Opacity="0.3"/>
 
                 <!-- Tools & Extras -->
-                <TextBlock Classes="H2" Text="Tools &amp; Extras"/>
+                <TextBlock Name="SectionToolsExtras" Classes="H2" Text="Tools &amp; Extras"/>
 
                 <TextBlock Classes="H3" Text="Exporting &amp; Sharing"/>
-                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Classes="ListBullet"/>
-                    <TextBlock Grid.Column="1" Classes="ListItemContent">
-                        <Run FontWeight="Bold">Export Image:</Run>
-                        <Run> Save the current Traits Grid as a PNG image.</Run>
-                    </TextBlock>
-                </Grid>
-                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Classes="ListBullet"/>
-                    <TextBlock Grid.Column="1" Classes="ListItemContent">
-                        <Run FontWeight="Bold">Export Notes:</Run>
-                        <Run> Creates a TXT file containing all trait notes from your project.</Run>
-                    </TextBlock>
-                </Grid>
 
+                    <TextBlock Classes="H4" Text="Export Image" Margin="30,5,20,5"/>
+                    <TextBlock Classes="Body" Margin="30,0,20,5">
+                    <Run>Save the current Trait Grid as a PNG image. You can choose to include between All Characters, specific Groups, or specific Characters.</Run>
+                </TextBlock>
+                    <TextBlock Classes="H4" Text="Export Notes" Margin="30,10,20,5"/>
+                    <TextBlock Classes="Body" Margin="30,0,20,5">
+                    <Run>Create a TXT file containing all trait notes from your project. This is useful for reviewing your notes outside the app or sharing them with collaborators.</Run>
+                        </TextBlock>
+               
                 <TextBlock Classes="H3" Text="Settings"/>
-                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Classes="ListBullet"/>
-                    <TextBlock Grid.Column="1" Classes="ListItemContent">
-                        <Run FontWeight="Bold">Toggle Theme:</Run>
-                        <Run> Switch between Light and Dark mode to match your workspace.</Run>
-                    </TextBlock>
-                </Grid>
-                <Grid Classes="ListItemContainer" ColumnDefinitions="Auto,*">
-                    <TextBlock Classes="ListBullet"/>
-                    <TextBlock Grid.Column="1" Classes="ListItemContent">
-                        <Run FontWeight="Bold">Language:</Run>
-                        <Run> Choose from English, French, German, Spanish, Portuguese, Italian, Dutch, Polish, and Greek.</Run>
-                    </TextBlock>
-                </Grid>
+                    <TextBlock Classes="H4" Text="Toggle Theme" Margin="30,5,20,5"/>
+                    <TextBlock Classes="Body" Margin="30,0,20,5">
+                    <Run>Switch between Light and Dark mode to match your workspace.</Run>
+                </TextBlock>
+                    <TextBlock Classes="H4" Text="Languages" Margin="30,10,20,5"/>
+                    <TextBlock Classes="Body" Margin="30,0,20,5">
+                    <Run>The Trait Grid and Questionnaire are available in nine languages so that you can work in the same one you're writing in &#x2014; that is, if you're among the lucky ones who speak English, French, German, Spanish, Portuguese, Italian, Dutch, Polish, or Greek (at least for now!).</Run>
+                        </TextBlock>
 
                 <TextBlock Classes="H3" Text="Tutorial"/>
                 <TextBlock Classes="Body">
@@ -349,8 +415,8 @@
                 <Separator Margin="0,10" Height="1" Background="Gray" Opacity="0.3"/>
 
                 <!-- Support -->
-                <TextBlock Classes="H2" Text="Support"/>
-                <TextBlock Classes="Body">
+                <TextBlock Name="SectionSupport" Classes="H2" Text="Support"/>
+                <TextBlock Classes="Body" Margin="10,15,20,0">
                     <Run>If you find this tool useful, you can support the developer using the </Run>
                     <Run FontWeight="Bold">Donate</Run>
                     <Run> button. For app information, click </Run>
@@ -362,6 +428,7 @@
       
             </StackPanel>
         </ScrollViewer>
+        </Grid>
 
         <Button Grid.Row="1" Content="Close" HorizontalAlignment="Right" Margin="20" Click="Close_Click"/>
     </Grid>

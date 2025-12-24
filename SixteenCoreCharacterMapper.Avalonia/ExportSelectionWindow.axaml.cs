@@ -27,7 +27,6 @@ namespace SixteenCoreCharacterMapper.Avalonia
 
         public ExportSelectionWindow()
         {
-            InitializeComponent();
         }
 
         public ExportSelectionWindow(IEnumerable<Character> characters, bool isDarkMode) : this()
@@ -42,11 +41,6 @@ namespace SixteenCoreCharacterMapper.Avalonia
             }
 
             ApplyTheme(isDarkMode);
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
         }
 
         private void Radio_Checked(object? sender, RoutedEventArgs e)

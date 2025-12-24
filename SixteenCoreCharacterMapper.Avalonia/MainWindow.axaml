@@ -202,7 +202,7 @@
                     </Grid>
                 </Grid>
 
-                <!-- Right Panel: Traits Grid -->
+                <!-- Right Panel: Trait Grid -->
                 <Grid Grid.Column="1" x:Name="TraitsGrid" Background="#FAFAFA">
                     <!-- Populated in Code-behind -->
                     <TextBlock Text="Traits will appear here" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray"/>
@@ -258,9 +258,18 @@
             <Popup Name="NotePopup" Placement="Bottom" IsLightDismissEnabled="True" Closed="NotePopup_Closed">
                 <Border x:Name="NotePopupBorder" Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}" BorderThickness="1" BorderBrush="Gray" Padding="10" CornerRadius="5" Width="300" Height="200">
                     <Grid RowDefinitions="Auto,*,Auto">
-                        <TextBlock Name="NotePopupTitle" Text="Notes" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <Border Background="Transparent" PointerPressed="NotePopupHeader_PointerPressed" PointerMoved="NotePopupHeader_PointerMoved" PointerReleased="NotePopupHeader_PointerReleased" Margin="0,0,0,5" Cursor="SizeAll">
+                            <TextBlock Name="NotePopupTitle" Text="Notes" FontWeight="Bold" IsHitTestVisible="False"/>
+                        </Border>
                         <TextBox Name="NoteTextBox" Grid.Row="1" AcceptsReturn="True" TextWrapping="Wrap" Margin="0,0,0,10" TextChanged="NoteTextBox_TextChanged"/>
-                        <Button Content="Close" Grid.Row="2" HorizontalAlignment="Right" Click="CloseNotePopup_Click"/>
+                        <Grid Grid.Row="2">
+                            <Button Content="Close" HorizontalAlignment="Right" Click="CloseNotePopup_Click" Margin="0,0,15,0"/>
+                            <Path Data="M 8,8 L 8,0 L 0,8 Z" Fill="Gray" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="BottomRightCorner"
+                                  PointerPressed="NotePopupResize_PointerPressed"
+                                  PointerMoved="NotePopupResize_PointerMoved"
+                                  PointerReleased="NotePopupResize_PointerReleased"
+                                  Width="8" Height="8" Margin="0,0,-5,-5"/>
+                        </Grid>
                     </Grid>
                 </Border>
             </Popup>

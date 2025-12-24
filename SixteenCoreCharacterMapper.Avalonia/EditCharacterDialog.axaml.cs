@@ -69,11 +69,6 @@ namespace SixteenCoreCharacterMapper.Avalonia
             }
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-
         private void ApplyTheme(bool isDarkMode)
         {
             var colorPicker = this.FindControl<SimpleColorPicker>("ColorPickerControl");

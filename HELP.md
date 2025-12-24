@@ -11,7 +11,7 @@ Welcome to **16Core Character Mapper** — a dedicated tool for writers, game desi
 When you open the app you'll see three main areas:
 1.  **Toolbar** (top) — project and tool buttons.
 2.  **Character Panel** (left) — add, select and manage characters.
-3.  **Traits Grid** (right) — where each character is shown on the personality map.
+3.  **Trait Grid** (right) — where each character is shown on the personality map.
 
 ---
 
@@ -37,7 +37,7 @@ When you open the app you'll see three main areas:
 ### Adding & Editing Characters
 Click **Add** to create a new character or **Edit** (or double-click) to modify an existing one.
 * **Name:** What you call the character.
-* **Color:** The specific color for their bubble on the Traits Grid.
+* **Color:** The specific color for their bubble on the Trait Grid.
 * **Role:** Determines the size of the character's bubble:
     * **Main:** Large bubble (Protagonists/Antagonists).
     * **Supporting:** Medium bubble.
@@ -53,9 +53,9 @@ Click **Add** to create a new character or **Edit** (or double-click) to modify 
 ---
 
 ## Mapping Personalities
-The Traits Grid is inspired by established psychological frameworks, using public domain terminology (IPIP) to help you define character dispositions.
+The Trait Grid is inspired by established psychological frameworks, using public domain terminology (IPIP) to help you define character dispositions.
 
-The right-hand Traits Grid shows one card for each trait and a bubble for each visible character.
+The right-hand Trait Grid shows one card for each trait and a bubble for each visible character.
 * **Bubbles** — colored bubbles represent characters.
 * **Position** — horizontal placement reflects the character’s leaning on that trait.
 * **Size** — bubble size reflects the character’s role (Main, Supporting, Background).
@@ -65,7 +65,7 @@ The right-hand Traits Grid shows one card for each trait and a bubble for each v
 ### 1. Manual Mapping
 Simply drag a character’s bubble horizontally across any trait card.
 
-Remember, your character can sit anywhere along the spectrum, not just at the extremes. Where the program actually shines is when you start comparing multiple characters side-by-side, deciding who is "more" or "less" of a trait relative to others.
+Remember, your character can sit anywhere along the spectrum, not just at the extremes. Where the program really shines is when you start comparing multiple characters side-by-side, deciding who has "more" or "less" of a trait relative to others.
 
 ### 2. The Questionnaire
 If a character is still forming in your head or you want a science-backed starting point, use the built-in questionnaire inside the **Edit Character** dialog.
@@ -84,14 +84,14 @@ If a character is still forming in your head or you want a science-backed starti
 ---
 
 ## Exporting & Sharing
-* **Export Image:** Save the current Traits Grid as a PNG image. You can choose to include all characters, specific groups, or specific characters.
+* **Export Image:** Save the current Trait Grid as a PNG image. You can choose to include all characters, specific groups, or specific characters.
 * **Export Notes:** Creates a TXT file containing all trait notes from your project, grouped and labeled for easy reference during your writing process.
 
 ---
 
 ## Settings
 *   **Toggle Theme** — switch between Light and Dark mode to match your workspace.
-*   **Language** — choose from English, French, German, Spanish, Portuguese, Italian, Dutch, Polish, and Greek. The parts translated are the Traits Grid (trait names, descriptions, labels) and the Questionnaire (questions and group titles). Some UI labels and dialogs may stay in the original language.
+*   **Language** — choose from English, French, German, Spanish, Portuguese, Italian, Dutch, Polish, and Greek. The parts translated are the Trait Grid (trait names, descriptions, labels) and the Questionnaire (questions and group titles). Some UI labels and dialogs may stay in the original language.
 *   **Updates** — the app checks for updates on startup and will let you know if a new version is available.
 
 ---

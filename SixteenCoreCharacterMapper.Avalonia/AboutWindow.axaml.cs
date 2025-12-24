@@ -31,11 +31,6 @@ namespace SixteenCoreCharacterMapper.Avalonia
             }
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-
         private void ApplyTheme()
         {
             var isDark = Application.Current?.ActualThemeVariant == ThemeVariant.Dark;
@@ -67,12 +62,27 @@ namespace SixteenCoreCharacterMapper.Avalonia
 
         private async void CheckUpdates_Click(object? sender, RoutedEventArgs e)
         {
-            bool isUpdateAvailable = await CheckForUpdatesWithResultAsync();
+            var button = sender as Button;
+            if (button != null) button.IsEnabled = false;
 
-            if (!isUpdateAvailable)
+            try
             {
-                var msgBox = new SimpleMessageBox("You're using the latest version available.", "No Updates", SimpleMessageBox.MessageBoxButtons.OK);
+                bool isUpdateAvailable = await CheckForUpdatesWithResultAsync();
+
+                if (!isUpdateAvailable)
+                {
+                    var msgBox = new SimpleMessageBox("You're using the latest version available.", "No Updates", SimpleMessageBox.MessageBoxButtons.OK);
+                    await msgBox.ShowDialog(this);
+                }
+            }
+            catch (Exception ex)
+            {
+                var msgBox = new SimpleMessageBox($"Failed to check for updates: {ex.Message}", "Update Check Failed", SimpleMessageBox.MessageBoxButtons.OK);
                 await msgBox.ShowDialog(this);
+            }
+            finally
+            {
+                if (button != null) button.IsEnabled = true;
             }
         }
 

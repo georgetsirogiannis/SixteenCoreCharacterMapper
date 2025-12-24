@@ -23,11 +23,6 @@ namespace SixteenCoreCharacterMapper.Avalonia
             ApplyTheme(isDarkMode);
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-
         private void ApplyTheme(bool isDarkMode)
         {
             var contentBorder = this.FindControl<Border>("ContentBorder");

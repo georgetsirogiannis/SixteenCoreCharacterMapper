@@ -53,11 +53,6 @@ namespace SixteenCoreCharacterMapper.Avalonia
             }
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-
         private void ApplyTheme()
         {
             var isDark = Application.Current?.ActualThemeVariant == ThemeVariant.Dark;

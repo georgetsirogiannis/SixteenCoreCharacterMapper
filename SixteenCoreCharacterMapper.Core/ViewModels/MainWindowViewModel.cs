@@ -114,14 +114,14 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
             SaveSettings();
         }
 
-        private void SaveSettings()
+        private async void SaveSettings()
         {
             var settings = new AppSettings
             {
                 IsDarkMode = IsDarkMode,
                 LanguageCode = SelectedLanguage?.Code ?? "en"
             };
-            _settingsService.SaveSettings(settings);
+            await _settingsService.SaveSettingsAsync(settings);
         }
 
         public string ProjectName
@@ -207,7 +207,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                 {
                     try
                     {
-                        Project = ProjectService.Load(fileName);
+                        Project = await ProjectService.LoadAsync(fileName);
                         CurrentFilePath = fileName;
                         SetDirty(false);
                         UpdateHasNotes();
@@ -246,7 +246,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                         Project.SelectedLanguage = SelectedLanguage.Code;
                     }
 
-                    ProjectService.Save(Project, CurrentFilePath);
+                    await ProjectService.SaveAsync(Project, CurrentFilePath);
                     SetDirty(false);
                 }
                 catch (Exception ex)

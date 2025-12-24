@@ -17,39 +17,31 @@ namespace SixteenCoreCharacterMapper.Core.Services
 
         public async Task<UpdateInfo?> CheckForUpdateAsync(Version currentVersion)
         {
-            try
+            // Ensure User-Agent is set for GitHub API or raw content access
+            if (!_httpClient.DefaultRequestHeaders.Contains("User-Agent"))
             {
-                // Ensure User-Agent is set for GitHub API or raw content access
-                if (!_httpClient.DefaultRequestHeaders.Contains("User-Agent"))
-                {
-                    _httpClient.DefaultRequestHeaders.Add("User-Agent", AppConstants.UpdateCheckUserAgent);
-                }
+                _httpClient.DefaultRequestHeaders.Add("User-Agent", AppConstants.UpdateCheckUserAgent);
+            }
 
-                string json = await _httpClient.GetStringAsync(AppConstants.UpdateCheckUrl);
+            using var stream = await _httpClient.GetStreamAsync(AppConstants.UpdateCheckUrl);
 
-                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                var updateInfo = JsonSerializer.Deserialize<UpdateInfo>(json, options);
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var updateInfo = await JsonSerializer.DeserializeAsync<UpdateInfo>(stream, options);
 
-                if (updateInfo?.Version == null || updateInfo.Url == null || updateInfo.ReleaseNotes == null)
-                {
-                    return null;
-                }
-
-                if (Version.TryParse(updateInfo.Version.Trim(), out var latestVersion))
-                {
-                    if (latestVersion > currentVersion)
-                    {
-                        return updateInfo;
-                    }
-                }
-
+            if (updateInfo?.Version == null || updateInfo.Url == null || updateInfo.ReleaseNotes == null)
+            {
                 return null;
             }
-            catch
+
+            if (Version.TryParse(updateInfo.Version.Trim(), out var latestVersion))
             {
-                // Log error if logging infrastructure exists
-                return null;
+                if (latestVersion > currentVersion)
+                {
+                    return updateInfo;
+                }
             }
+
+            return null;
         }
     }
 }
