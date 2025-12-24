@@ -15,6 +15,7 @@
     <Copyright>© 2025 George Tsirogiannis. All Rights Reserved.</Copyright>
     <PackageProjectUrl>https://georgetsirogiannis.com/16corecharactermapper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/georgetsirogiannis/SixteenCoreCharacterMapper</RepositoryUrl>
+    <ApplicationIcon>Assets\16Core logo icon v3.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,5 +36,9 @@
 
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\16Core logo icon v3.ico" />
   </ItemGroup>
 </Project>
