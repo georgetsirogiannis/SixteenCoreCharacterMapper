@@ -116,12 +116,19 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
 
         private async void SaveSettings()
         {
-            var settings = new AppSettings
+            try
             {
-                IsDarkMode = IsDarkMode,
-                LanguageCode = SelectedLanguage?.Code ?? "en"
-            };
-            await _settingsService.SaveSettingsAsync(settings);
+                var settings = new AppSettings
+                {
+                    IsDarkMode = IsDarkMode,
+                    LanguageCode = SelectedLanguage?.Code ?? "en"
+                };
+                await _settingsService.SaveSettingsAsync(settings);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error saving settings: {ex.Message}");
+            }
         }
 
         public string ProjectName

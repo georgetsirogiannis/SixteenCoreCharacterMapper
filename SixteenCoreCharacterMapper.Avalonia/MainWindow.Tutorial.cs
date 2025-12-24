@@ -80,8 +80,8 @@ namespace SixteenCoreCharacterMapper.Avalonia
             HideHighlightsInList(this.FindControl<ListBox>("SupportingList"));
             HideHighlightsInList(this.FindControl<ListBox>("BackgroundList"));
 
-            RedrawBubblesInTraits(); 
             _currentTutorialStage++; 
+            RedrawBubblesInTraits(); 
             ShowTutorialStage(_currentTutorialStage); 
         }
 

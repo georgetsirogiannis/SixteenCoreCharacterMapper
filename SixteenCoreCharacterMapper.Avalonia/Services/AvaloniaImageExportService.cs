@@ -119,7 +119,7 @@ namespace SixteenCoreCharacterMapper.Avalonia.Services
                         if (!ch.IsVisible) continue;
                         double pos = ch.GetTraitPosition(trait);
 
-                        double bubbleSize = ch.Size switch { BubbleSize.Large => 40 * scale, BubbleSize.Medium => 25 * scale, _ => 15 * scale };
+                        double bubbleSize = ch.Size switch { BubbleSize.Large => 40 * scale, BubbleSize.Medium => 26 * scale, _ => 16 * scale };
                         double x = pos * (canvasWidth - (30 * scale) - bubbleSize);
                         double y = (canvasHeight - bubbleSize) / 2;
                         
@@ -153,7 +153,7 @@ namespace SixteenCoreCharacterMapper.Avalonia.Services
                 var sortedCharacters = charactersToExport.OrderBy(ch => ch.Size switch { BubbleSize.Large => 0, BubbleSize.Medium => 1, _ => 2 });
                 foreach (var ch in sortedCharacters)
                 {
-                    double bubbleSize = ch.Size switch { BubbleSize.Large => 40 * scale, BubbleSize.Medium => 25 * scale, _ => 15 * scale };
+                    double bubbleSize = ch.Size switch { BubbleSize.Large => 40 * scale, BubbleSize.Medium => 26 * scale, _ => 16 * scale };
                     var legendItemPanel = new StackPanel 
                     { 
                         Orientation = Orientation.Horizontal, 
@@ -187,10 +187,19 @@ namespace SixteenCoreCharacterMapper.Avalonia.Services
                 var watermarkLogo = new Image
                 {
                     Height = 20 * scale,
-                    Source = new Bitmap(global::Avalonia.Platform.AssetLoader.Open(new Uri("avares://SixteenCoreCharacterMapper.Avalonia/Assets/16Core logo icon v2.png"))),
                     Margin = new Thickness(0, 0, 5 * scale, 0),
                     Stretch = Stretch.Uniform
                 };
+
+                try
+                {
+                    watermarkLogo.Source = new Bitmap(global::Avalonia.Platform.AssetLoader.Open(new Uri("avares://SixteenCoreCharacterMapper.Avalonia/Assets/16Core%20logo%20icon%20v2.png")));
+                }
+                catch
+                {
+                    // Ignore if logo is missing
+                }
+
                 var watermarkText = new TextBlock
                 {
                     Text = AppConstants.WatermarkText,

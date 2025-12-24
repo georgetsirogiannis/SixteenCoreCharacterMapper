@@ -49,6 +49,12 @@ namespace SixteenCoreCharacterMapper.Avalonia
             InitializeComponent();
             _traitsGrid = this.FindControl<Grid>("TraitsGrid");
             this.SizeChanged += Window_SizeChanged;
+            Closing += MainWindow_Closing;
+        }
+
+        private void MainWindow_Closing(object? sender, WindowClosingEventArgs e)
+        {
+            _viewModel?.ClosingWindow(e);
         }
 
         protected override void OnOpened(EventArgs e)
@@ -365,7 +371,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
 
                 double pos = ch.GetTraitPosition(trait);
 
-                double size = ch.Size switch { BubbleSize.Large => 40, BubbleSize.Medium => 25, _ => 15 };
+                double size = ch.Size switch { BubbleSize.Large => 40, BubbleSize.Medium => 26, _ => 16 };
                 double usable = System.Math.Max(1, canvas.Bounds.Width);
                 double x = pos * (usable - size);
                 double y = (50 - size) / 2;
@@ -461,49 +467,57 @@ namespace SixteenCoreCharacterMapper.Avalonia
         {
             if (_viewModel == null || _viewModel.Project == null) return;
 
-            var selectionDialog = new ExportSelectionWindow(_viewModel.Project.Characters, _viewModel.IsDarkMode);
-            var selectedCharacters = await selectionDialog.ShowDialog<List<Character>>(this);
-
-            if (selectedCharacters == null) return;
-
-            var saveOptions = new FilePickerSaveOptions
+            try
             {
-                Title = "Export Image",
-                DefaultExtension = "png",
-                FileTypeChoices = new List<FilePickerFileType>
-                {
-                    new FilePickerFileType("PNG Image") { Patterns = new[] { "*.png" } }
-                }
-            };
+                var selectionDialog = new ExportSelectionWindow(_viewModel.Project.Characters, _viewModel.IsDarkMode);
+                var selectedCharacters = await selectionDialog.ShowDialog<List<Character>>(this);
 
-            var file = await StorageProvider.SaveFilePickerAsync(saveOptions);
-            if (file != null)
-            {
-                try
+                if (selectedCharacters == null) return;
+
+                var saveOptions = new FilePickerSaveOptions
                 {
-                    // Avalonia's IStorageFile provides a path property in some implementations, but it's safer to use the path if available or stream.
-                    // Our service currently takes a string path.
-                    // For local files, TryGetLocalPath() is available in newer Avalonia versions or we can use the path property if it's a local file.
-                    // However, IStorageFile.Path is a Uri.
-                    
-                    string? localPath = file.Path.LocalPath;
-                    if (localPath != null)
+                    Title = "Export Image",
+                    DefaultExtension = "png",
+                    FileTypeChoices = new List<FilePickerFileType>
                     {
-                        await _imageExportService.ExportImageAsync(_viewModel.Project, selectedCharacters, _viewModel.IsDarkMode, localPath);
-                        var msgBox = new SimpleMessageBox("Image exported successfully!", "Export Complete", SimpleMessageBox.MessageBoxButtons.OK);
+                        new FilePickerFileType("PNG Image") { Patterns = new[] { "*.png" } }
+                    }
+                };
+
+                var file = await StorageProvider.SaveFilePickerAsync(saveOptions);
+                if (file != null)
+                {
+                    try
+                    {
+                        // Avalonia's IStorageFile provides a path property in some implementations, but it's safer to use the path if available or stream.
+                        // Our service currently takes a string path.
+                        // For local files, TryGetLocalPath() is available in newer Avalonia versions or we can use the path property if it's a local file.
+                        // However, IStorageFile.Path is a Uri.
+                        
+                        string? localPath = file.Path.LocalPath;
+                        if (localPath != null)
+                        {
+                            await _imageExportService.ExportImageAsync(_viewModel.Project, selectedCharacters, _viewModel.IsDarkMode, localPath);
+                            var msgBox = new SimpleMessageBox("Image exported successfully!", "Export Complete", SimpleMessageBox.MessageBoxButtons.OK);
+                            await msgBox.ShowDialog(this);
+                        }
+                        else
+                        {
+                             var msgBox = new SimpleMessageBox("Could not determine local file path for export.", "Export Error", SimpleMessageBox.MessageBoxButtons.OK);
+                             await msgBox.ShowDialog(this);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        var msgBox = new SimpleMessageBox($"An error occurred: {ex.Message}", "Export Error", SimpleMessageBox.MessageBoxButtons.OK);
                         await msgBox.ShowDialog(this);
                     }
-                    else
-                    {
-                         var msgBox = new SimpleMessageBox("Could not determine local file path for export.", "Export Error", SimpleMessageBox.MessageBoxButtons.OK);
-                         await msgBox.ShowDialog(this);
-                    }
                 }
-                catch (Exception ex)
-                {
-                    var msgBox = new SimpleMessageBox($"An error occurred: {ex.Message}", "Export Error", SimpleMessageBox.MessageBoxButtons.OK);
-                    await msgBox.ShowDialog(this);
-                }
+            }
+            catch (Exception ex)
+            {
+                var msgBox = new SimpleMessageBox($"An error occurred during export setup: {ex.Message}", "Export Error", SimpleMessageBox.MessageBoxButtons.OK);
+                await msgBox.ShowDialog(this);
             }
         }
 
@@ -969,11 +983,18 @@ namespace SixteenCoreCharacterMapper.Avalonia
                     if (control.DataContext is Character character)
                     {
                         _isPotentialDrag = false; // Reset to prevent multiple drags
+                        try
+                        {
 #pragma warning disable CS0618
-                        var dragData = new DataObject();
-                        dragData.Set("Character", character);
-                        var result = await DragDrop.DoDragDrop(e, dragData, DragDropEffects.Move);
+                            var dragData = new DataObject();
+                            dragData.Set("Character", character);
+                            var result = await DragDrop.DoDragDrop(e, dragData, DragDropEffects.Move);
 #pragma warning restore CS0618
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"DragDrop error: {ex.Message}");
+                        }
                     }
                 }
             }
@@ -1171,27 +1192,34 @@ namespace SixteenCoreCharacterMapper.Avalonia
 
         private async System.Threading.Tasks.Task<bool> CheckForUpdatesWithResultAsync()
         {
-            var currentVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0, 0);
-            var updateInfo = await _updateService.CheckForUpdateAsync(currentVersion);
-
-            if (updateInfo != null)
+            try
             {
-                var msgBox = new SimpleMessageBox(
-                    $"A new version ({updateInfo.Version}) is available! You are currently using version {currentVersion}.\n\nRelease Notes:\n{updateInfo.ReleaseNotes}\n\nWould you like to go to the download page?",
-                    "Update Available",
-                    SimpleMessageBox.MessageBoxButtons.YesNo);
-                
-                await msgBox.ShowDialog(this);
+                var currentVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0, 0);
+                var updateInfo = await _updateService.CheckForUpdateAsync(currentVersion);
 
-                if (msgBox.Result == Core.Services.DialogResult.Yes)
+                if (updateInfo != null)
                 {
-                    try
+                    var msgBox = new SimpleMessageBox(
+                        $"A new version ({updateInfo.Version}) is available! You are currently using version {currentVersion}.\n\nRelease Notes:\n{updateInfo.ReleaseNotes}\n\nWould you like to go to the download page?",
+                        "Update Available",
+                        SimpleMessageBox.MessageBoxButtons.YesNo);
+                    
+                    await msgBox.ShowDialog(this);
+
+                    if (msgBox.Result == Core.Services.DialogResult.Yes)
                     {
-                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo { FileName = updateInfo.Url, UseShellExecute = true });
+                        try
+                        {
+                            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo { FileName = updateInfo.Url, UseShellExecute = true });
+                        }
+                        catch { }
                     }
-                    catch { }
+                    return true;
                 }
-                return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Update check error: {ex.Message}");
             }
             
             return false;

@@ -27,6 +27,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
 
         public ExportSelectionWindow()
         {
+            InitializeComponent();
         }
 
         public ExportSelectionWindow(IEnumerable<Character> characters, bool isDarkMode) : this()
