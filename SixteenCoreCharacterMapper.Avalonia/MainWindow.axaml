@@ -130,6 +130,7 @@
                                   Width="120" VerticalAlignment="Center"
                                   FontSize="13" FontWeight="500"/>
                         <Border x:Name="ToolBarDivider3" Width="1" Background="#CCCCCC" Margin="5,2"/>
+                        <Button Content="Help" Classes="ToolBarButton" Click="Help_Click"/>
                         <Button Content="About" Classes="ToolBarButton" Click="About_Click"/>
                         <Button Content="Donate" Classes="ToolBarButton" Click="Donate_Click"/>
                     </StackPanel>

@@ -309,4 +309,499 @@
   <data name="Trait_Emotionality_High" xml:space="preserve">
     <value>spięty, niecierpliwy, łatwo się irytuje, szybko wpada w złość, sfrustrowany, zirytowany błędami innych</value>
   </data>
+  <data name="Question_Warmth_01" xml:space="preserve">
+    <value>Wie, jak pocieszać innych.</value>
+  </data>
+  <data name="Question_Warmth_02" xml:space="preserve">
+    <value>Lubi jednoczyć ludzi.</value>
+  </data>
+  <data name="Question_Warmth_03" xml:space="preserve">
+    <value>Czuje emocje innych.</value>
+  </data>
+  <data name="Question_Warmth_04" xml:space="preserve">
+    <value>Interesuje się życiem innych ludzi.</value>
+  </data>
+  <data name="Question_Warmth_05" xml:space="preserve">
+    <value>Rozwesela ludzi.</value>
+  </data>
+  <data name="Question_Warmth_06" xml:space="preserve">
+    <value>Sprawia, że ludzie czują się swobodnie.</value>
+  </data>
+  <data name="Question_Warmth_07" xml:space="preserve">
+    <value>Poświęca czas innym.</value>
+  </data>
+  <data name="Question_Warmth_08" xml:space="preserve">
+    <value>Nie lubi angażować się w problemy innych.</value>
+  </data>
+  <data name="Question_Warmth_09" xml:space="preserve">
+    <value>Stara się nie myśleć o potrzebujących.</value>
+  </data>
+  <data name="Question_Intellect_01" xml:space="preserve">
+    <value>Robi trafne uwagi.</value>
+  </data>
+  <data name="Question_Intellect_02" xml:space="preserve">
+    <value>Zna odpowiedzi na wiele pytań.</value>
+  </data>
+  <data name="Question_Intellect_03" xml:space="preserve">
+    <value>Ma tendencję do analizowania rzeczy.</value>
+  </data>
+  <data name="Question_Intellect_04" xml:space="preserve">
+    <value>Używa mózgu.</value>
+  </data>
+  <data name="Question_Intellect_05" xml:space="preserve">
+    <value>Szybko się uczy.</value>
+  </data>
+  <data name="Question_Intellect_06" xml:space="preserve">
+    <value>Odpiera argumenty innych.</value>
+  </data>
+  <data name="Question_Intellect_07" xml:space="preserve">
+    <value>Zastanawia się przed działaniem.</value>
+  </data>
+  <data name="Question_Intellect_08" xml:space="preserve">
+    <value>Waży wszystkie "za" i "przeciw".</value>
+  </data>
+  <data name="Question_Intellect_09" xml:space="preserve">
+    <value>Uważa się za przeciętną osobę.</value>
+  </data>
+  <data name="Question_Intellect_10" xml:space="preserve">
+    <value>Łatwo się gubi.</value>
+  </data>
+  <data name="Question_Intellect_11" xml:space="preserve">
+    <value>Wie, że nie jest wyjątkową osobą.</value>
+  </data>
+  <data name="Question_Intellect_12" xml:space="preserve">
+    <value>Ma ubogie słownictwo.</value>
+  </data>
+  <data name="Question_Intellect_13" xml:space="preserve">
+    <value>Pomija trudne słowa podczas czytania.</value>
+  </data>
+  <data name="Question_EmotionalStability_01" xml:space="preserve">
+    <value>Rzadko miewa chandrę.</value>
+  </data>
+  <data name="Question_EmotionalStability_02" xml:space="preserve">
+    <value>Dobrze się czuje sam ze sobą.</value>
+  </data>
+  <data name="Question_EmotionalStability_03" xml:space="preserve">
+    <value>Łatwo podnosi się po porażkach.</value>
+  </data>
+  <data name="Question_EmotionalStability_04" xml:space="preserve">
+    <value>Is relaxed most of the time.</value>
+  </data>
+  <data name="Question_EmotionalStability_05" xml:space="preserve">
+    <value>Nie daje się łatwo sfrustrować ani zniechęcić.</value>
+  </data>
+  <data name="Question_EmotionalStability_06" xml:space="preserve">
+    <value>Miewa częste wahania nastrojów.</value>
+  </data>
+  <data name="Question_EmotionalStability_07" xml:space="preserve">
+    <value>Nie lubi siebie.</value>
+  </data>
+  <data name="Question_EmotionalStability_08" xml:space="preserve">
+    <value>Czuje desperację.</value>
+  </data>
+  <data name="Question_Assertiveness_01" xml:space="preserve">
+    <value>Przejmuje stery.</value>
+  </data>
+  <data name="Question_Assertiveness_02" xml:space="preserve">
+    <value>Chce rządzić.</value>
+  </data>
+  <data name="Question_Assertiveness_03" xml:space="preserve">
+    <value>Mówi to, co myśli.</value>
+  </data>
+  <data name="Question_Assertiveness_04" xml:space="preserve">
+    <value>Is not afraid of providing criticism.</value>
+  </data>
+  <data name="Question_Assertiveness_05" xml:space="preserve">
+    <value>Przejmuje kontrolę nad sprawami.</value>
+  </data>
+  <data name="Question_Assertiveness_06" xml:space="preserve">
+    <value>Potrafi podjąć radykalne kroki.</value>
+  </data>
+  <data name="Question_Assertiveness_07" xml:space="preserve">
+    <value>Czeka, aż inni przejmą inicjatywę.</value>
+  </data>
+  <data name="Question_Assertiveness_08" xml:space="preserve">
+    <value>Nigdy niczego nie podważa.</value>
+  </data>
+  <data name="Question_Assertiveness_09" xml:space="preserve">
+    <value>Pozwala innym podejmować decyzje.</value>
+  </data>
+  <data name="Question_Assertiveness_10" xml:space="preserve">
+    <value>Allows others to push them around.</value>
+  </data>
+  <data name="Question_Gregariousness_01" xml:space="preserve">
+    <value>Jest duszą towarzystwa.</value>
+  </data>
+  <data name="Question_Gregariousness_02" xml:space="preserve">
+    <value>Uwielbia duże imprezy i tłumne wydarzenia.</value>
+  </data>
+  <data name="Question_Gregariousness_03" xml:space="preserve">
+    <value>Dużo żartuje.</value>
+  </data>
+  <data name="Question_Gregariousness_04" xml:space="preserve">
+    <value>Lubi być częścią głośnego tłumu.</value>
+  </data>
+  <data name="Question_Gregariousness_05" xml:space="preserve">
+    <value>Rozśmiesza swoich znajomych.</value>
+  </data>
+  <data name="Question_Gregariousness_06" xml:space="preserve">
+    <value>Zachowuje się szalenie i nieobliczalnie.</value>
+  </data>
+  <data name="Question_Gregariousness_07" xml:space="preserve">
+    <value>Jako ostatni śmieje się z żartu.</value>
+  </data>
+  <data name="Question_Gregariousness_08" xml:space="preserve">
+    <value>Nie lubi głośnej muzyki.</value>
+  </data>
+  <data name="Question_Dutifulness_01" xml:space="preserve">
+    <value>Uważa, że prawo powinno być surowo egzekwowane.</value>
+  </data>
+  <data name="Question_Dutifulness_02" xml:space="preserve">
+    <value>Stara się przestrzegać zasad.</value>
+  </data>
+  <data name="Question_Dutifulness_03" xml:space="preserve">
+    <value>Wierzy w jedyną prawdziwą religię.</value>
+  </data>
+  <data name="Question_Dutifulness_04" xml:space="preserve">
+    <value>Szanuje autorytet.</value>
+  </data>
+  <data name="Question_Dutifulness_05" xml:space="preserve">
+    <value>Lubi stać podczas hymnu narodowego.</value>
+  </data>
+  <data name="Question_Dutifulness_06" xml:space="preserve">
+    <value>Sprzeciwia się władzy.</value>
+  </data>
+  <data name="Question_Dutifulness_07" xml:space="preserve">
+    <value>Łamie zasady.</value>
+  </data>
+  <data name="Question_Dutifulness_08" xml:space="preserve">
+    <value>Przeklina.</value>
+  </data>
+  <data name="Question_Dutifulness_09" xml:space="preserve">
+    <value>Zwalcza autorytety.</value>
+  </data>
+  <data name="Question_Dutifulness_10" xml:space="preserve">
+    <value>Wie, jak omijać przepisy.</value>
+  </data>
+  <data name="Question_SocialConfidence_01" xml:space="preserve">
+    <value>Dobrze się czuje wśród ludzi.</value>
+  </data>
+  <data name="Question_SocialConfidence_02" xml:space="preserve">
+    <value>Rozmawia z wieloma osobami na imprezach.</value>
+  </data>
+  <data name="Question_SocialConfidence_03" xml:space="preserve">
+    <value>Nie przeszkadza mu bycie w centrum uwagi.</value>
+  </data>
+  <data name="Question_SocialConfidence_04" xml:space="preserve">
+    <value>Łatwo nawiązuje przyjaźnie.</value>
+  </data>
+  <data name="Question_SocialConfidence_05" xml:space="preserve">
+    <value>Nawiązuje rozmowy.</value>
+  </data>
+  <data name="Question_SocialConfidence_06" xml:space="preserve">
+    <value>Trudno mu podejść do innych.</value>
+  </data>
+  <data name="Question_SocialConfidence_07" xml:space="preserve">
+    <value>Ma mało do powiedzenia.</value>
+  </data>
+  <data name="Question_SocialConfidence_08" xml:space="preserve">
+    <value>Jest małomówny przy obcych.</value>
+  </data>
+  <data name="Question_SocialConfidence_09" xml:space="preserve">
+    <value>Trzyma się w tle.</value>
+  </data>
+  <data name="Question_Sensitivity_01" xml:space="preserve">
+    <value>Lubi czytać.</value>
+  </data>
+  <data name="Question_Sensitivity_02" xml:space="preserve">
+    <value>Lubi dyskutować o filmach i książkach.</value>
+  </data>
+  <data name="Question_Sensitivity_03" xml:space="preserve">
+    <value>Dużo czyta.</value>
+  </data>
+  <data name="Question_Sensitivity_04" xml:space="preserve">
+    <value>Nie lubi kina akcji.</value>
+  </data>
+  <data name="Question_Sensitivity_05" xml:space="preserve">
+    <value>Płacze na filmach.</value>
+  </data>
+  <data name="Question_Sensitivity_06" xml:space="preserve">
+    <value>Kocha kwiaty.</value>
+  </data>
+  <data name="Question_Sensitivity_07" xml:space="preserve">
+    <value>Nie lubi oglądać występów tanecznych.</value>
+  </data>
+  <data name="Question_Sensitivity_08" xml:space="preserve">
+    <value>Nie lubi poezji.</value>
+  </data>
+  <data name="Question_Sensitivity_09" xml:space="preserve">
+    <value>Nie lubi beletrystyki.</value>
+  </data>
+  <data name="Question_Sensitivity_10" xml:space="preserve">
+    <value>Rzadko zauważa własne emocje.</value>
+  </data>
+  <data name="Question_Distrust_01" xml:space="preserve">
+    <value>Trudno mu wybaczyć innym.</value>
+  </data>
+  <data name="Question_Distrust_02" xml:space="preserve">
+    <value>Podejrzewa u innych ukryte motywy.</value>
+  </data>
+  <data name="Question_Distrust_03" xml:space="preserve">
+    <value>Jest nieufny wobec innych.</value>
+  </data>
+  <data name="Question_Distrust_04" xml:space="preserve">
+    <value>Nie ufa ludziom.</value>
+  </data>
+  <data name="Question_Distrust_05" xml:space="preserve">
+    <value>Uważa, że ludzie rzadko mówią całą prawdę.</value>
+  </data>
+  <data name="Question_Distrust_06" xml:space="preserve">
+    <value>Uważa, że ludzie są z natury źli.</value>
+  </data>
+  <data name="Question_Distrust_07" xml:space="preserve">
+    <value>Ufa temu, co mówią ludzie.</value>
+  </data>
+  <data name="Question_Distrust_08" xml:space="preserve">
+    <value>Wierzy, że inni mają dobre intencje.</value>
+  </data>
+  <data name="Question_Distrust_09" xml:space="preserve">
+    <value>Uważa, że ludzie są moralni.</value>
+  </data>
+  <data name="Question_Imagination_01" xml:space="preserve">
+    <value>Robi rzeczy, które inni uważają za dziwne.</value>
+  </data>
+  <data name="Question_Imagination_02" xml:space="preserve">
+    <value>Lubi zatapiać się w myślach.</value>
+  </data>
+  <data name="Question_Imagination_03" xml:space="preserve">
+    <value>Lubi loty wyobraźni.</value>
+  </data>
+  <data name="Question_Imagination_04" xml:space="preserve">
+    <value>Uwielbia marzyć na jawie.</value>
+  </data>
+  <data name="Question_Imagination_05" xml:space="preserve">
+    <value>Płynie pod prąd.</value>
+  </data>
+  <data name="Question_Imagination_06" xml:space="preserve">
+    <value>Takes deviant positions.</value>
+  </data>
+  <data name="Question_Imagination_07" xml:space="preserve">
+    <value>Robi nieoczekiwane rzeczy.</value>
+  </data>
+  <data name="Question_Imagination_08" xml:space="preserve">
+    <value>Robi wszystko zgodnie z przepisami.</value>
+  </data>
+  <data name="Question_Imagination_09" xml:space="preserve">
+    <value>Rzadko marzy na jawie.</value>
+  </data>
+  <data name="Question_Imagination_10" xml:space="preserve">
+    <value>Rzadko zatapia się w myślach.</value>
+  </data>
+  <data name="Question_Reserve_01" xml:space="preserve">
+    <value>Mało mówi o sobie.</value>
+  </data>
+  <data name="Question_Reserve_02" xml:space="preserve">
+    <value>Trudno go poznać.</value>
+  </data>
+  <data name="Question_Reserve_03" xml:space="preserve">
+    <value>Mało mówi.</value>
+  </data>
+  <data name="Question_Reserve_04" xml:space="preserve">
+    <value>Tłumi w sobie uczucia.</value>
+  </data>
+  <data name="Question_Reserve_05" xml:space="preserve">
+    <value>Zachowuje myśli dla siebie.</value>
+  </data>
+  <data name="Question_Reserve_06" xml:space="preserve">
+    <value>Jest otwarty wobec innych.</value>
+  </data>
+  <data name="Question_Reserve_07" xml:space="preserve">
+    <value>Otwarcie mówi o uczuciach.</value>
+  </data>
+  <data name="Question_Reserve_08" xml:space="preserve">
+    <value>Wyjawia intymne myśli.</value>
+  </data>
+  <data name="Question_Reserve_09" xml:space="preserve">
+    <value>Okazuje swoje uczucia.</value>
+  </data>
+  <data name="Question_Anxiety_01" xml:space="preserve">
+    <value>Boi się, że zrobi coś źle.</value>
+  </data>
+  <data name="Question_Anxiety_02" xml:space="preserve">
+    <value>Łatwo czuje się zagrożony.</value>
+  </data>
+  <data name="Question_Anxiety_03" xml:space="preserve">
+    <value>Łatwo go zranić.</value>
+  </data>
+  <data name="Question_Anxiety_04" xml:space="preserve">
+    <value>Zamartwia się wszystkim.</value>
+  </data>
+  <data name="Question_Anxiety_05" xml:space="preserve">
+    <value>Rozmyśla o dawnych błędach.</value>
+  </data>
+  <data name="Question_Anxiety_06" xml:space="preserve">
+    <value>Ma poczucie winy, gdy mówi nie.</value>
+  </data>
+  <data name="Question_Anxiety_07" xml:space="preserve">
+    <value>Czuje się zdruzgotany porażką.</value>
+  </data>
+  <data name="Question_Anxiety_08" xml:space="preserve">
+    <value>Nie martwi się przeszłością.</value>
+  </data>
+  <data name="Question_Anxiety_09" xml:space="preserve">
+    <value>Nie przejmuje się łatwo.</value>
+  </data>
+  <data name="Question_Anxiety_10" xml:space="preserve">
+    <value>Nie pozwala się zniechęcać.</value>
+  </data>
+  <data name="Question_Complexity_01" xml:space="preserve">
+    <value>Wierzy w znaczenie sztuki.</value>
+  </data>
+  <data name="Question_Complexity_02" xml:space="preserve">
+    <value>Uwielbia nowe sposoby działania.</value>
+  </data>
+  <data name="Question_Complexity_03" xml:space="preserve">
+    <value>Lubi słuchać o nowych pomysłach.</value>
+  </data>
+  <data name="Question_Complexity_04" xml:space="preserve">
+    <value>Przenosi rozmowę na wyższy poziom.</value>
+  </data>
+  <data name="Question_Complexity_05" xml:space="preserve">
+    <value>Woli różnorodność od rutyny.</value>
+  </data>
+  <data name="Question_Complexity_06" xml:space="preserve">
+    <value>Unika dyskusji filozoficznych.</value>
+  </data>
+  <data name="Question_Complexity_07" xml:space="preserve">
+    <value>Rzadko szuka głębszego sensu.</value>
+  </data>
+  <data name="Question_Complexity_08" xml:space="preserve">
+    <value>Nie interesuje się teorią.</value>
+  </data>
+  <data name="Question_Complexity_09" xml:space="preserve">
+    <value>Nie interesują go abstrakcje.</value>
+  </data>
+  <data name="Question_Complexity_10" xml:space="preserve">
+    <value>Stara się unikać trudnych ludzi.</value>
+  </data>
+  <data name="Question_Introversion_01" xml:space="preserve">
+    <value>Chce zostać sam.</value>
+  </data>
+  <data name="Question_Introversion_02" xml:space="preserve">
+    <value>Woli robić wszystko sam.</value>
+  </data>
+  <data name="Question_Introversion_03" xml:space="preserve">
+    <value>Lubi spędzać czas samemu.</value>
+  </data>
+  <data name="Question_Introversion_04" xml:space="preserve">
+    <value>Szuka ciszy.</value>
+  </data>
+  <data name="Question_Introversion_05" xml:space="preserve">
+    <value>Nie przeszkadza mu jeść samemu.</value>
+  </data>
+  <data name="Question_Introversion_06" xml:space="preserve">
+    <value>Lubi ciszę.</value>
+  </data>
+  <data name="Question_Introversion_07" xml:space="preserve">
+    <value>Ceni swoją prywatność.</value>
+  </data>
+  <data name="Question_Introversion_08" xml:space="preserve">
+    <value>Lubi być częścią grupy.</value>
+  </data>
+  <data name="Question_Introversion_09" xml:space="preserve">
+    <value>Lubi pracę zespołową.</value>
+  </data>
+  <data name="Question_Introversion_10" xml:space="preserve">
+    <value>Nie może żyć bez ludzi.</value>
+  </data>
+  <data name="Question_Orderliness_01" xml:space="preserve">
+    <value>Chce, by wszystko było idealnie.</value>
+  </data>
+  <data name="Question_Orderliness_02" xml:space="preserve">
+    <value>Od razu wykonuje obowiązki.</value>
+  </data>
+  <data name="Question_Orderliness_03" xml:space="preserve">
+    <value>Lubi porządek.</value>
+  </data>
+  <data name="Question_Orderliness_04" xml:space="preserve">
+    <value>Pracuje aż do ideału.</value>
+  </data>
+  <data name="Question_Orderliness_05" xml:space="preserve">
+    <value>Jest wymagający w pracy.</value>
+  </data>
+  <data name="Question_Orderliness_06" xml:space="preserve">
+    <value>Nie przeszkadzają mu bałaganiarze.</value>
+  </data>
+  <data name="Question_Orderliness_07" xml:space="preserve">
+    <value>Nie przeszkadza mu nieład.</value>
+  </data>
+  <data name="Question_Orderliness_08" xml:space="preserve">
+    <value>Ma bałagan w pokoju.</value>
+  </data>
+  <data name="Question_Orderliness_09" xml:space="preserve">
+    <value>Porzuca rzeczy gdzie popadnie.</value>
+  </data>
+  <data name="Question_Orderliness_10" xml:space="preserve">
+    <value>Odkłada trudne zadania.</value>
+  </data>
+  <data name="Question_Emotionality_01" xml:space="preserve">
+    <value>Łatwo wpada w irytację.</value>
+  </data>
+  <data name="Question_Emotionality_02" xml:space="preserve">
+    <value>Szybko się złości.</value>
+  </data>
+  <data name="Question_Emotionality_03" xml:space="preserve">
+    <value>Szybko ocenia innych.</value>
+  </data>
+  <data name="Question_Emotionality_04" xml:space="preserve">
+    <value>Irytują go błędy innych.</value>
+  </data>
+  <data name="Question_Emotionality_05" xml:space="preserve">
+    <value>Łatwo go speszyć.</value>
+  </data>
+  <data name="Question_Emotionality_06" xml:space="preserve">
+    <value>Nie znosi sprzeciwu.</value>
+  </data>
+  <data name="Question_Emotionality_07" xml:space="preserve">
+    <value>Ocenia po wyglądzie.</value>
+  </data>
+  <data name="Question_Emotionality_08" xml:space="preserve">
+    <value>Nie daje się łatwo zirytować.</value>
+  </data>
+  <data name="Question_Emotionality_09" xml:space="preserve">
+    <value>Stara się wybaczać i zapominać.</value>
+  </data>
+  <data name="Question_Emotionality_10" xml:space="preserve">
+    <value>Has a good word for everyone.</value>
+  </data>
+  <data name="Questionnaire_Label_SD" xml:space="preserve">
+    <value>ZN</value>
+  </data>
+  <data name="Questionnaire_Label_D" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="Questionnaire_Label_N" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="Questionnaire_Label_A" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="Questionnaire_Label_SA" xml:space="preserve">
+    <value>ZZ</value>
+  </data>
+  <data name="Questionnaire_Tooltip_SD" xml:space="preserve">
+    <value>Zdecydowanie się nie zgadzam</value>
+  </data>
+  <data name="Questionnaire_Tooltip_D" xml:space="preserve">
+    <value>Nie zgadzam się</value>
+  </data>
+  <data name="Questionnaire_Tooltip_N" xml:space="preserve">
+    <value>Ani tak, ani nie (Neutralnie)</value>
+  </data>
+  <data name="Questionnaire_Tooltip_A" xml:space="preserve">
+    <value>Zgadzam się</value>
+  </data>
+  <data name="Questionnaire_Tooltip_SA" xml:space="preserve">
+    <value>Zdecydowanie się zgadzam</value>
+  </data>
 </root>

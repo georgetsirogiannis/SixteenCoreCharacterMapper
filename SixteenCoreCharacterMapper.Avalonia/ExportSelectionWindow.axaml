@@ -8,7 +8,8 @@
         x:Class="SixteenCoreCharacterMapper.Avalonia.ExportSelectionWindow"
         Title="Export Selection"
         WindowStartupLocation="CenterOwner"
-        CanResize="False">
+        CanResize="False"
+        Icon="/Assets/16Core logo icon v2.png">
   <Grid RowDefinitions="Auto,*,Auto" Margin="20">
     <StackPanel Grid.Row="0" Spacing="10">
       <TextBlock Name="TitleText" Text="Export Options" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>

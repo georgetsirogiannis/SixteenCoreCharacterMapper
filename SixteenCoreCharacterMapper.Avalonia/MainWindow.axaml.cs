@@ -115,7 +115,8 @@ namespace SixteenCoreCharacterMapper.Avalonia
             if (DataContext is MainWindowViewModel vm)
             {
                 _viewModel = vm;
-                _viewModel.RedrawTraitsRequested += InitializeTraits;
+                _viewModel.RebuildTraitsRequested += InitializeTraits;
+                _viewModel.RefreshBubblesRequested += RedrawBubblesInTraits;
                 _viewModel.ApplyThemeRequested += () => ApplyTheme(_viewModel.IsDarkMode);
                 _viewModel.CharacterAdded += OnCharacterAddedForTutorial;
                 _viewModel.RefreshCharacterListRequested += UpdateGroups;
@@ -568,6 +569,12 @@ namespace SixteenCoreCharacterMapper.Avalonia
         {
             var aboutWindow = new AboutWindow();
             aboutWindow.ShowDialog(this);
+        }
+
+        private void Help_Click(object? sender, RoutedEventArgs e)
+        {
+            var helpWindow = new HelpWindow();
+            helpWindow.ShowDialog(this);
         }
 
         private void ApplyTheme(bool isDarkMode)

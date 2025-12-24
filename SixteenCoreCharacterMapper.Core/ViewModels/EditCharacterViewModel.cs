@@ -14,6 +14,9 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
         [ObservableProperty]
         private ColorItem _selectedColorItem;
 
+        [ObservableProperty]
+        private string _questionnaireButtonText = "Take Questionnaire";
+
         public string Name
         {
             get => Character.Name;
@@ -32,6 +35,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
         public EditCharacterViewModel(Character character)
         {
             _character = character;
+            UpdateQuestionnaireStatus();
 
             AvailableColors = new List<ColorItem>
             {
@@ -67,6 +71,13 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                 _selectedColorItem = AvailableColors.First();
                 Character.ColorHex = _selectedColorItem.Hex;
             }
+        }
+
+        public void UpdateQuestionnaireStatus()
+        {
+            QuestionnaireButtonText = Character.QuestionnaireAnswers.Count > 0 
+                ? "Edit Questionnaire" 
+                : "Take Questionnaire";
         }
 
         [RelayCommand]

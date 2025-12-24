@@ -34,6 +34,12 @@ namespace SixteenCoreCharacterMapper.Core.Models
         // Trait name ? position (0.0 to 1.0)
         public Dictionary<string, double> TraitPositions { get; set; } = new Dictionary<string, double>();
 
+        // Question Text ? Answer (0-5)
+        public Dictionary<string, int> QuestionnaireAnswers { get; set; } = new Dictionary<string, int>();
+
+        // Trait IDs to exclude from calculation
+        public List<string> QuestionnaireExclusions { get; set; } = new List<string>();
+
         public double GetTraitPosition(Trait trait)
         {
             // Prefer stable Id key; migrate old localized keys if present

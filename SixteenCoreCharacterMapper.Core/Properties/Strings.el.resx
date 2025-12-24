@@ -309,4 +309,499 @@
   <data name="Trait_Emotionality_High" xml:space="preserve">
     <value>σε ένταση, ανυπόμονος, ευερέθιστος, θυμώνει εύκολα, απογοητευμένος, ενοχλείται από τα λάθη των άλλων, εκνευρίζεται εύκολα</value>
   </data>
+  <data name="Question_Warmth_01" xml:space="preserve">
+    <value>Ξέρει πώς να παρηγορεί τους άλλους.</value>
+  </data>
+  <data name="Question_Warmth_02" xml:space="preserve">
+    <value>Απολαμβάνει να φέρνει τους ανθρώπους κοντά.</value>
+  </data>
+  <data name="Question_Warmth_03" xml:space="preserve">
+    <value>Νιώθει τα συναισθήματα των άλλων.</value>
+  </data>
+  <data name="Question_Warmth_04" xml:space="preserve">
+    <value>Ενδιαφέρεται για τη ζωή των άλλων ανθρώπων.</value>
+  </data>
+  <data name="Question_Warmth_05" xml:space="preserve">
+    <value>Φτιάχνει τη διάθεση των άλλων.</value>
+  </data>
+  <data name="Question_Warmth_06" xml:space="preserve">
+    <value>Κάνει τους ανθρώπους να νιώθουν άνετα.</value>
+  </data>
+  <data name="Question_Warmth_07" xml:space="preserve">
+    <value>Αφιερώνει χρόνο για τους άλλους.</value>
+  </data>
+  <data name="Question_Warmth_08" xml:space="preserve">
+    <value>Δεν του αρέσει να εμπλέκεται στα προβλήματα των άλλων.</value>
+  </data>
+  <data name="Question_Warmth_09" xml:space="preserve">
+    <value>Προσπαθεί να μη σκέφτεται όσους έχουν ανάγκη.</value>
+  </data>
+  <data name="Question_Intellect_01" xml:space="preserve">
+    <value>Κάνει εύστοχες παρατηρήσεις.</value>
+  </data>
+  <data name="Question_Intellect_02" xml:space="preserve">
+    <value>Γνωρίζει τις απαντήσεις σε πολλές ερωτήσεις.</value>
+  </data>
+  <data name="Question_Intellect_03" xml:space="preserve">
+    <value>Έχει την τάση να αναλύει τα πράγματα.</value>
+  </data>
+  <data name="Question_Intellect_04" xml:space="preserve">
+    <value>Χρησιμοποιεί το μυαλό του.</value>
+  </data>
+  <data name="Question_Intellect_05" xml:space="preserve">
+    <value>Μαθαίνει γρήγορα.</value>
+  </data>
+  <data name="Question_Intellect_06" xml:space="preserve">
+    <value>Αντικρούει τα επιχειρήματα των άλλων.</value>
+  </data>
+  <data name="Question_Intellect_07" xml:space="preserve">
+    <value>Σκέφτεται τα πράγματα πριν δράσει.</value>
+  </data>
+  <data name="Question_Intellect_08" xml:space="preserve">
+    <value>Ζυγίζει τα υπέρ και τα κατά.</value>
+  </data>
+  <data name="Question_Intellect_09" xml:space="preserve">
+    <value>Θεωρεί τον εαυτό του έναν συνηθισμένο άνθρωπο.</value>
+  </data>
+  <data name="Question_Intellect_10" xml:space="preserve">
+    <value>Μπερδεύεται εύκολα.</value>
+  </data>
+  <data name="Question_Intellect_11" xml:space="preserve">
+    <value>Ξέρει ότι δεν είναι κάποιος ξεχωριστός άνθρωπος.</value>
+  </data>
+  <data name="Question_Intellect_12" xml:space="preserve">
+    <value>Έχει φτωχό λεξιλόγιο.</value>
+  </data>
+  <data name="Question_Intellect_13" xml:space="preserve">
+    <value>Προσπερνά τις δύσκολες λέξεις κατά την ανάγνωση.</value>
+  </data>
+  <data name="Question_EmotionalStability_01" xml:space="preserve">
+    <value>Σπάνια νιώθει μελαγχολία.</value>
+  </data>
+  <data name="Question_EmotionalStability_02" xml:space="preserve">
+    <value>Νιώθει άνετα με τον εαυτό του.</value>
+  </data>
+  <data name="Question_EmotionalStability_03" xml:space="preserve">
+    <value>Ξεπερνά εύκολα τις αναποδιές.</value>
+  </data>
+  <data name="Question_EmotionalStability_04" xml:space="preserve">
+    <value>Είναι χαλαρός τις περισσότερες φορές.</value>
+  </data>
+  <data name="Question_EmotionalStability_05" xml:space="preserve">
+    <value>Δεν απογοητεύεται ούτε χάνει το θάρρος του εύκολα.</value>
+  </data>
+  <data name="Question_EmotionalStability_06" xml:space="preserve">
+    <value>Έχει συχνές εναλλαγές στη διάθεσή του.</value>
+  </data>
+  <data name="Question_EmotionalStability_07" xml:space="preserve">
+    <value>Δεν συμπαθεί τον εαυτό του.</value>
+  </data>
+  <data name="Question_EmotionalStability_08" xml:space="preserve">
+    <value>Νιώθει απόγνωση.</value>
+  </data>
+  <data name="Question_Assertiveness_01" xml:space="preserve">
+    <value>Αναλαμβάνει την αρχηγία.</value>
+  </data>
+  <data name="Question_Assertiveness_02" xml:space="preserve">
+    <value>Θέλει να έχει τον έλεγχο.</value>
+  </data>
+  <data name="Question_Assertiveness_03" xml:space="preserve">
+    <value>Λέει αυτό που σκέφτεται.</value>
+  </data>
+  <data name="Question_Assertiveness_04" xml:space="preserve">
+    <value>Δεν φοβάται να ασκήσει κριτική.</value>
+  </data>
+  <data name="Question_Assertiveness_05" xml:space="preserve">
+    <value>Παίρνει τον έλεγχο των πραγμάτων.</value>
+  </data>
+  <data name="Question_Assertiveness_06" xml:space="preserve">
+    <value>Μπορεί να πάρει δραστικά μέτρα.</value>
+  </data>
+  <data name="Question_Assertiveness_07" xml:space="preserve">
+    <value>Περιμένει τους άλλους να δείξουν τον δρόμο.</value>
+  </data>
+  <data name="Question_Assertiveness_08" xml:space="preserve">
+    <value>Δεν αμφισβητεί ποτέ τα πράγματα.</value>
+  </data>
+  <data name="Question_Assertiveness_09" xml:space="preserve">
+    <value>Αφήνει τους άλλους να παίρνουν τις αποφάσεις.</value>
+  </data>
+  <data name="Question_Assertiveness_10" xml:space="preserve">
+    <value>Allows others to push them around.</value>
+  </data>
+  <data name="Question_Gregariousness_01" xml:space="preserve">
+    <value>Είναι η ψυχή της παρέας.</value>
+  </data>
+  <data name="Question_Gregariousness_02" xml:space="preserve">
+    <value>Αγαπά τα μεγάλα πάρτι και τις εκδηλώσεις με κόσμο.</value>
+  </data>
+  <data name="Question_Gregariousness_03" xml:space="preserve">
+    <value>Κάνει πολλά αστεία.</value>
+  </data>
+  <data name="Question_Gregariousness_04" xml:space="preserve">
+    <value>Απολαμβάνει να είναι μέρος ενός θορυβώδους πλήθους.</value>
+  </data>
+  <data name="Question_Gregariousness_05" xml:space="preserve">
+    <value>Διασκεδάζει τους φίλους του.</value>
+  </data>
+  <data name="Question_Gregariousness_06" xml:space="preserve">
+    <value>Φέρεται τρελά και παρορμητικά.</value>
+  </data>
+  <data name="Question_Gregariousness_07" xml:space="preserve">
+    <value>Είναι ο τελευταίος που θα γελάσει με ένα αστείο.</value>
+  </data>
+  <data name="Question_Gregariousness_08" xml:space="preserve">
+    <value>Δεν του αρέσει η δυνατή μουσική.</value>
+  </data>
+  <data name="Question_Dutifulness_01" xml:space="preserve">
+    <value>Πιστεύει ότι οι νόμοι πρέπει να επιβάλλονται αυστηρά.</value>
+  </data>
+  <data name="Question_Dutifulness_02" xml:space="preserve">
+    <value>Προσπαθεί να ακολουθεί τους κανόνες.</value>
+  </data>
+  <data name="Question_Dutifulness_03" xml:space="preserve">
+    <value>Πιστεύει σε μία αληθινή θρησκεία.</value>
+  </data>
+  <data name="Question_Dutifulness_04" xml:space="preserve">
+    <value>Σέβεται την εξουσία.</value>
+  </data>
+  <data name="Question_Dutifulness_05" xml:space="preserve">
+    <value>Του αρέσει να στέκεται όρθιος στον εθνικό ύμνο.</value>
+  </data>
+  <data name="Question_Dutifulness_06" xml:space="preserve">
+    <value>Αντιστέκεται στην εξουσία.</value>
+  </data>
+  <data name="Question_Dutifulness_07" xml:space="preserve">
+    <value>Παραβαίνει τους κανόνες.</value>
+  </data>
+  <data name="Question_Dutifulness_08" xml:space="preserve">
+    <value>Χρησιμοποιεί βρισιές.</value>
+  </data>
+  <data name="Question_Dutifulness_09" xml:space="preserve">
+    <value>Εναντιώνεται στην εξουσία.</value>
+  </data>
+  <data name="Question_Dutifulness_10" xml:space="preserve">
+    <value>Ξέρει πώς να παρακάμπτει τους κανόνες.</value>
+  </data>
+  <data name="Question_SocialConfidence_01" xml:space="preserve">
+    <value>Νιώθει άνετα ανάμεσα σε κόσμο.</value>
+  </data>
+  <data name="Question_SocialConfidence_02" xml:space="preserve">
+    <value>Μιλάει με πολλούς διαφορετικούς ανθρώπους στα πάρτι.</value>
+  </data>
+  <data name="Question_SocialConfidence_03" xml:space="preserve">
+    <value>Δεν τον πειράζει να είναι το επίκεντρο της προσοχής.</value>
+  </data>
+  <data name="Question_SocialConfidence_04" xml:space="preserve">
+    <value>Κάνει εύκολα φίλους.</value>
+  </data>
+  <data name="Question_SocialConfidence_05" xml:space="preserve">
+    <value>Πιάνει συζήτηση με τους άλλους.</value>
+  </data>
+  <data name="Question_SocialConfidence_06" xml:space="preserve">
+    <value>Δυσκολεύεται να πλησιάσει τους άλλους.</value>
+  </data>
+  <data name="Question_SocialConfidence_07" xml:space="preserve">
+    <value>Έχει λίγα να πει.</value>
+  </data>
+  <data name="Question_SocialConfidence_08" xml:space="preserve">
+    <value>Είναι σιωπηλός με τους ξένους.</value>
+  </data>
+  <data name="Question_SocialConfidence_09" xml:space="preserve">
+    <value>Μένει στο παρασκήνιο.</value>
+  </data>
+  <data name="Question_Sensitivity_01" xml:space="preserve">
+    <value>Του αρέσει το διάβασμα.</value>
+  </data>
+  <data name="Question_Sensitivity_02" xml:space="preserve">
+    <value>Απολαμβάνει να συζητά για ταινίες και βιβλία.</value>
+  </data>
+  <data name="Question_Sensitivity_03" xml:space="preserve">
+    <value>Διαβάζει πολύ.</value>
+  </data>
+  <data name="Question_Sensitivity_04" xml:space="preserve">
+    <value>Δεν του αρέσουν οι ταινίες δράσης.</value>
+  </data>
+  <data name="Question_Sensitivity_05" xml:space="preserve">
+    <value>Κλαίει στις ταινίες.</value>
+  </data>
+  <data name="Question_Sensitivity_06" xml:space="preserve">
+    <value>Αγαπά τα λουλούδια.</value>
+  </data>
+  <data name="Question_Sensitivity_07" xml:space="preserve">
+    <value>Δεν απολαμβάνει τις παραστάσεις χορού.</value>
+  </data>
+  <data name="Question_Sensitivity_08" xml:space="preserve">
+    <value>Δεν του αρέσει η ποίηση.</value>
+  </data>
+  <data name="Question_Sensitivity_09" xml:space="preserve">
+    <value>Αντιπαθεί τα έργα μυθοπλασίας.</value>
+  </data>
+  <data name="Question_Sensitivity_10" xml:space="preserve">
+    <value>Σπάνια παρατηρεί τις συναισθηματικές του αντιδράσεις.</value>
+  </data>
+  <data name="Question_Distrust_01" xml:space="preserve">
+    <value>Δυσκολεύεται να συγχωρέσει τους άλλους.</value>
+  </data>
+  <data name="Question_Distrust_02" xml:space="preserve">
+    <value>Υποψιάζεται κρυφά κίνητρα στους άλλους.</value>
+  </data>
+  <data name="Question_Distrust_03" xml:space="preserve">
+    <value>Είναι επιφυλακτικός με τους άλλους.</value>
+  </data>
+  <data name="Question_Distrust_04" xml:space="preserve">
+    <value>Δεν εμπιστεύεται τους ανθρώπους.</value>
+  </data>
+  <data name="Question_Distrust_05" xml:space="preserve">
+    <value>Πιστεύει ότι οι άνθρωποι σπάνια λένε την αλήθεια.</value>
+  </data>
+  <data name="Question_Distrust_06" xml:space="preserve">
+    <value>Πιστεύει ότι οι άνθρωποι είναι στην ουσία κακοί.</value>
+  </data>
+  <data name="Question_Distrust_07" xml:space="preserve">
+    <value>Εμπιστεύεται αυτά που λένε οι άνθρωποι.</value>
+  </data>
+  <data name="Question_Distrust_08" xml:space="preserve">
+    <value>Πιστεύει ότι οι άλλοι έχουν καλές προθέσεις.</value>
+  </data>
+  <data name="Question_Distrust_09" xml:space="preserve">
+    <value>Πιστεύει ότι οι άνθρωποι είναι βασικά ηθικοί.</value>
+  </data>
+  <data name="Question_Imagination_01" xml:space="preserve">
+    <value>Κάνει πράγματα που οι άλλοι βρίσκουν παράξενα.</value>
+  </data>
+  <data name="Question_Imagination_02" xml:space="preserve">
+    <value>Του αρέσει να χάνεται στις σκέψεις του.</value>
+  </data>
+  <data name="Question_Imagination_03" xml:space="preserve">
+    <value>Απολαμβάνει τρελά παιχνίδια της φαντασίας.</value>
+  </data>
+  <data name="Question_Imagination_04" xml:space="preserve">
+    <value>Λατρεύει να ονειροπολεί.</value>
+  </data>
+  <data name="Question_Imagination_05" xml:space="preserve">
+    <value>Κολυμπάει κόντρα στο ρεύμα.</value>
+  </data>
+  <data name="Question_Imagination_06" xml:space="preserve">
+    <value>Παίρνει αντισυμβατικές θέσεις.</value>
+  </data>
+  <data name="Question_Imagination_07" xml:space="preserve">
+    <value>Κάνει αναπάντεχα πράγματα.</value>
+  </data>
+  <data name="Question_Imagination_08" xml:space="preserve">
+    <value>Κάνει τα πράγματα βάσει κανόνων.</value>
+  </data>
+  <data name="Question_Imagination_09" xml:space="preserve">
+    <value>Σπάνια ονειροπολεί.</value>
+  </data>
+  <data name="Question_Imagination_10" xml:space="preserve">
+    <value>Σπάνια χάνεται στις σκέψεις του.</value>
+  </data>
+  <data name="Question_Reserve_01" xml:space="preserve">
+    <value>Φανερώνει λίγα για τον εαυτό του.</value>
+  </data>
+  <data name="Question_Reserve_02" xml:space="preserve">
+    <value>Είναι δύσκολο να τον γνωρίσει κανείς.</value>
+  </data>
+  <data name="Question_Reserve_03" xml:space="preserve">
+    <value>Δεν μιλάει πολύ.</value>
+  </data>
+  <data name="Question_Reserve_04" xml:space="preserve">
+    <value>Καταπιέζει τα συναισθήματά του.</value>
+  </data>
+  <data name="Question_Reserve_05" xml:space="preserve">
+    <value>Κρατάει τις σκέψεις για τον εαυτό του.</value>
+  </data>
+  <data name="Question_Reserve_06" xml:space="preserve">
+    <value>Είναι ανοιχτός με τους άλλους.</value>
+  </data>
+  <data name="Question_Reserve_07" xml:space="preserve">
+    <value>Είναι ανοιχτός για τα συναισθήματά του.</value>
+  </data>
+  <data name="Question_Reserve_08" xml:space="preserve">
+    <value>Αποκαλύπτει τις μύχιες σκέψεις του.</value>
+  </data>
+  <data name="Question_Reserve_09" xml:space="preserve">
+    <value>Δείχνει τα συναισθήματά του.</value>
+  </data>
+  <data name="Question_Anxiety_01" xml:space="preserve">
+    <value>Φοβάται ότι θα κάνει το λάθος πράγμα.</value>
+  </data>
+  <data name="Question_Anxiety_02" xml:space="preserve">
+    <value>Νιώθει εύκολα απειλή.</value>
+  </data>
+  <data name="Question_Anxiety_03" xml:space="preserve">
+    <value>Πληγώνεται εύκολα.</value>
+  </data>
+  <data name="Question_Anxiety_04" xml:space="preserve">
+    <value>Ανησυχεί για διάφορα πράγματα.</value>
+  </data>
+  <data name="Question_Anxiety_05" xml:space="preserve">
+    <value>Αναλογίζεται τα λάθη του παρελθόντος.</value>
+  </data>
+  <data name="Question_Anxiety_06" xml:space="preserve">
+    <value>Νιώθει ενοχές όταν λέει όχι.</value>
+  </data>
+  <data name="Question_Anxiety_07" xml:space="preserve">
+    <value>Καταρρέει στις αναποδιές.</value>
+  </data>
+  <data name="Question_Anxiety_08" xml:space="preserve">
+    <value>Δεν ανησυχεί για όσα έχουν συμβεί.</value>
+  </data>
+  <data name="Question_Anxiety_09" xml:space="preserve">
+    <value>Δεν ενοχλείται εύκολα.</value>
+  </data>
+  <data name="Question_Anxiety_10" xml:space="preserve">
+    <value>Δεν αφήνει τους άλλους να τον αποθαρρύνουν.</value>
+  </data>
+  <data name="Question_Complexity_01" xml:space="preserve">
+    <value>Πιστεύει στη σημασία της τέχνης.</value>
+  </data>
+  <data name="Question_Complexity_02" xml:space="preserve">
+    <value>Λατρεύει να βρίσκει νέους τρόπους.</value>
+  </data>
+  <data name="Question_Complexity_03" xml:space="preserve">
+    <value>Απολαμβάνει να ακούει νέες ιδέες.</value>
+  </data>
+  <data name="Question_Complexity_04" xml:space="preserve">
+    <value>Ανυψώνει τη συζήτηση.</value>
+  </data>
+  <data name="Question_Complexity_05" xml:space="preserve">
+    <value>Προτιμά την ποικιλία από τη ρουτίνα.</value>
+  </data>
+  <data name="Question_Complexity_06" xml:space="preserve">
+    <value>Αποφεύγει τις φιλοσοφικές συζητήσεις.</value>
+  </data>
+  <data name="Question_Complexity_07" xml:space="preserve">
+    <value>Σπάνια αναζητά βαθύτερο νόημα.</value>
+  </data>
+  <data name="Question_Complexity_08" xml:space="preserve">
+    <value>Δεν ενδιαφέρεται για τις θεωρίες.</value>
+  </data>
+  <data name="Question_Complexity_09" xml:space="preserve">
+    <value>Δεν ενδιαφέρεται για αφηρημένες ιδέες.</value>
+  </data>
+  <data name="Question_Complexity_10" xml:space="preserve">
+    <value>Αποφεύγει τους περίπλοκους ανθρώπους.</value>
+  </data>
+  <data name="Question_Introversion_01" xml:space="preserve">
+    <value>Θέλει να τον αφήνουν ήσυχο.</value>
+  </data>
+  <data name="Question_Introversion_02" xml:space="preserve">
+    <value>Προτιμά να κάνει τα πράγματα μόνος του.</value>
+  </data>
+  <data name="Question_Introversion_03" xml:space="preserve">
+    <value>Απολαμβάνει να περνάει χρόνο μόνος του.</value>
+  </data>
+  <data name="Question_Introversion_04" xml:space="preserve">
+    <value>Αναζητά την ησυχία.</value>
+  </data>
+  <data name="Question_Introversion_05" xml:space="preserve">
+    <value>Δεν τον πειράζει να τρώει μόνος του.</value>
+  </data>
+  <data name="Question_Introversion_06" xml:space="preserve">
+    <value>Απολαμβάνει τη σιωπή.</value>
+  </data>
+  <data name="Question_Introversion_07" xml:space="preserve">
+    <value>Απολαμβάνει την ιδιωτικότητά του.</value>
+  </data>
+  <data name="Question_Introversion_08" xml:space="preserve">
+    <value>Απολαμβάνει να είναι μέρος μιας ομάδας.</value>
+  </data>
+  <data name="Question_Introversion_09" xml:space="preserve">
+    <value>Απολαμβάνει την ομαδική εργασία.</value>
+  </data>
+  <data name="Question_Introversion_10" xml:space="preserve">
+    <value>Δεν μπορεί χωρίς την παρέα των άλλων.</value>
+  </data>
+  <data name="Question_Orderliness_01" xml:space="preserve">
+    <value>Θέλει τα πάντα στην εντέλεια.</value>
+  </data>
+  <data name="Question_Orderliness_02" xml:space="preserve">
+    <value>Τελειώνει τις δουλειές του αμέσως.</value>
+  </data>
+  <data name="Question_Orderliness_03" xml:space="preserve">
+    <value>Του αρέσει η τάξη.</value>
+  </data>
+  <data name="Question_Orderliness_04" xml:space="preserve">
+    <value>Συνεχίζει μέχρι τα πάντα να είναι τέλεια.</value>
+  </data>
+  <data name="Question_Orderliness_05" xml:space="preserve">
+    <value>Είναι σχολαστικός στη δουλειά του.</value>
+  </data>
+  <data name="Question_Orderliness_06" xml:space="preserve">
+    <value>Δεν τον ενοχλούν οι ακατάστατοι.</value>
+  </data>
+  <data name="Question_Orderliness_07" xml:space="preserve">
+    <value>Δεν τον ενοχλεί η αταξία.</value>
+  </data>
+  <data name="Question_Orderliness_08" xml:space="preserve">
+    <value>Αφήνει το δωμάτιό του ακατάστατο.</value>
+  </data>
+  <data name="Question_Orderliness_09" xml:space="preserve">
+    <value>Παρατάει τα πράγματά του παντού.</value>
+  </data>
+  <data name="Question_Orderliness_10" xml:space="preserve">
+    <value>Αναβάλλει τις δυσάρεστες δουλειές.</value>
+  </data>
+  <data name="Question_Emotionality_01" xml:space="preserve">
+    <value>Εκνευρίζεται εύκολα.</value>
+  </data>
+  <data name="Question_Emotionality_02" xml:space="preserve">
+    <value>Θυμώνει εύκολα.</value>
+  </data>
+  <data name="Question_Emotionality_03" xml:space="preserve">
+    <value>Κρίνει γρήγορα τους άλλους.</value>
+  </data>
+  <data name="Question_Emotionality_04" xml:space="preserve">
+    <value>Ενοχλείται από τα λάθη των άλλων.</value>
+  </data>
+  <data name="Question_Emotionality_05" xml:space="preserve">
+    <value>Αναστατώνεται εύκολα.</value>
+  </data>
+  <data name="Question_Emotionality_06" xml:space="preserve">
+    <value>Δεν αντέχει να τον αντιλέγουν.</value>
+  </data>
+  <data name="Question_Emotionality_07" xml:space="preserve">
+    <value>Κρίνει τους ανθρώπους από την εμφάνιση.</value>
+  </data>
+  <data name="Question_Emotionality_08" xml:space="preserve">
+    <value>Δεν εκνευρίζεται εύκολα.</value>
+  </data>
+  <data name="Question_Emotionality_09" xml:space="preserve">
+    <value>Προσπαθεί να συγχωρεί και να ξεχνά.</value>
+  </data>
+  <data name="Question_Emotionality_10" xml:space="preserve">
+    <value>Έχει έναν καλό λόγο για όλους.</value>
+  </data>
+  <data name="Questionnaire_Label_SD" xml:space="preserve">
+    <value>ΔΑ</value>
+  </data>
+  <data name="Questionnaire_Label_D" xml:space="preserve">
+    <value>Δ</value>
+  </data>
+  <data name="Questionnaire_Label_N" xml:space="preserve">
+    <value>Ο</value>
+  </data>
+  <data name="Questionnaire_Label_A" xml:space="preserve">
+    <value>Σ</value>
+  </data>
+  <data name="Questionnaire_Label_SA" xml:space="preserve">
+    <value>ΣΑ</value>
+  </data>
+  <data name="Questionnaire_Tooltip_SD" xml:space="preserve">
+    <value>Διαφωνώ απόλυτα</value>
+  </data>
+  <data name="Questionnaire_Tooltip_D" xml:space="preserve">
+    <value>Διαφωνώ</value>
+  </data>
+  <data name="Questionnaire_Tooltip_N" xml:space="preserve">
+    <value>Ούτε συμφωνώ, ούτε διαφωνώ</value>
+  </data>
+  <data name="Questionnaire_Tooltip_A" xml:space="preserve">
+    <value>Συμφωνώ</value>
+  </data>
+  <data name="Questionnaire_Tooltip_SA" xml:space="preserve">
+    <value>Συμφωνώ απόλυτα</value>
+  </data>
 </root>

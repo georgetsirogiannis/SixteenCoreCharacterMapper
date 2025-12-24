@@ -309,4 +309,499 @@
   <data name="Trait_Emotionality_High" xml:space="preserve">
     <value>gespannen, ongeduldig, snel geïrriteerd, wordt snel boos, gefrustreerd, geïrriteerd door fouten van anderen</value>
   </data>
+  <data name="Question_Warmth_01" xml:space="preserve">
+    <value>Weet hoe anderen te troosten.</value>
+  </data>
+  <data name="Question_Warmth_02" xml:space="preserve">
+    <value>Geniet ervan om mensen bij elkaar te brengen.</value>
+  </data>
+  <data name="Question_Warmth_03" xml:space="preserve">
+    <value>Voelt de emoties van anderen aan.</value>
+  </data>
+  <data name="Question_Warmth_04" xml:space="preserve">
+    <value>Toont interesse in het leven van anderen.</value>
+  </data>
+  <data name="Question_Warmth_05" xml:space="preserve">
+    <value>Vrolijkt mensen op.</value>
+  </data>
+  <data name="Question_Warmth_06" xml:space="preserve">
+    <value>Stelt mensen op hun gemak.</value>
+  </data>
+  <data name="Question_Warmth_07" xml:space="preserve">
+    <value>Neemt de tijd voor anderen.</value>
+  </data>
+  <data name="Question_Warmth_08" xml:space="preserve">
+    <value>Houdt er niet van om betrokken te raken bij andermans problemen.</value>
+  </data>
+  <data name="Question_Warmth_09" xml:space="preserve">
+    <value>Probeert niet aan behoeftigen te denken.</value>
+  </data>
+  <data name="Question_Intellect_01" xml:space="preserve">
+    <value>Maakt scherpzinnige opmerkingen.</value>
+  </data>
+  <data name="Question_Intellect_02" xml:space="preserve">
+    <value>Weet de antwoorden op veel vragen.</value>
+  </data>
+  <data name="Question_Intellect_03" xml:space="preserve">
+    <value>Neigt ertoe om zaken te analyseren.</value>
+  </data>
+  <data name="Question_Intellect_04" xml:space="preserve">
+    <value>Gebruikt het verstand.</value>
+  </data>
+  <data name="Question_Intellect_05" xml:space="preserve">
+    <value>Leert snel.</value>
+  </data>
+  <data name="Question_Intellect_06" xml:space="preserve">
+    <value>Weerlegt andermans argumenten.</value>
+  </data>
+  <data name="Question_Intellect_07" xml:space="preserve">
+    <value>Denkt na voordat hij/zij handelt.</value>
+  </data>
+  <data name="Question_Intellect_08" xml:space="preserve">
+    <value>Weegt de voor- en nadelen af.</value>
+  </data>
+  <data name="Question_Intellect_09" xml:space="preserve">
+    <value>Beschouwt zichzelf als een gemiddeld persoon.</value>
+  </data>
+  <data name="Question_Intellect_10" xml:space="preserve">
+    <value>Is snel in de war.</value>
+  </data>
+  <data name="Question_Intellect_11" xml:space="preserve">
+    <value>Weet dat hij/zij geen bijzonder persoon is.</value>
+  </data>
+  <data name="Question_Intellect_12" xml:space="preserve">
+    <value>Heeft een beperkte woordenschat.</value>
+  </data>
+  <data name="Question_Intellect_13" xml:space="preserve">
+    <value>Slaat moeilijke woorden over tijdens het lezen.</value>
+  </data>
+  <data name="Question_EmotionalStability_01" xml:space="preserve">
+    <value>Voelt zich zelden somber.</value>
+  </data>
+  <data name="Question_EmotionalStability_02" xml:space="preserve">
+    <value>Voelt zich op zijn gemak met zichzelf.</value>
+  </data>
+  <data name="Question_EmotionalStability_03" xml:space="preserve">
+    <value>Overwint tegenslagen gemakkelijk.</value>
+  </data>
+  <data name="Question_EmotionalStability_04" xml:space="preserve">
+    <value>Is meestal ontspannen.</value>
+  </data>
+  <data name="Question_EmotionalStability_05" xml:space="preserve">
+    <value>Raakt niet snel gefrustreerd of ontmoedigd.</value>
+  </data>
+  <data name="Question_EmotionalStability_06" xml:space="preserve">
+    <value>Heeft vaak stemmingswisselingen.</value>
+  </data>
+  <data name="Question_EmotionalStability_07" xml:space="preserve">
+    <value>Houdt niet van zichzelf.</value>
+  </data>
+  <data name="Question_EmotionalStability_08" xml:space="preserve">
+    <value>Voelt zich wanhopig.</value>
+  </data>
+  <data name="Question_Assertiveness_01" xml:space="preserve">
+    <value>Neemt de leiding.</value>
+  </data>
+  <data name="Question_Assertiveness_02" xml:space="preserve">
+    <value>Wil de leiding hebben.</value>
+  </data>
+  <data name="Question_Assertiveness_03" xml:space="preserve">
+    <value>Zegt wat hij/zij denkt.</value>
+  </data>
+  <data name="Question_Assertiveness_04" xml:space="preserve">
+    <value>Is niet bang om kritiek te geven.</value>
+  </data>
+  <data name="Question_Assertiveness_05" xml:space="preserve">
+    <value>Neemt de controle over de zaken.</value>
+  </data>
+  <data name="Question_Assertiveness_06" xml:space="preserve">
+    <value>Kan krachtige maatregelen nemen.</value>
+  </data>
+  <data name="Question_Assertiveness_07" xml:space="preserve">
+    <value>Wacht tot anderen de weg wijzen.</value>
+  </data>
+  <data name="Question_Assertiveness_08" xml:space="preserve">
+    <value>Daagt nooit iets uit.</value>
+  </data>
+  <data name="Question_Assertiveness_09" xml:space="preserve">
+    <value>Laat anderen de beslissingen nemen.</value>
+  </data>
+  <data name="Question_Assertiveness_10" xml:space="preserve">
+    <value>Allows others to push them around.</value>
+  </data>
+  <data name="Question_Gregariousness_01" xml:space="preserve">
+    <value>Is de gangmaker op elk feestje.</value>
+  </data>
+  <data name="Question_Gregariousness_02" xml:space="preserve">
+    <value>Houdt van grote feesten en drukke evenementen.</value>
+  </data>
+  <data name="Question_Gregariousness_03" xml:space="preserve">
+    <value>Maakt veel grapjes.</value>
+  </data>
+  <data name="Question_Gregariousness_04" xml:space="preserve">
+    <value>Geniet ervan om deel uit te maken van een menigte.</value>
+  </data>
+  <data name="Question_Gregariousness_05" xml:space="preserve">
+    <value>Amuseert zijn/haar vrienden.</value>
+  </data>
+  <data name="Question_Gregariousness_06" xml:space="preserve">
+    <value>Doet wild en gek.</value>
+  </data>
+  <data name="Question_Gregariousness_07" xml:space="preserve">
+    <value>Lacht als laatste om een grapje.</value>
+  </data>
+  <data name="Question_Gregariousness_08" xml:space="preserve">
+    <value>Houdt niet van harde muziek.</value>
+  </data>
+  <data name="Question_Dutifulness_01" xml:space="preserve">
+    <value>Vindt dat wetten strikt gehandhaafd moeten worden.</value>
+  </data>
+  <data name="Question_Dutifulness_02" xml:space="preserve">
+    <value>Probeert de regels te volgen.</value>
+  </data>
+  <data name="Question_Dutifulness_03" xml:space="preserve">
+    <value>Gelooft in één ware religie.</value>
+  </data>
+  <data name="Question_Dutifulness_04" xml:space="preserve">
+    <value>Respecteert autoriteit.</value>
+  </data>
+  <data name="Question_Dutifulness_05" xml:space="preserve">
+    <value>Staat graag tijdens het volkslied.</value>
+  </data>
+  <data name="Question_Dutifulness_06" xml:space="preserve">
+    <value>Verzet zich tegen gezag.</value>
+  </data>
+  <data name="Question_Dutifulness_07" xml:space="preserve">
+    <value>Breekt de regels.</value>
+  </data>
+  <data name="Question_Dutifulness_08" xml:space="preserve">
+    <value>Vloekt.</value>
+  </data>
+  <data name="Question_Dutifulness_09" xml:space="preserve">
+    <value>Is tegen autoriteit.</value>
+  </data>
+  <data name="Question_Dutifulness_10" xml:space="preserve">
+    <value>Weet hoe de regels te omzeilen.</value>
+  </data>
+  <data name="Question_SocialConfidence_01" xml:space="preserve">
+    <value>Voelt zich op zijn gemak bij mensen.</value>
+  </data>
+  <data name="Question_SocialConfidence_02" xml:space="preserve">
+    <value>Praat met veel mensen op feestjes.</value>
+  </data>
+  <data name="Question_SocialConfidence_03" xml:space="preserve">
+    <value>Vindt het niet erg om in de belangstelling te staan.</value>
+  </data>
+  <data name="Question_SocialConfidence_04" xml:space="preserve">
+    <value>Maakt gemakkelijk vrienden.</value>
+  </data>
+  <data name="Question_SocialConfidence_05" xml:space="preserve">
+    <value>Knoopt gesprekken aan.</value>
+  </data>
+  <data name="Question_SocialConfidence_06" xml:space="preserve">
+    <value>Vindt het moeilijk om anderen te benaderen.</value>
+  </data>
+  <data name="Question_SocialConfidence_07" xml:space="preserve">
+    <value>Heeft weinig te zeggen.</value>
+  </data>
+  <data name="Question_SocialConfidence_08" xml:space="preserve">
+    <value>Is stil bij vreemden.</value>
+  </data>
+  <data name="Question_SocialConfidence_09" xml:space="preserve">
+    <value>Blijft op de achtergrond.</value>
+  </data>
+  <data name="Question_Sensitivity_01" xml:space="preserve">
+    <value>Leest graag.</value>
+  </data>
+  <data name="Question_Sensitivity_02" xml:space="preserve">
+    <value>Bespreekt graag films en boeken.</value>
+  </data>
+  <data name="Question_Sensitivity_03" xml:space="preserve">
+    <value>Leest veel.</value>
+  </data>
+  <data name="Question_Sensitivity_04" xml:space="preserve">
+    <value>Doesn't like action movies.</value>
+  </data>
+  <data name="Question_Sensitivity_05" xml:space="preserve">
+    <value>Huilt bij films.</value>
+  </data>
+  <data name="Question_Sensitivity_06" xml:space="preserve">
+    <value>Houdt van bloemen.</value>
+  </data>
+  <data name="Question_Sensitivity_07" xml:space="preserve">
+    <value>Kijkt niet graag naar dans.</value>
+  </data>
+  <data name="Question_Sensitivity_08" xml:space="preserve">
+    <value>Houdt niet van poëzie.</value>
+  </data>
+  <data name="Question_Sensitivity_09" xml:space="preserve">
+    <value>Houdt niet van fictie.</value>
+  </data>
+  <data name="Question_Sensitivity_10" xml:space="preserve">
+    <value>Merkt eigen emoties zelden op.</value>
+  </data>
+  <data name="Question_Distrust_01" xml:space="preserve">
+    <value>Vindt het moeilijk anderen te vergeven.</value>
+  </data>
+  <data name="Question_Distrust_02" xml:space="preserve">
+    <value>Vermoedt verborgen motieven.</value>
+  </data>
+  <data name="Question_Distrust_03" xml:space="preserve">
+    <value>Is op zijn hoede voor anderen.</value>
+  </data>
+  <data name="Question_Distrust_04" xml:space="preserve">
+    <value>Wantrouwt mensen.</value>
+  </data>
+  <data name="Question_Distrust_05" xml:space="preserve">
+    <value>Gelooft dat mensen zelden de waarheid vertellen.</value>
+  </data>
+  <data name="Question_Distrust_06" xml:space="preserve">
+    <value>Gelooft dat mensen slecht zijn.</value>
+  </data>
+  <data name="Question_Distrust_07" xml:space="preserve">
+    <value>Vertrouwt op wat mensen zeggen.</value>
+  </data>
+  <data name="Question_Distrust_08" xml:space="preserve">
+    <value>Gelooft dat anderen het goed bedoelen.</value>
+  </data>
+  <data name="Question_Distrust_09" xml:space="preserve">
+    <value>Believes that people are basically moral.</value>
+  </data>
+  <data name="Question_Imagination_01" xml:space="preserve">
+    <value>Doet dingen die anderen vreemd vinden.</value>
+  </data>
+  <data name="Question_Imagination_02" xml:space="preserve">
+    <value>Verliest zich graag in gedachten.</value>
+  </data>
+  <data name="Question_Imagination_03" xml:space="preserve">
+    <value>Geniet van fantasieën.</value>
+  </data>
+  <data name="Question_Imagination_04" xml:space="preserve">
+    <value>Houdt van dagdromen.</value>
+  </data>
+  <data name="Question_Imagination_05" xml:space="preserve">
+    <value>Zwemt tegen de stroom in.</value>
+  </data>
+  <data name="Question_Imagination_06" xml:space="preserve">
+    <value>Neemt afwijkende standpunten in.</value>
+  </data>
+  <data name="Question_Imagination_07" xml:space="preserve">
+    <value>Doet onverwachte dingen.</value>
+  </data>
+  <data name="Question_Imagination_08" xml:space="preserve">
+    <value>Doet de dingen volgens het boekje.</value>
+  </data>
+  <data name="Question_Imagination_09" xml:space="preserve">
+    <value>Dagdroomt zelden.</value>
+  </data>
+  <data name="Question_Imagination_10" xml:space="preserve">
+    <value>Verliest zich zelden in gedachten.</value>
+  </data>
+  <data name="Question_Reserve_01" xml:space="preserve">
+    <value>Onthult weinig over zichzelf.</value>
+  </data>
+  <data name="Question_Reserve_02" xml:space="preserve">
+    <value>Is moeilijk te leren kennen.</value>
+  </data>
+  <data name="Question_Reserve_03" xml:space="preserve">
+    <value>Praat niet veel.</value>
+  </data>
+  <data name="Question_Reserve_04" xml:space="preserve">
+    <value>Kropt gevoelens op.</value>
+  </data>
+  <data name="Question_Reserve_05" xml:space="preserve">
+    <value>Houdt gedachten voor zich.</value>
+  </data>
+  <data name="Question_Reserve_06" xml:space="preserve">
+    <value>Is open over zichzelf.</value>
+  </data>
+  <data name="Question_Reserve_07" xml:space="preserve">
+    <value>Is open over zijn/haar gevoelens.</value>
+  </data>
+  <data name="Question_Reserve_08" xml:space="preserve">
+    <value>Deelt zijn/haar intieme gedachten.</value>
+  </data>
+  <data name="Question_Reserve_09" xml:space="preserve">
+    <value>Toont zijn/haar gevoelens.</value>
+  </data>
+  <data name="Question_Anxiety_01" xml:space="preserve">
+    <value>Is bang fouten te maken.</value>
+  </data>
+  <data name="Question_Anxiety_02" xml:space="preserve">
+    <value>Voelt zich snel bedreigd.</value>
+  </data>
+  <data name="Question_Anxiety_03" xml:space="preserve">
+    <value>Is snel gekwetst.</value>
+  </data>
+  <data name="Question_Anxiety_04" xml:space="preserve">
+    <value>Maakt zich overal zorgen om.</value>
+  </data>
+  <data name="Question_Anxiety_05" xml:space="preserve">
+    <value>Piekert over fouten uit het verleden.</value>
+  </data>
+  <data name="Question_Anxiety_06" xml:space="preserve">
+    <value>Voelt zich schuldig bij nee.</value>
+  </data>
+  <data name="Question_Anxiety_07" xml:space="preserve">
+    <value>Is gebroken door tegenslag.</value>
+  </data>
+  <data name="Question_Anxiety_08" xml:space="preserve">
+    <value>Maakt zich geen zorgen over vroeger.</value>
+  </data>
+  <data name="Question_Anxiety_09" xml:space="preserve">
+    <value>Is niet snel van stuk.</value>
+  </data>
+  <data name="Question_Anxiety_10" xml:space="preserve">
+    <value>Laat zich niet ontmoedigen.</value>
+  </data>
+  <data name="Question_Complexity_01" xml:space="preserve">
+    <value>Gelooft in het belang van kunst.</value>
+  </data>
+  <data name="Question_Complexity_02" xml:space="preserve">
+    <value>Bedenkt graag nieuwe manieren.</value>
+  </data>
+  <data name="Question_Complexity_03" xml:space="preserve">
+    <value>Houdt van nieuwe ideeën.</value>
+  </data>
+  <data name="Question_Complexity_04" xml:space="preserve">
+    <value>Brengt het gesprek naar een hoger niveau.</value>
+  </data>
+  <data name="Question_Complexity_05" xml:space="preserve">
+    <value>Geeft de voorkeur aan variatie.</value>
+  </data>
+  <data name="Question_Complexity_06" xml:space="preserve">
+    <value>Vermijdt filosofische discussies.</value>
+  </data>
+  <data name="Question_Complexity_07" xml:space="preserve">
+    <value>Zoekt zelden naar diepgang.</value>
+  </data>
+  <data name="Question_Complexity_08" xml:space="preserve">
+    <value>Is niet theoretisch ingesteld.</value>
+  </data>
+  <data name="Question_Complexity_09" xml:space="preserve">
+    <value>Is not interested in abstract ideas.</value>
+  </data>
+  <data name="Question_Complexity_10" xml:space="preserve">
+    <value>Vermijdt complexe mensen.</value>
+  </data>
+  <data name="Question_Introversion_01" xml:space="preserve">
+    <value>Wil met rust gelaten worden.</value>
+  </data>
+  <data name="Question_Introversion_02" xml:space="preserve">
+    <value>Doet de dingen liever alleen.</value>
+  </data>
+  <data name="Question_Introversion_03" xml:space="preserve">
+    <value>Geniet van tijd voor zichzelf.</value>
+  </data>
+  <data name="Question_Introversion_04" xml:space="preserve">
+    <value>Zoekt de stilte op.</value>
+  </data>
+  <data name="Question_Introversion_05" xml:space="preserve">
+    <value>Vindt het niet erg om alleen te eten.</value>
+  </data>
+  <data name="Question_Introversion_06" xml:space="preserve">
+    <value>Geniet van stilte.</value>
+  </data>
+  <data name="Question_Introversion_07" xml:space="preserve">
+    <value>Hecht aan zijn/haar privacy.</value>
+  </data>
+  <data name="Question_Introversion_08" xml:space="preserve">
+    <value>Enjoys being part of a group.</value>
+  </data>
+  <data name="Question_Introversion_09" xml:space="preserve">
+    <value>Geniet van teamwerk.</value>
+  </data>
+  <data name="Question_Introversion_10" xml:space="preserve">
+    <value>Kan niet zonder gezelschap.</value>
+  </data>
+  <data name="Question_Orderliness_01" xml:space="preserve">
+    <value>Wil alles perfect hebben.</value>
+  </data>
+  <data name="Question_Orderliness_02" xml:space="preserve">
+    <value>Doet klusjes meteen.</value>
+  </data>
+  <data name="Question_Orderliness_03" xml:space="preserve">
+    <value>Houdt van orde.</value>
+  </data>
+  <data name="Question_Orderliness_04" xml:space="preserve">
+    <value>Gaat door tot het perfect is.</value>
+  </data>
+  <data name="Question_Orderliness_05" xml:space="preserve">
+    <value>Is veeleisend in zijn/haar werk.</value>
+  </data>
+  <data name="Question_Orderliness_06" xml:space="preserve">
+    <value>Stoort zich niet aan rommel.</value>
+  </data>
+  <data name="Question_Orderliness_07" xml:space="preserve">
+    <value>Stoort zich niet aan wanorde.</value>
+  </data>
+  <data name="Question_Orderliness_08" xml:space="preserve">
+    <value>Maakt een rommel van zijn/haar kamer.</value>
+  </data>
+  <data name="Question_Orderliness_09" xml:space="preserve">
+    <value>Laat spullen rondslingeren.</value>
+  </data>
+  <data name="Question_Orderliness_10" xml:space="preserve">
+    <value>Stelt nare taken uit.</value>
+  </data>
+  <data name="Question_Emotionality_01" xml:space="preserve">
+    <value>Is snel geïrriteerd.</value>
+  </data>
+  <data name="Question_Emotionality_02" xml:space="preserve">
+    <value>Wordt snel boos.</value>
+  </data>
+  <data name="Question_Emotionality_03" xml:space="preserve">
+    <value>Oordeelt snel over anderen.</value>
+  </data>
+  <data name="Question_Emotionality_04" xml:space="preserve">
+    <value>Ergert zich aan andermans fouten.</value>
+  </data>
+  <data name="Question_Emotionality_05" xml:space="preserve">
+    <value>Is snel uit zijn/haar humeur.</value>
+  </data>
+  <data name="Question_Emotionality_06" xml:space="preserve">
+    <value>Kan niet tegen tegenspraak.</value>
+  </data>
+  <data name="Question_Emotionality_07" xml:space="preserve">
+    <value>Beoordeelt op uiterlijk.</value>
+  </data>
+  <data name="Question_Emotionality_08" xml:space="preserve">
+    <value>Is niet snel geërgerd.</value>
+  </data>
+  <data name="Question_Emotionality_09" xml:space="preserve">
+    <value>Probeert te vergeven en vergeten.</value>
+  </data>
+  <data name="Question_Emotionality_10" xml:space="preserve">
+    <value>Heeft voor iedereen een goed woordje.</value>
+  </data>
+  <data name="Questionnaire_Label_SD" xml:space="preserve">
+    <value>HO</value>
+  </data>
+  <data name="Questionnaire_Label_D" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="Questionnaire_Label_N" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="Questionnaire_Label_A" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="Questionnaire_Label_SA" xml:space="preserve">
+    <value>HE</value>
+  </data>
+  <data name="Questionnaire_Tooltip_SD" xml:space="preserve">
+    <value>Helemaal mee oneens</value>
+  </data>
+  <data name="Questionnaire_Tooltip_D" xml:space="preserve">
+    <value>Mee oneens</value>
+  </data>
+  <data name="Questionnaire_Tooltip_N" xml:space="preserve">
+    <value>Niet mee eens, niet mee oneens</value>
+  </data>
+  <data name="Questionnaire_Tooltip_A" xml:space="preserve">
+    <value>Mee eens</value>
+  </data>
+  <data name="Questionnaire_Tooltip_SA" xml:space="preserve">
+    <value>Helemaal mee eens</value>
+  </data>
 </root>

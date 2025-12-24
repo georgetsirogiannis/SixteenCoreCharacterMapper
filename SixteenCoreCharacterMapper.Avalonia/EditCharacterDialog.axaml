@@ -9,7 +9,8 @@
         x:Class="SixteenCoreCharacterMapper.Avalonia.EditCharacterDialog"
         x:CompileBindings="False"
         Title="Edit Character" Width="350" SizeToContent="Height"
-        WindowStartupLocation="CenterOwner" CanResize="False">
+        WindowStartupLocation="CenterOwner" CanResize="False"
+        Icon="/Assets/16Core logo icon v2.png">
 
     <Window.Resources>
         <local:ColorToBooleanConverter x:Key="ColorToBoolConverter"/>
@@ -73,9 +74,13 @@
             <RadioButton x:Name="BackgroundRadioButton" Content="Background" FontSize="12" GroupName="CharacterType" Margin="10,0"/>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="OkButton" Content="OK" FontSize="12" Width="60" Margin="5,15,5,5" Click="Ok_Click" IsDefault="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Button x:Name="CancelButton" Content="Cancel" FontSize="12"  Width="60" Margin="5,15,5,5" Click="Cancel_Click" IsCancel="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        </StackPanel>
+        <Grid Margin="0,15,0,5">
+            <Button Content="{Binding QuestionnaireButtonText}" HorizontalAlignment="Left" Click="Questionnaire_Click" VerticalAlignment="Center"/>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button x:Name="OkButton" Content="OK" FontSize="12" Width="60" Margin="5,0,5,0" Click="Ok_Click" IsDefault="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Button x:Name="CancelButton" Content="Cancel" FontSize="12"  Width="60" Margin="5,0,5,0" Click="Cancel_Click" IsCancel="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            </StackPanel>
+        </Grid>
     </StackPanel>
 </Window>

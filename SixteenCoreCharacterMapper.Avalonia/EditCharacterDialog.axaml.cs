@@ -4,8 +4,10 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using SixteenCoreCharacterMapper.Core.Models;
+using SixteenCoreCharacterMapper.Core.Services;
 using SixteenCoreCharacterMapper.Core.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace SixteenCoreCharacterMapper.Avalonia
 {
@@ -13,6 +15,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
     {
         public Character? Character { get; private set; }
         private EditCharacterViewModel? _viewModel;
+        private bool _isDarkMode;
 
         public EditCharacterDialog()
         {
@@ -21,6 +24,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
 
         public EditCharacterDialog(bool isDarkMode) : this()
         {
+            _isDarkMode = isDarkMode;
             Character = new Character();
             _viewModel = new EditCharacterViewModel(Character);
             DataContext = _viewModel;
@@ -32,6 +36,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
 
         public EditCharacterDialog(Character existing, bool isDarkMode) : this()
         {
+            _isDarkMode = isDarkMode;
             Character = existing;
             _viewModel = new EditCharacterViewModel(Character);
             DataContext = _viewModel;
@@ -146,6 +151,52 @@ namespace SixteenCoreCharacterMapper.Avalonia
                 {
                     colorPicker.SelectedColor = color;
                 }
+            }
+        }
+
+        private async void Questionnaire_Click(object? sender, RoutedEventArgs e)
+        {
+            if (Character != null && Character.TraitPositions.Count > 0)
+            {
+                var msgBox = new SimpleMessageBox(
+                    "Only the traits you answer for will be recalculated. All other manual positions will remain unchanged. Continue?", 
+                    "Warning", 
+                    SimpleMessageBox.MessageBoxButtons.YesNo);
+                
+                await msgBox.ShowDialog(this);
+                
+                if (msgBox.Result != Core.Services.DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
+            var service = new QuestionnaireService();
+            var vm = new QuestionnaireViewModel(service, Character?.QuestionnaireAnswers, Character?.QuestionnaireExclusions);
+            var window = new QuestionnaireWindow(_isDarkMode)
+            {
+                DataContext = vm
+            };
+            
+            var result = await window.ShowDialog<(Dictionary<string, double>? Scores, Dictionary<string, int>? Answers, List<string>? Exclusions)>(this);
+            
+            if (result.Scores != null && Character != null)
+            {
+                 foreach (var kvp in result.Scores)
+                {
+                    Character.TraitPositions[kvp.Key] = kvp.Value;
+                }
+            }
+
+            if (result.Answers != null && Character != null)
+            {
+                Character.QuestionnaireAnswers = result.Answers;
+                _viewModel?.UpdateQuestionnaireStatus();
+            }
+
+            if (result.Exclusions != null && Character != null)
+            {
+                Character.QuestionnaireExclusions = result.Exclusions;
             }
         }
 

@@ -52,7 +52,8 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
         [ObservableProperty]
         private bool _hasCharacters;
 
-        public event Action? RedrawTraitsRequested;
+        public event Action? RebuildTraitsRequested;
+        public event Action? RefreshBubblesRequested;
         public event Action? ApplyThemeRequested;
         public event Action<Character>? CharacterAdded;
         public event Action? RefreshCharacterListRequested;
@@ -149,7 +150,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
         {
             _localizationService.SetCulture(languageCode);
             OnPropertyChanged(string.Empty);
-            RedrawTraitsRequested?.Invoke();
+            RebuildTraitsRequested?.Invoke();
 
             var match = AvailableLanguages.FirstOrDefault(l => l.Code == languageCode);
             if (match != null && !Equals(SelectedLanguage, match))
@@ -191,7 +192,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                 SetDirty(false);
                 UpdateHasNotes();
                 UpdateHasCharacters();
-                RedrawTraitsRequested?.Invoke();
+                RebuildTraitsRequested?.Invoke();
                 RefreshCharacterListRequested?.Invoke();
             }
         }
@@ -212,7 +213,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                         UpdateHasNotes();
                         UpdateHasCharacters();
                         OnPropertyChanged(nameof(ProjectName));
-                        RedrawTraitsRequested?.Invoke();
+                        RebuildTraitsRequested?.Invoke();
                         RefreshCharacterListRequested?.Invoke();
 
                         if (!string.IsNullOrEmpty(Project.SelectedLanguage))
@@ -286,7 +287,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                 Project.Characters.Add(newCharacter);
                 SetDirty(true);
                 UpdateHasCharacters();
-                RedrawTraitsRequested?.Invoke();
+                RefreshBubblesRequested?.Invoke();
                 RefreshCharacterListRequested?.Invoke();
                 CharacterAdded?.Invoke(newCharacter);
             }
@@ -300,7 +301,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
             if (updatedCharacter != null)
             {
                 SetDirty(true);
-                RedrawTraitsRequested?.Invoke();
+                RefreshBubblesRequested?.Invoke();
                 RefreshCharacterListRequested?.Invoke();
             }
         }
@@ -315,7 +316,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                 Project.Characters.Remove(SelectedCharacter);
                 SetDirty(true);
                 UpdateHasCharacters();
-                RedrawTraitsRequested?.Invoke();
+                RefreshBubblesRequested?.Invoke();
                 RefreshCharacterListRequested?.Invoke();
             }
         }
@@ -333,7 +334,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
             {
                 character.IsLocked = !character.IsLocked;
                 SetDirty(true);
-                RedrawTraitsRequested?.Invoke();
+                RefreshBubblesRequested?.Invoke();
             }
         }
 
@@ -344,7 +345,7 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
             {
                 character.IsVisible = !character.IsVisible;
                 SetDirty(true);
-                RedrawTraitsRequested?.Invoke();
+                RefreshBubblesRequested?.Invoke();
             }
         }
 

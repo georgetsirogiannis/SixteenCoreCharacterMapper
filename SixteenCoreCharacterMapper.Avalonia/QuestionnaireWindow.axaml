@@ -1,0 +1,151 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:SixteenCoreCharacterMapper.Core.ViewModels"
+        xmlns:local="using:SixteenCoreCharacterMapper.Avalonia"
+        xmlns:p="clr-namespace:SixteenCoreCharacterMapper.Core.Properties;assembly=SixteenCoreCharacterMapper.Core"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="500"
+        x:Class="SixteenCoreCharacterMapper.Avalonia.QuestionnaireWindow"
+        x:DataType="vm:QuestionnaireViewModel"
+        Title="Character Questionnaire" Width="700" Height="600"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Assets/16Core logo icon v2.png">
+
+    <Window.Resources>
+        <local:IntegerToBooleanConverter x:Key="IntToBoolConverter"/>
+        <SolidColorBrush x:Key="BrushSD" Color="#B0413E"/>
+        <SolidColorBrush x:Key="BrushD" Color="#D47B78"/>
+        <SolidColorBrush x:Key="BrushN" Color="#A3A3A3"/>
+        <SolidColorBrush x:Key="BrushA" Color="#79B486"/>
+        <SolidColorBrush x:Key="BrushSA" Color="#3B7A4B"/>
+    </Window.Resources>
+
+    <Window.Styles>
+        <!-- Custom Template for Colored RadioButtons -->
+        <Style Selector="RadioButton.sd, RadioButton.d, RadioButton.n, RadioButton.a, RadioButton.sa">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Panel Background="Transparent" Width="20" Height="20">
+                        <Ellipse Name="OuterEllipse"
+                                 Stroke="{TemplateBinding BorderBrush}"
+                                 StrokeThickness="2"
+                                 Fill="Transparent"
+                                 Width="15" Height="15"/>
+                        <Ellipse Name="CheckGlyph"
+                                 Fill="{TemplateBinding BorderBrush}"
+                                 Width="20" Height="20"
+                                 IsVisible="False"/>
+                    </Panel>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <!-- Show Glyph when Checked -->
+        <Style Selector="RadioButton.sd:checked /template/ Ellipse#CheckGlyph,
+                         RadioButton.d:checked /template/ Ellipse#CheckGlyph,
+                         RadioButton.n:checked /template/ Ellipse#CheckGlyph,
+                         RadioButton.a:checked /template/ Ellipse#CheckGlyph,
+                         RadioButton.sa:checked /template/ Ellipse#CheckGlyph">
+            <Setter Property="IsVisible" Value="True"/>
+        </Style>
+
+        <!-- Color Definitions -->
+        <Style Selector="RadioButton.sd"> <Setter Property="BorderBrush" Value="{StaticResource BrushSD}"/> </Style>
+        <Style Selector="RadioButton.d"> <Setter Property="BorderBrush" Value="{StaticResource BrushD}"/> </Style>
+        <Style Selector="RadioButton.n"> <Setter Property="BorderBrush" Value="{StaticResource BrushN}"/> </Style>
+        <Style Selector="RadioButton.a"> <Setter Property="BorderBrush" Value="{StaticResource BrushA}"/> </Style>
+        <Style Selector="RadioButton.sa"> <Setter Property="BorderBrush" Value="{StaticResource BrushSA}"/> </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="20">
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,15">
+            <TextBlock Text="Character Personality Questionnaire" FontSize="20" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBlock Text="For the most accurate results, please respond to as many statements as possible." FontSize="12" Foreground="#666666"/>
+        </StackPanel>
+        
+        <!-- Progress -->
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <ProgressBar Minimum="0" Maximum="100" Value="{Binding Progress}" Height="10"/>
+            <TextBlock Text="{Binding Progress, StringFormat='{}{0:0}%'}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,-20" FontSize="12"/>
+        </Grid>
+
+        <!-- Content -->
+        <Border x:Name="ContentBorder" Grid.Row="2" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Padding="20" Background="#FAFAFA">
+            <Grid>
+                <TextBlock Text="Loading..." IsVisible="{Binding IsLoading}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                
+                <Grid IsVisible="{Binding !IsLoading}" RowDefinitions="Auto,Auto,*">
+                    <!-- Header with Title and Checkbox -->
+                    <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,15">
+                        <TextBlock x:Name="TitleTextBlock" Grid.Column="0" Text="{Binding CurrentGroup.Title}" FontSize="18" FontWeight="SemiBold" Foreground="#555555" VerticalAlignment="Center"/>
+                        <CheckBox Grid.Column="1" Content="Use these answers to calculate position" IsChecked="{Binding CurrentGroup.IncludeInCalculation}" FontSize="12" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <!-- Column Headers -->
+                    <Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="0,0,0,5" IsVisible="{Binding CurrentGroup.IncludeInCalculation}">
+                        <Grid Grid.Column="0" ColumnDefinitions="*, 50, 50, 50, 50, 50">
+                            <TextBlock Grid.Column="0" Text="Question" FontWeight="Bold" FontSize="12" Foreground="#777777"/>
+                            <TextBlock Grid.Column="1" Text="{x:Static p:Strings.Questionnaire_Label_SD}" ToolTip.Tip="{x:Static p:Strings.Questionnaire_Tooltip_SD}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="12" Foreground="#777777"/>
+                            <TextBlock Grid.Column="2" Text="{x:Static p:Strings.Questionnaire_Label_D}" ToolTip.Tip="{x:Static p:Strings.Questionnaire_Tooltip_D}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="12" Foreground="#777777"/>
+                            <TextBlock Grid.Column="3" Text="{x:Static p:Strings.Questionnaire_Label_N}" ToolTip.Tip="{x:Static p:Strings.Questionnaire_Tooltip_N}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="12" Foreground="#777777"/>
+                            <TextBlock Grid.Column="4" Text="{x:Static p:Strings.Questionnaire_Label_A}" ToolTip.Tip="{x:Static p:Strings.Questionnaire_Tooltip_A}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="12" Foreground="#777777"/>
+                            <TextBlock Grid.Column="5" Text="{x:Static p:Strings.Questionnaire_Label_SA}" ToolTip.Tip="{x:Static p:Strings.Questionnaire_Tooltip_SA}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="12" Foreground="#777777"/>
+                        </Grid>
+                        <!-- Dummy ScrollBar to reserve exact space -->
+                        <ScrollBar Grid.Column="1" Orientation="Vertical" Visibility="Hidden"/>
+                    </Grid>
+                    
+                    <ScrollViewer Grid.Row="2" IsEnabled="{Binding CurrentGroup.IncludeInCalculation}" VerticalScrollBarVisibility="Visible">
+                        <ItemsControl ItemsSource="{Binding CurrentGroup.Questions}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="*, 50, 50, 50, 50, 50" Margin="0,0,0,20" Background="Transparent">
+                                        <TextBlock Grid.Column="0" Text="{Binding Question.Text}" FontSize="13" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,2,10,0"/>
+                                        
+                                        <RadioButton Grid.Column="1" GroupName="{Binding Question.Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Padding="0" HorizontalContentAlignment="Center"
+                                                     IsChecked="{Binding Answer, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}"
+                                                     ToolTip.Tip="{x:Static p:Strings.Questionnaire_Tooltip_SD}"
+                                                     Classes="sd"/>
+                                        <RadioButton Grid.Column="2" GroupName="{Binding Question.Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Padding="0" HorizontalContentAlignment="Center"
+                                                     IsChecked="{Binding Answer, Converter={StaticResource IntToBoolConverter}, ConverterParameter=2}"
+                                                     ToolTip.Tip="{x:Static p:Strings.Questionnaire_Tooltip_D}"
+                                                     Classes="d"/>
+                                        <RadioButton Grid.Column="3" GroupName="{Binding Question.Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Padding="0" HorizontalContentAlignment="Center"
+                                                     IsChecked="{Binding Answer, Converter={StaticResource IntToBoolConverter}, ConverterParameter=3}"
+                                                     ToolTip.Tip="{x:Static p:Strings.Questionnaire_Tooltip_N}"
+                                                     Classes="n"/>
+                                        <RadioButton Grid.Column="4" GroupName="{Binding Question.Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Padding="0" HorizontalContentAlignment="Center"
+                                                     IsChecked="{Binding Answer, Converter={StaticResource IntToBoolConverter}, ConverterParameter=4}"
+                                                     ToolTip.Tip="{x:Static p:Strings.Questionnaire_Tooltip_A}"
+                                                     Classes="a"/>
+                                        <RadioButton Grid.Column="5" GroupName="{Binding Question.Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Padding="0" HorizontalContentAlignment="Center"
+                                                     IsChecked="{Binding Answer, Converter={StaticResource IntToBoolConverter}, ConverterParameter=5}"
+                                                     ToolTip.Tip="{x:Static p:Strings.Questionnaire_Tooltip_SA}"
+                                                     Classes="sa"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Footer -->
+        <Grid Grid.Row="3" Margin="0,20,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="10">
+                <Button Content="Cancel" Command="{Binding CancelCommand}"/>
+                <Button Content="Skip Remaining" Command="{Binding SkipRestCommand}"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+                <Button Content="Previous" Command="{Binding PreviousCommand}" IsEnabled="{Binding !IsFirstPage}"/>
+                <Button Content="Skip Trait" Command="{Binding SkipGroupCommand}" IsVisible="{Binding !IsLastPage}"/>
+                <Button Content="Next" Command="{Binding NextCommand}" IsVisible="{Binding !IsLastPage}"/>
+                <Button Content="Finish" Command="{Binding NextCommand}" IsVisible="{Binding IsLastPage}" Classes="accent"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

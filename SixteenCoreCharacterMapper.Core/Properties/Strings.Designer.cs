@@ -61,6 +61,1491 @@ namespace SixteenCoreCharacterMapper.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is afraid that they&apos;ll do the wrong thing..
+        /// </summary>
+        public static string Question_Anxiety_01 {
+            get {
+                return ResourceManager.GetString("Question_Anxiety_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feels threatened easily..
+        /// </summary>
+        public static string Question_Anxiety_02 {
+            get {
+                return ResourceManager.GetString("Question_Anxiety_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is easily hurt..
+        /// </summary>
+        public static string Question_Anxiety_03 {
+            get {
+                return ResourceManager.GetString("Question_Anxiety_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Worries about things..
+        /// </summary>
+        public static string Question_Anxiety_04 {
+            get {
+                return ResourceManager.GetString("Question_Anxiety_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spends time thinking about past mistakes..
+        /// </summary>
+        public static string Question_Anxiety_05 {
+            get {
+                return ResourceManager.GetString("Question_Anxiety_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feels guilty when they say no..
+        /// </summary>
+        public static string Question_Anxiety_06 {
+            get {
+                return ResourceManager.GetString("Question_Anxiety_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feels crushed by setbacks..
+        /// </summary>
+        public static string Question_Anxiety_07 {
+            get {
+                return ResourceManager.GetString("Question_Anxiety_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doesn&apos;t worry about things that have already happened..
+        /// </summary>
+        public static string Question_Anxiety_08 {
+            get {
+                return ResourceManager.GetString("Question_Anxiety_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not easily bothered by things..
+        /// </summary>
+        public static string Question_Anxiety_09 {
+            get {
+                return ResourceManager.GetString("Question_Anxiety_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doesn&apos;t let others discourage them..
+        /// </summary>
+        public static string Question_Anxiety_10 {
+            get {
+                return ResourceManager.GetString("Question_Anxiety_10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Takes charge..
+        /// </summary>
+        public static string Question_Assertiveness_01 {
+            get {
+                return ResourceManager.GetString("Question_Assertiveness_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wants to be in charge..
+        /// </summary>
+        public static string Question_Assertiveness_02 {
+            get {
+                return ResourceManager.GetString("Question_Assertiveness_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Says what they think..
+        /// </summary>
+        public static string Question_Assertiveness_03 {
+            get {
+                return ResourceManager.GetString("Question_Assertiveness_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not afraid of providing criticism..
+        /// </summary>
+        public static string Question_Assertiveness_04 {
+            get {
+                return ResourceManager.GetString("Question_Assertiveness_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Takes control of things..
+        /// </summary>
+        public static string Question_Assertiveness_05 {
+            get {
+                return ResourceManager.GetString("Question_Assertiveness_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can take strong measures..
+        /// </summary>
+        public static string Question_Assertiveness_06 {
+            get {
+                return ResourceManager.GetString("Question_Assertiveness_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waits for others to lead the way..
+        /// </summary>
+        public static string Question_Assertiveness_07 {
+            get {
+                return ResourceManager.GetString("Question_Assertiveness_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never challenges things..
+        /// </summary>
+        public static string Question_Assertiveness_08 {
+            get {
+                return ResourceManager.GetString("Question_Assertiveness_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lets others make the decisions..
+        /// </summary>
+        public static string Question_Assertiveness_09 {
+            get {
+                return ResourceManager.GetString("Question_Assertiveness_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allows others to push them around..
+        /// </summary>
+        public static string Question_Assertiveness_10 {
+            get {
+                return ResourceManager.GetString("Question_Assertiveness_10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Believes in the importance of art..
+        /// </summary>
+        public static string Question_Complexity_01 {
+            get {
+                return ResourceManager.GetString("Question_Complexity_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loves to think up new ways of doing things..
+        /// </summary>
+        public static string Question_Complexity_02 {
+            get {
+                return ResourceManager.GetString("Question_Complexity_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enjoys hearing new ideas..
+        /// </summary>
+        public static string Question_Complexity_03 {
+            get {
+                return ResourceManager.GetString("Question_Complexity_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Carries the conversation to a higher level..
+        /// </summary>
+        public static string Question_Complexity_04 {
+            get {
+                return ResourceManager.GetString("Question_Complexity_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prefers variety to routine..
+        /// </summary>
+        public static string Question_Complexity_05 {
+            get {
+                return ResourceManager.GetString("Question_Complexity_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoids philosophical discussions..
+        /// </summary>
+        public static string Question_Complexity_06 {
+            get {
+                return ResourceManager.GetString("Question_Complexity_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rarely looks for a deeper meaning in things..
+        /// </summary>
+        public static string Question_Complexity_07 {
+            get {
+                return ResourceManager.GetString("Question_Complexity_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not interested in theoretical discussions..
+        /// </summary>
+        public static string Question_Complexity_08 {
+            get {
+                return ResourceManager.GetString("Question_Complexity_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not interested in abstract ideas..
+        /// </summary>
+        public static string Question_Complexity_09 {
+            get {
+                return ResourceManager.GetString("Question_Complexity_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tries to avoid complex people..
+        /// </summary>
+        public static string Question_Complexity_10 {
+            get {
+                return ResourceManager.GetString("Question_Complexity_10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finds it hard to forgive others..
+        /// </summary>
+        public static string Question_Distrust_01 {
+            get {
+                return ResourceManager.GetString("Question_Distrust_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suspects hidden motives in others..
+        /// </summary>
+        public static string Question_Distrust_02 {
+            get {
+                return ResourceManager.GetString("Question_Distrust_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is wary of others..
+        /// </summary>
+        public static string Question_Distrust_03 {
+            get {
+                return ResourceManager.GetString("Question_Distrust_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distrusts people..
+        /// </summary>
+        public static string Question_Distrust_04 {
+            get {
+                return ResourceManager.GetString("Question_Distrust_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Believes that people seldom tell you the whole truth..
+        /// </summary>
+        public static string Question_Distrust_05 {
+            get {
+                return ResourceManager.GetString("Question_Distrust_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Believes that people are essentially evil..
+        /// </summary>
+        public static string Question_Distrust_06 {
+            get {
+                return ResourceManager.GetString("Question_Distrust_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trusts what people say..
+        /// </summary>
+        public static string Question_Distrust_07 {
+            get {
+                return ResourceManager.GetString("Question_Distrust_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Believes that others have good intentions..
+        /// </summary>
+        public static string Question_Distrust_08 {
+            get {
+                return ResourceManager.GetString("Question_Distrust_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Believes that people are basically moral..
+        /// </summary>
+        public static string Question_Distrust_09 {
+            get {
+                return ResourceManager.GetString("Question_Distrust_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Believes laws should be strictly enforced..
+        /// </summary>
+        public static string Question_Dutifulness_01 {
+            get {
+                return ResourceManager.GetString("Question_Dutifulness_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tries to follow the rules..
+        /// </summary>
+        public static string Question_Dutifulness_02 {
+            get {
+                return ResourceManager.GetString("Question_Dutifulness_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Believes in one true religion..
+        /// </summary>
+        public static string Question_Dutifulness_03 {
+            get {
+                return ResourceManager.GetString("Question_Dutifulness_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Respects authority..
+        /// </summary>
+        public static string Question_Dutifulness_04 {
+            get {
+                return ResourceManager.GetString("Question_Dutifulness_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Likes to stand during the national anthem..
+        /// </summary>
+        public static string Question_Dutifulness_05 {
+            get {
+                return ResourceManager.GetString("Question_Dutifulness_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resists authority..
+        /// </summary>
+        public static string Question_Dutifulness_06 {
+            get {
+                return ResourceManager.GetString("Question_Dutifulness_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breaks rules..
+        /// </summary>
+        public static string Question_Dutifulness_07 {
+            get {
+                return ResourceManager.GetString("Question_Dutifulness_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uses swear words..
+        /// </summary>
+        public static string Question_Dutifulness_08 {
+            get {
+                return ResourceManager.GetString("Question_Dutifulness_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opposes authority..
+        /// </summary>
+        public static string Question_Dutifulness_09 {
+            get {
+                return ResourceManager.GetString("Question_Dutifulness_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Knows how to get around the rules..
+        /// </summary>
+        public static string Question_Dutifulness_10 {
+            get {
+                return ResourceManager.GetString("Question_Dutifulness_10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gets irritated easily..
+        /// </summary>
+        public static string Question_Emotionality_01 {
+            get {
+                return ResourceManager.GetString("Question_Emotionality_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gets angry easily..
+        /// </summary>
+        public static string Question_Emotionality_02 {
+            get {
+                return ResourceManager.GetString("Question_Emotionality_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is quick to judge others..
+        /// </summary>
+        public static string Question_Emotionality_03 {
+            get {
+                return ResourceManager.GetString("Question_Emotionality_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is annoyed by others&apos; mistakes..
+        /// </summary>
+        public static string Question_Emotionality_04 {
+            get {
+                return ResourceManager.GetString("Question_Emotionality_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is easily put out..
+        /// </summary>
+        public static string Question_Emotionality_05 {
+            get {
+                return ResourceManager.GetString("Question_Emotionality_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t stand being contradicted..
+        /// </summary>
+        public static string Question_Emotionality_06 {
+            get {
+                return ResourceManager.GetString("Question_Emotionality_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Judges people by their appearance..
+        /// </summary>
+        public static string Question_Emotionality_07 {
+            get {
+                return ResourceManager.GetString("Question_Emotionality_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not easily annoyed..
+        /// </summary>
+        public static string Question_Emotionality_08 {
+            get {
+                return ResourceManager.GetString("Question_Emotionality_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tries to forgive and forget..
+        /// </summary>
+        public static string Question_Emotionality_09 {
+            get {
+                return ResourceManager.GetString("Question_Emotionality_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has a good word for everyone..
+        /// </summary>
+        public static string Question_Emotionality_10 {
+            get {
+                return ResourceManager.GetString("Question_Emotionality_10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seldom feels blue..
+        /// </summary>
+        public static string Question_EmotionalStability_01 {
+            get {
+                return ResourceManager.GetString("Question_EmotionalStability_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feels comfortable with themselves..
+        /// </summary>
+        public static string Question_EmotionalStability_02 {
+            get {
+                return ResourceManager.GetString("Question_EmotionalStability_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Readily overcomes setbacks..
+        /// </summary>
+        public static string Question_EmotionalStability_03 {
+            get {
+                return ResourceManager.GetString("Question_EmotionalStability_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is relaxed most of the time..
+        /// </summary>
+        public static string Question_EmotionalStability_04 {
+            get {
+                return ResourceManager.GetString("Question_EmotionalStability_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not easily frustrated or discouraged..
+        /// </summary>
+        public static string Question_EmotionalStability_05 {
+            get {
+                return ResourceManager.GetString("Question_EmotionalStability_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has frequent mood swings..
+        /// </summary>
+        public static string Question_EmotionalStability_06 {
+            get {
+                return ResourceManager.GetString("Question_EmotionalStability_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dislikes themselves..
+        /// </summary>
+        public static string Question_EmotionalStability_07 {
+            get {
+                return ResourceManager.GetString("Question_EmotionalStability_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feels desperate..
+        /// </summary>
+        public static string Question_EmotionalStability_08 {
+            get {
+                return ResourceManager.GetString("Question_EmotionalStability_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is the life of the party..
+        /// </summary>
+        public static string Question_Gregariousness_01 {
+            get {
+                return ResourceManager.GetString("Question_Gregariousness_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loves large parties and crowded events..
+        /// </summary>
+        public static string Question_Gregariousness_02 {
+            get {
+                return ResourceManager.GetString("Question_Gregariousness_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jokes around a lot..
+        /// </summary>
+        public static string Question_Gregariousness_03 {
+            get {
+                return ResourceManager.GetString("Question_Gregariousness_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enjoys being part of a loud crowd..
+        /// </summary>
+        public static string Question_Gregariousness_04 {
+            get {
+                return ResourceManager.GetString("Question_Gregariousness_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amuses their friends..
+        /// </summary>
+        public static string Question_Gregariousness_05 {
+            get {
+                return ResourceManager.GetString("Question_Gregariousness_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Acts wild and crazy..
+        /// </summary>
+        public static string Question_Gregariousness_06 {
+            get {
+                return ResourceManager.GetString("Question_Gregariousness_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is the last to laugh at a joke..
+        /// </summary>
+        public static string Question_Gregariousness_07 {
+            get {
+                return ResourceManager.GetString("Question_Gregariousness_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dislikes loud music..
+        /// </summary>
+        public static string Question_Gregariousness_08 {
+            get {
+                return ResourceManager.GetString("Question_Gregariousness_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Does things that others find strange..
+        /// </summary>
+        public static string Question_Imagination_01 {
+            get {
+                return ResourceManager.GetString("Question_Imagination_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Likes to get lost in thought..
+        /// </summary>
+        public static string Question_Imagination_02 {
+            get {
+                return ResourceManager.GetString("Question_Imagination_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enjoys wild flights of fantasy..
+        /// </summary>
+        public static string Question_Imagination_03 {
+            get {
+                return ResourceManager.GetString("Question_Imagination_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loves to daydream..
+        /// </summary>
+        public static string Question_Imagination_04 {
+            get {
+                return ResourceManager.GetString("Question_Imagination_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swims against the current..
+        /// </summary>
+        public static string Question_Imagination_05 {
+            get {
+                return ResourceManager.GetString("Question_Imagination_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Takes deviant positions..
+        /// </summary>
+        public static string Question_Imagination_06 {
+            get {
+                return ResourceManager.GetString("Question_Imagination_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Does unexpected things..
+        /// </summary>
+        public static string Question_Imagination_07 {
+            get {
+                return ResourceManager.GetString("Question_Imagination_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Does things by the book..
+        /// </summary>
+        public static string Question_Imagination_08 {
+            get {
+                return ResourceManager.GetString("Question_Imagination_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seldom daydreams..
+        /// </summary>
+        public static string Question_Imagination_09 {
+            get {
+                return ResourceManager.GetString("Question_Imagination_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seldom gets lost in thought..
+        /// </summary>
+        public static string Question_Imagination_10 {
+            get {
+                return ResourceManager.GetString("Question_Imagination_10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Makes insightful remarks..
+        /// </summary>
+        public static string Question_Intellect_01 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Knows the answers to many questions..
+        /// </summary>
+        public static string Question_Intellect_02 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tends to analyze things..
+        /// </summary>
+        public static string Question_Intellect_03 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uses their brain..
+        /// </summary>
+        public static string Question_Intellect_04 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Learns quickly..
+        /// </summary>
+        public static string Question_Intellect_05 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Counters others&apos; arguments..
+        /// </summary>
+        public static string Question_Intellect_06 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reflects on things before acting..
+        /// </summary>
+        public static string Question_Intellect_07 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weighs the pros against the cons..
+        /// </summary>
+        public static string Question_Intellect_08 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Considers themselves an average person..
+        /// </summary>
+        public static string Question_Intellect_09 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gets confused easily..
+        /// </summary>
+        public static string Question_Intellect_10 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Knows that they&apos;re not a special person..
+        /// </summary>
+        public static string Question_Intellect_11 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has a poor vocabulary..
+        /// </summary>
+        public static string Question_Intellect_12 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skips difficult words while reading..
+        /// </summary>
+        public static string Question_Intellect_13 {
+            get {
+                return ResourceManager.GetString("Question_Intellect_13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wants to be left alone..
+        /// </summary>
+        public static string Question_Introversion_01 {
+            get {
+                return ResourceManager.GetString("Question_Introversion_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prefers to do things by themselves..
+        /// </summary>
+        public static string Question_Introversion_02 {
+            get {
+                return ResourceManager.GetString("Question_Introversion_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enjoys spending time by themselves..
+        /// </summary>
+        public static string Question_Introversion_03 {
+            get {
+                return ResourceManager.GetString("Question_Introversion_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seeks quiet..
+        /// </summary>
+        public static string Question_Introversion_04 {
+            get {
+                return ResourceManager.GetString("Question_Introversion_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doesn&apos;t mind eating alone..
+        /// </summary>
+        public static string Question_Introversion_05 {
+            get {
+                return ResourceManager.GetString("Question_Introversion_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enjoys silence..
+        /// </summary>
+        public static string Question_Introversion_06 {
+            get {
+                return ResourceManager.GetString("Question_Introversion_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enjoys their privacy..
+        /// </summary>
+        public static string Question_Introversion_07 {
+            get {
+                return ResourceManager.GetString("Question_Introversion_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enjoys being part of a group..
+        /// </summary>
+        public static string Question_Introversion_08 {
+            get {
+                return ResourceManager.GetString("Question_Introversion_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enjoys teamwork..
+        /// </summary>
+        public static string Question_Introversion_09 {
+            get {
+                return ResourceManager.GetString("Question_Introversion_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t do without the company of others..
+        /// </summary>
+        public static string Question_Introversion_10 {
+            get {
+                return ResourceManager.GetString("Question_Introversion_10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wants everything to be &quot;just right&quot;..
+        /// </summary>
+        public static string Question_Orderliness_01 {
+            get {
+                return ResourceManager.GetString("Question_Orderliness_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gets chores done right away..
+        /// </summary>
+        public static string Question_Orderliness_02 {
+            get {
+                return ResourceManager.GetString("Question_Orderliness_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Likes order..
+        /// </summary>
+        public static string Question_Orderliness_03 {
+            get {
+                return ResourceManager.GetString("Question_Orderliness_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continues until everything is perfect..
+        /// </summary>
+        public static string Question_Orderliness_04 {
+            get {
+                return ResourceManager.GetString("Question_Orderliness_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is exacting in their work..
+        /// </summary>
+        public static string Question_Orderliness_05 {
+            get {
+                return ResourceManager.GetString("Question_Orderliness_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not bothered by messy people..
+        /// </summary>
+        public static string Question_Orderliness_06 {
+            get {
+                return ResourceManager.GetString("Question_Orderliness_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not bothered by disorder..
+        /// </summary>
+        public static string Question_Orderliness_07 {
+            get {
+                return ResourceManager.GetString("Question_Orderliness_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leaves a mess in their room..
+        /// </summary>
+        public static string Question_Orderliness_08 {
+            get {
+                return ResourceManager.GetString("Question_Orderliness_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leaves their belongings around..
+        /// </summary>
+        public static string Question_Orderliness_09 {
+            get {
+                return ResourceManager.GetString("Question_Orderliness_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Puts off unpleasant tasks..
+        /// </summary>
+        public static string Question_Orderliness_10 {
+            get {
+                return ResourceManager.GetString("Question_Orderliness_10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reveals little about themselves..
+        /// </summary>
+        public static string Question_Reserve_01 {
+            get {
+                return ResourceManager.GetString("Question_Reserve_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is hard to get to know..
+        /// </summary>
+        public static string Question_Reserve_02 {
+            get {
+                return ResourceManager.GetString("Question_Reserve_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doesn&apos;t talk a lot..
+        /// </summary>
+        public static string Question_Reserve_03 {
+            get {
+                return ResourceManager.GetString("Question_Reserve_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bottles up their feelings..
+        /// </summary>
+        public static string Question_Reserve_04 {
+            get {
+                return ResourceManager.GetString("Question_Reserve_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keeps their thoughts to themselves..
+        /// </summary>
+        public static string Question_Reserve_05 {
+            get {
+                return ResourceManager.GetString("Question_Reserve_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is open about themselves to others..
+        /// </summary>
+        public static string Question_Reserve_06 {
+            get {
+                return ResourceManager.GetString("Question_Reserve_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is open about their feelings..
+        /// </summary>
+        public static string Question_Reserve_07 {
+            get {
+                return ResourceManager.GetString("Question_Reserve_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discloses their intimate thoughts..
+        /// </summary>
+        public static string Question_Reserve_08 {
+            get {
+                return ResourceManager.GetString("Question_Reserve_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shows their feelings..
+        /// </summary>
+        public static string Question_Reserve_09 {
+            get {
+                return ResourceManager.GetString("Question_Reserve_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Likes to read..
+        /// </summary>
+        public static string Question_Sensitivity_01 {
+            get {
+                return ResourceManager.GetString("Question_Sensitivity_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enjoys discussing movies and books with others..
+        /// </summary>
+        public static string Question_Sensitivity_02 {
+            get {
+                return ResourceManager.GetString("Question_Sensitivity_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reads a lot..
+        /// </summary>
+        public static string Question_Sensitivity_03 {
+            get {
+                return ResourceManager.GetString("Question_Sensitivity_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doesn&apos;t like action movies..
+        /// </summary>
+        public static string Question_Sensitivity_04 {
+            get {
+                return ResourceManager.GetString("Question_Sensitivity_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cries during movies..
+        /// </summary>
+        public static string Question_Sensitivity_05 {
+            get {
+                return ResourceManager.GetString("Question_Sensitivity_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loves flowers..
+        /// </summary>
+        public static string Question_Sensitivity_06 {
+            get {
+                return ResourceManager.GetString("Question_Sensitivity_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doesn&apos;t enjoy watching dance performances..
+        /// </summary>
+        public static string Question_Sensitivity_07 {
+            get {
+                return ResourceManager.GetString("Question_Sensitivity_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doesn&apos;t like poetry..
+        /// </summary>
+        public static string Question_Sensitivity_08 {
+            get {
+                return ResourceManager.GetString("Question_Sensitivity_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dislikes works of fiction..
+        /// </summary>
+        public static string Question_Sensitivity_09 {
+            get {
+                return ResourceManager.GetString("Question_Sensitivity_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rarely notices their own emotional reactions..
+        /// </summary>
+        public static string Question_Sensitivity_10 {
+            get {
+                return ResourceManager.GetString("Question_Sensitivity_10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feels comfortable around people..
+        /// </summary>
+        public static string Question_SocialConfidence_01 {
+            get {
+                return ResourceManager.GetString("Question_SocialConfidence_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Talks to a lot of different people at parties..
+        /// </summary>
+        public static string Question_SocialConfidence_02 {
+            get {
+                return ResourceManager.GetString("Question_SocialConfidence_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doesn&apos;t mind being the center of attention..
+        /// </summary>
+        public static string Question_SocialConfidence_03 {
+            get {
+                return ResourceManager.GetString("Question_SocialConfidence_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Makes friends easily..
+        /// </summary>
+        public static string Question_SocialConfidence_04 {
+            get {
+                return ResourceManager.GetString("Question_SocialConfidence_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starts conversations..
+        /// </summary>
+        public static string Question_SocialConfidence_05 {
+            get {
+                return ResourceManager.GetString("Question_SocialConfidence_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finds it difficult to approach others..
+        /// </summary>
+        public static string Question_SocialConfidence_06 {
+            get {
+                return ResourceManager.GetString("Question_SocialConfidence_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has little to say..
+        /// </summary>
+        public static string Question_SocialConfidence_07 {
+            get {
+                return ResourceManager.GetString("Question_SocialConfidence_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is quiet around strangers..
+        /// </summary>
+        public static string Question_SocialConfidence_08 {
+            get {
+                return ResourceManager.GetString("Question_SocialConfidence_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keeps in the background..
+        /// </summary>
+        public static string Question_SocialConfidence_09 {
+            get {
+                return ResourceManager.GetString("Question_SocialConfidence_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Knows how to comfort others..
+        /// </summary>
+        public static string Question_Warmth_01 {
+            get {
+                return ResourceManager.GetString("Question_Warmth_01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enjoys bringing people together..
+        /// </summary>
+        public static string Question_Warmth_02 {
+            get {
+                return ResourceManager.GetString("Question_Warmth_02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feels others&apos; emotions..
+        /// </summary>
+        public static string Question_Warmth_03 {
+            get {
+                return ResourceManager.GetString("Question_Warmth_03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Takes an interest in other people&apos;s lives..
+        /// </summary>
+        public static string Question_Warmth_04 {
+            get {
+                return ResourceManager.GetString("Question_Warmth_04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cheers people up..
+        /// </summary>
+        public static string Question_Warmth_05 {
+            get {
+                return ResourceManager.GetString("Question_Warmth_05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Makes people feel at ease..
+        /// </summary>
+        public static string Question_Warmth_06 {
+            get {
+                return ResourceManager.GetString("Question_Warmth_06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Takes time out for others..
+        /// </summary>
+        public static string Question_Warmth_07 {
+            get {
+                return ResourceManager.GetString("Question_Warmth_07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doesn&apos;t like to get involved in other people&apos;s problems..
+        /// </summary>
+        public static string Question_Warmth_08 {
+            get {
+                return ResourceManager.GetString("Question_Warmth_08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tries not to think about the needy..
+        /// </summary>
+        public static string Question_Warmth_09 {
+            get {
+                return ResourceManager.GetString("Question_Warmth_09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A.
+        /// </summary>
+        public static string Questionnaire_Label_A {
+            get {
+                return ResourceManager.GetString("Questionnaire_Label_A", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D.
+        /// </summary>
+        public static string Questionnaire_Label_D {
+            get {
+                return ResourceManager.GetString("Questionnaire_Label_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to N.
+        /// </summary>
+        public static string Questionnaire_Label_N {
+            get {
+                return ResourceManager.GetString("Questionnaire_Label_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SA.
+        /// </summary>
+        public static string Questionnaire_Label_SA {
+            get {
+                return ResourceManager.GetString("Questionnaire_Label_SA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SD.
+        /// </summary>
+        public static string Questionnaire_Label_SD {
+            get {
+                return ResourceManager.GetString("Questionnaire_Label_SD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agree.
+        /// </summary>
+        public static string Questionnaire_Tooltip_A {
+            get {
+                return ResourceManager.GetString("Questionnaire_Tooltip_A", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disagree.
+        /// </summary>
+        public static string Questionnaire_Tooltip_D {
+            get {
+                return ResourceManager.GetString("Questionnaire_Tooltip_D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neither agree nor disagree.
+        /// </summary>
+        public static string Questionnaire_Tooltip_N {
+            get {
+                return ResourceManager.GetString("Questionnaire_Tooltip_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Strongly Agree.
+        /// </summary>
+        public static string Questionnaire_Tooltip_SA {
+            get {
+                return ResourceManager.GetString("Questionnaire_Tooltip_SA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Strongly Disagree.
+        /// </summary>
+        public static string Questionnaire_Tooltip_SD {
+            get {
+                return ResourceManager.GetString("Questionnaire_Tooltip_SD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to how prone one is to worry and self-doubt.
         /// </summary>
         public static string Trait_Anxiety_Description {

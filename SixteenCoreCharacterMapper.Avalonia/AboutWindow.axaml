@@ -6,7 +6,8 @@
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
         x:Class="SixteenCoreCharacterMapper.Avalonia.AboutWindow"
         Title="About 16Core Character Mapper" Width="550" Height="600"
-        WindowStartupLocation="CenterOwner" CanResize="False">
+        WindowStartupLocation="CenterOwner" CanResize="False"
+        Icon="/Assets/16Core logo icon v2.png">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
