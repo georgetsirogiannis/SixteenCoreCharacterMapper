@@ -212,28 +212,33 @@ namespace SixteenCoreCharacterMapper.Core.ViewModels
                 var fileName = await _dialogService.OpenFileAsync("Character Map (*.16core;*.json)|*.16core;*.json");
                 if (fileName != null)
                 {
-                    try
-                    {
-                        Project = await ProjectService.LoadAsync(fileName);
-                        CurrentFilePath = fileName;
-                        SetDirty(false);
-                        UpdateHasNotes();
-                        UpdateHasCharacters();
-                        OnPropertyChanged(nameof(ProjectName));
-                        RebuildTraitsRequested?.Invoke();
-                        RefreshCharacterListRequested?.Invoke();
-
-                        if (!string.IsNullOrEmpty(Project.SelectedLanguage))
-                        {
-                            _localizationService.SetCulture(Project.SelectedLanguage);
-                            SelectedLanguage = AvailableLanguages.FirstOrDefault(lang => lang.Code == Project.SelectedLanguage);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        _dialogService.ShowMessage($"Error loading project: {ex.Message}", "Load Error");
-                    }
+                    await LoadProjectFromFile(fileName);
                 }
+            }
+        }
+
+        public async Task LoadProjectFromFile(string fileName)
+        {
+            try
+            {
+                Project = await ProjectService.LoadAsync(fileName);
+                CurrentFilePath = fileName;
+                SetDirty(false);
+                UpdateHasNotes();
+                UpdateHasCharacters();
+                OnPropertyChanged(nameof(ProjectName));
+                RebuildTraitsRequested?.Invoke();
+                RefreshCharacterListRequested?.Invoke();
+
+                if (!string.IsNullOrEmpty(Project.SelectedLanguage))
+                {
+                    _localizationService.SetCulture(Project.SelectedLanguage);
+                    SelectedLanguage = AvailableLanguages.FirstOrDefault(lang => lang.Code == Project.SelectedLanguage);
+                }
+            }
+            catch (Exception ex)
+            {
+                _dialogService.ShowMessage($"Error loading project: {ex.Message}", "Load Error");
             }
         }
 

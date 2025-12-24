@@ -29,6 +29,11 @@ namespace SixteenCoreCharacterMapper.Avalonia
                 {
                     DataContext = viewModel
                 };
+
+                if (desktop.Args != null && desktop.Args.Length > 0 && System.IO.File.Exists(desktop.Args[0]))
+                {
+                    _ = viewModel.LoadProjectFromFile(desktop.Args[0]);
+                }
             }
 
             base.OnFrameworkInitializationCompleted();
