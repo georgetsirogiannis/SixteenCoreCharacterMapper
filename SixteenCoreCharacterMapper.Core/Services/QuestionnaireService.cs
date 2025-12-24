@@ -28,27 +28,34 @@ namespace SixteenCoreCharacterMapper.Core.Services
             }
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
-            using (var reader = new StreamReader(stream))
             {
-                var json = await reader.ReadToEndAsync();
-                var questions = JsonSerializer.Deserialize<List<PersonalityQuestion>>(json, new JsonSerializerOptions
+                if (stream == null)
                 {
-                    PropertyNameCaseInsensitive = true
-                });
-
-                if (questions != null)
-                {
-                    foreach (var question in questions)
-                    {
-                        if (!string.IsNullOrEmpty(question.ResourceKey))
-                        {
-                            var text = Strings.ResourceManager.GetString(question.ResourceKey);
-                            question.Text = text ?? question.ResourceKey;
-                        }
-                    }
+                    return new List<PersonalityQuestion>();
                 }
 
-                return questions ?? new List<PersonalityQuestion>();
+                using (var reader = new StreamReader(stream))
+                {
+                    var json = await reader.ReadToEndAsync();
+                    var questions = JsonSerializer.Deserialize<List<PersonalityQuestion>>(json, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    if (questions != null)
+                    {
+                        foreach (var question in questions)
+                        {
+                            if (!string.IsNullOrEmpty(question.ResourceKey))
+                            {
+                                var text = Strings.ResourceManager.GetString(question.ResourceKey);
+                                question.Text = text ?? question.ResourceKey;
+                            }
+                        }
+                    }
+
+                    return questions ?? new List<PersonalityQuestion>();
+                }
             }
         }
 

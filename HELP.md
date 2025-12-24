@@ -78,7 +78,7 @@ If a character is still forming in your head or you want a science-backed starti
     * **Precision:** Try to answer as many questions as possible; more answers result in a more precise placement. 
     * **Neutral Answers:** If you leave some questions blank within a scored section, the app treats them as **Neutral** (middle-of-the-road) answers.
 * **Excluding Traits:** If a specific trait section doesn't apply to your character or you don't want to deal with it right now, uncheck the **"Use these answers to calculate position" checkbox** at the top of that section. The app will skip scoring for that trait entirely.
-* **Refinement & Hybrid Use:** * You can skip sections or submit early; the app updates only the sections you included.
+* **Refinement & Hybrid Use:**  You can skip sections or submit early; the app updates only the sections you included.
     * **Partial Updates:** When you re-run the questionnaire, only the sections with new answers will update the map positions. This allows you to keep manual positions for some traits while letting the questionnaire handle others.
 
 ---

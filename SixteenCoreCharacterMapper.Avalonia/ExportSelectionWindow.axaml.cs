@@ -23,7 +23,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
 
     public partial class ExportSelectionWindow : Window
     {
-        private List<ExportSelectionItem> _items;
+        private List<ExportSelectionItem> _items = new List<ExportSelectionItem>();
 
         public ExportSelectionWindow()
         {

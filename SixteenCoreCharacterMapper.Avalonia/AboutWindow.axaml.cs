@@ -90,7 +90,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
                 
                 await msgBox.ShowDialog(this);
 
-                if (msgBox.Result == Core.Services.DialogResult.Yes)
+                if (msgBox.Result == Core.Services.DialogResult.Yes && !string.IsNullOrEmpty(updateInfo.Url))
                 {
                     OpenUrl(updateInfo.Url);
                 }

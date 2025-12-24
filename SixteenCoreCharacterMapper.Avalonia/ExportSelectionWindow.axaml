@@ -13,16 +13,16 @@
   <Grid RowDefinitions="Auto,*,Auto" Margin="20">
     <StackPanel Grid.Row="0" Spacing="10">
       <TextBlock Name="TitleText" Text="Export Options" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-      <RadioButton Name="AllCharactersRadio" GroupName="ExportOptions" Content="Export All Characters" IsChecked="True" Checked="Radio_Checked"/>
+      <RadioButton Name="AllCharactersRadio" GroupName="ExportOptions" Content="Export All Characters" IsChecked="True" IsCheckedChanged="Radio_Checked"/>
       <StackPanel Orientation="Horizontal" Spacing="10">
-        <RadioButton Name="CategoryRadio" GroupName="ExportOptions" Content="Export Category:" Checked="Radio_Checked" VerticalAlignment="Center"/>
+        <RadioButton Name="CategoryRadio" GroupName="ExportOptions" Content="Export Category:" IsCheckedChanged="Radio_Checked" VerticalAlignment="Center"/>
         <ComboBox Name="CategoryComboBox" Width="150" SelectedIndex="0" IsEnabled="False">
           <ComboBoxItem>Main</ComboBoxItem>
           <ComboBoxItem>Supporting</ComboBoxItem>
           <ComboBoxItem>Background</ComboBoxItem>
         </ComboBox>
       </StackPanel>
-      <RadioButton Name="SelectCharactersRadio" GroupName="ExportOptions" Content="Select Characters to Export" Checked="Radio_Checked"/>
+      <RadioButton Name="SelectCharactersRadio" GroupName="ExportOptions" Content="Select Characters to Export" IsCheckedChanged="Radio_Checked"/>
     </StackPanel>
 
     <Border Name="ListBorder" Grid.Row="1" Margin="0,10" BorderThickness="1" CornerRadius="3">
