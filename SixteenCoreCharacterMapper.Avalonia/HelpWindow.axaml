@@ -392,7 +392,7 @@
                 </TextBlock>
                     <TextBlock Classes="H4" Text="Export Notes" Margin="30,10,20,5"/>
                     <TextBlock Classes="Body" Margin="30,0,20,5">
-                    <Run>Create a TXT file containing all trait notes from your project. This is useful for reviewing your notes outside the app or sharing them with collaborators.</Run>
+                    <Run>Create an RTF (Rich Text Format) or TXT (Plain Text) file containing all trait notes from your project. This is useful for reviewing your notes outside the app or sharing them with collaborators.</Run>
                         </TextBlock>
                
                 <TextBlock Classes="H3" Text="Settings"/>

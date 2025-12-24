@@ -85,7 +85,7 @@ If a character is still forming in your head or you want a science-backed starti
 
 ## Exporting & Sharing
 * **Export Image:** Save the current Trait Grid as a PNG image. You can choose to include all characters, specific groups, or specific characters.
-* **Export Notes:** Creates a TXT file containing all trait notes from your project, grouped and labeled for easy reference during your writing process.
+* **Export Notes:** Creates an RTF or TXT file containing all trait notes from your project, grouped and labeled for easy reference during your writing process.
 
 ---
 
