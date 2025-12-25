@@ -1,5 +1,9 @@
 {
-  "version": "1.1.0",
-  "Url": "https://github.com/georgetsirogiannis/SixteenCoreCharacterMapper/releases/download/v1.1.0/16CoreCharacterMapper-Setup-v1.1.0.exe",
-  "ReleaseNotes": "• Added a localization feature for the trait grid. The grid can now be used in English, French, German, Spanish, Portuguese, Italian, Dutch, Polish and Greek. \n\n• Fixed a bug where the Project Title wasn't saved and reverted back to the savefile name the next time the savefile was loaded. \n\n• Fixed the Update Check functionality."
+  "version": "2.0.0",
+  "Url": "https://github.com/georgetsirogiannis/SixteenCoreCharacterMapper/releases/download/v2.0.0/16CoreCharacterMapper-Setup-v2.0.0.exe",
+  "ReleaseNotes": "v2.0.0: Major Architecture Update\n• Rebuilt with Avalonia for cross-platform support & better UI scaling\n• New: Built-in Character Questionnaire\n• New: Trait Notes (exportable to RTF/TXT)\n• New: Advanced PNG Export with character filtering\n• New: .16core file format (legacy .json projects still supported)",
+  "UrlWindows": "https://github.com/georgetsirogiannis/SixteenCoreCharacterMapper/releases/download/v2.0.0/16CoreCharacterMapper-Setup-v2.0.0.exe",
+  "UrlMacIntel": "https://github.com/georgetsirogiannis/SixteenCoreCharacterMapper/releases/download/v2.0.0/16Core_Character_Mapper_v2.0.0_macOS-Intel.dmg",
+  "UrlMacArm": "https://github.com/georgetsirogiannis/SixteenCoreCharacterMapper/releases/download/v2.0.0/16Core_Character_Mapper_v2.0.0_macOS-AppleSilicon.dmg",
+  "UrlLinux": "https://github.com/georgetsirogiannis/SixteenCoreCharacterMapper/releases/download/v2.0.0/16Core_Character_Mapper_v2.0.0_Linux-x64.tar.gz"
 }
