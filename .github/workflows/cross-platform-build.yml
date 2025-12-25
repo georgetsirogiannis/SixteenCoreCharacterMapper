@@ -19,7 +19,8 @@ jobs:
         run: |
           # 1. Generate Icons
           create_icns() {
-            SOURCE=$1; NAME=$2; mkdir "$NAME.iconset"
+            SOURCE=$1; NAME=$2
+            mkdir "$NAME.iconset"
             for RES in 16 32 128 256 512; do
               sips -z $RES $RES "$SOURCE" --out "$NAME.iconset/icon_${RES}x${RES}.png"
               sips -z $((RES*2)) $((RES*2)) "$SOURCE" --out "$NAME.iconset/icon_${RES}x${RES}@2x.png"
@@ -30,7 +31,7 @@ jobs:
           create_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core Logo v3 Retina.png" "AppIcon"
           create_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core File Icon v1 Retina.png" "FileIcon"
 
-          # 2. Build for Intel and ARM
+          # 2. Build for Intel and ARM (This CREATES the files on the GitHub computer)
           dotnet publish SixteenCoreCharacterMapper.Avalonia/SixteenCoreCharacterMapper.Avalonia.csproj -c Release -r osx-x64 --self-contained true -p:PublishSingleFile=true --output ./publish-intel
           dotnet publish SixteenCoreCharacterMapper.Avalonia/SixteenCoreCharacterMapper.Avalonia.csproj -c Release -r osx-arm64 --self-contained true -p:PublishSingleFile=true --output ./publish-arm
 
@@ -38,18 +39,20 @@ jobs:
           APP_NAME="16Core Character Mapper.app"
           mkdir -p "$APP_NAME/Contents/MacOS"
           mkdir -p "$APP_NAME/Contents/Resources"
+          
+          # Copy the compiled files into the app bundle
           cp -R ./publish-intel/* "$APP_NAME/Contents/MacOS/"
           cp AppIcon.icns "$APP_NAME/Contents/Resources/"
           cp FileIcon.icns "$APP_NAME/Contents/Resources/"
           cp SixteenCoreCharacterMapper.Avalonia/Info.plist "$APP_NAME/Contents/Info.plist"
           
-          # Rename the binary to match the Info.plist
-          mv "$APP_NAME/Contents/MacOS/SixteenCoreCharacterMapper.Avalonia" "$APP_NAME/Contents/MacOS/16Core Character Mapper"
+          # FIND the main executable (it's usually the largest file without an extension) and rename it
+          find "$APP_NAME/Contents/MacOS" -type f -maxdepth 1 -not -name "*.*" -exec mv {} "$APP_NAME/Contents/MacOS/16Core Character Mapper" \;
+          
           chmod +x "$APP_NAME/Contents/MacOS/16Core Character Mapper"
           zip -r 16Core-macOS-Intel.zip "$APP_NAME"
 
           # 4. Assemble ARM .app (M1/M2/M3)
-          # Clear previous app folder to avoid mixing architectures
           rm -rf "$APP_NAME"
           mkdir -p "$APP_NAME/Contents/MacOS"
           mkdir -p "$APP_NAME/Contents/Resources"
@@ -58,7 +61,8 @@ jobs:
           cp FileIcon.icns "$APP_NAME/Contents/Resources/"
           cp SixteenCoreCharacterMapper.Avalonia/Info.plist "$APP_NAME/Contents/Info.plist"
           
-          mv "$APP_NAME/Contents/MacOS/SixteenCoreCharacterMapper.Avalonia" "$APP_NAME/Contents/MacOS/16Core Character Mapper"
+          find "$APP_NAME/Contents/MacOS" -type f -maxdepth 1 -not -name "*.*" -exec mv {} "$APP_NAME/Contents/MacOS/16Core Character Mapper" \;
+          
           chmod +x "$APP_NAME/Contents/MacOS/16Core Character Mapper"
           zip -r 16Core-macOS-AppleSilicon.zip "$APP_NAME"
 
@@ -80,8 +84,8 @@ jobs:
       - name: Build Linux
         run: |
           dotnet publish SixteenCoreCharacterMapper.Avalonia/SixteenCoreCharacterMapper.Avalonia.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true --output ./publish-linux
-          # Rename binary for Linux too
-          mv ./publish-linux/SixteenCoreCharacterMapper.Avalonia ./publish-linux/16CoreCharacterMapper
+          # Find the binary and rename it to 16CoreCharacterMapper
+          find ./publish-linux -type f -maxdepth 1 -not -name "*.*" -exec mv {} ./publish-linux/16CoreCharacterMapper \;
           tar -czvf 16Core-Character-Mapper-Linux.tar.gz -C ./publish-linux .
       - name: Upload Linux Artifact
         uses: actions/upload-artifact@v4
