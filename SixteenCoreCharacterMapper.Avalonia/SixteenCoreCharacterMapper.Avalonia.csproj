@@ -16,6 +16,9 @@
     <PackageProjectUrl>https://georgetsirogiannis.com/16corecharactermapper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/georgetsirogiannis/SixteenCoreCharacterMapper</RepositoryUrl>
     <ApplicationIcon>Assets\16Core logo icon v3.ico</ApplicationIcon>
+    <AssemblyName>16Core Character Mapper</AssemblyName>
+    <AssemblyTitle>16Core Character Mapper</AssemblyTitle>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
