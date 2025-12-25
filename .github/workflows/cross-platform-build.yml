@@ -1,7 +1,7 @@
 name: Build Multi-Platform
 
 on:
-  workflow_dispatch: # Runs only manually
+  workflow_dispatch:
 
 jobs:
   build:
@@ -10,21 +10,21 @@ jobs:
     strategy:
       matrix:
         include:
-          # 1. macOS Intel
-          - os: macos-latest
+          # 1. macOS Intel (x64) - Using macos-13 to ensure Intel runner
+          - os: macos-13
             os_name: macOS-Intel
             rid: osx-x64
-            output_name: 16CoreCharacterMapper-macOS-x64
-          # 2. macOS Apple Silicon
+            suffix: macOS-Intel
+          # 2. macOS Apple Silicon (arm64) - Using macos-latest (ARM runner)
           - os: macos-latest
             os_name: macOS-AppleSilicon
             rid: osx-arm64
-            output_name: 16CoreCharacterMapper-macOS-arm64
-          # 3. Linux
+            suffix: macOS-AppleSilicon
+          # 3. Linux (x64)
           - os: ubuntu-latest
             os_name: Linux
             rid: linux-x64
-            output_name: 16CoreCharacterMapper-Linux-x64
+            suffix: Linux-x64
 
     steps:
     - uses: actions/checkout@v4
@@ -89,28 +89,31 @@ jobs:
             generate_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core File Icon v1 Retina.png" "FileIcon"
         fi
 
-    # 4. Create macOS App Bundle Structure
+    # 4. Create macOS App Bundle Structure (UPDATED WITH FIXES)
     - name: Create macOS App Bundle
       if: startsWith(matrix.os, 'macos')
       run: |
         APP_NAME="16Core Character Mapper"
-        EXECUTABLE_NAME="SixteenCoreCharacterMapper.Avalonia"
+        EXECUTABLE_NAME="16Core Character Mapper"
         
         mkdir -p "$APP_NAME.app/Contents/MacOS"
         mkdir -p "$APP_NAME.app/Contents/Resources"
         
+        # Copy published files
         cp -a publish_output/. "$APP_NAME.app/Contents/MacOS/"
         
+        # Copy icons
         if [ -f "AppIcon.icns" ]; then cp "AppIcon.icns" "$APP_NAME.app/Contents/Resources/"; fi
         if [ -f "FileIcon.icns" ]; then cp "FileIcon.icns" "$APP_NAME.app/Contents/Resources/"; fi
         
-        # Determine Minimum System Version based on Architecture
+        # Determine Minimum System Version
         if [ "${{ matrix.rid }}" == "osx-arm64" ]; then
             MIN_OS="11.0"
         else
             MIN_OS="10.15"
         fi
 
+        # Create Info.plist
         cat > "$APP_NAME.app/Contents/Info.plist" <<EOF
         <?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -153,24 +156,34 @@ jobs:
         </plist>
         EOF
 
+        # --- CRITICAL FIXES FOR "DAMAGED" ERROR ---
+        
+        # 1. Ensure the binary is executable
+        chmod +x "$APP_NAME.app/Contents/MacOS/$EXECUTABLE_NAME"
+        
+        # 2. Ad-hoc code signing
+        # This tells macOS the app structure is valid, even if the developer is unknown.
+        codesign --force --deep --sign - "$APP_NAME.app"
+
     # 5. Create DMG (macOS)
     - name: Create DMG (macOS)
       if: startsWith(matrix.os, 'macos')
       run: |
-        hdiutil create -volname "16Core Character Mapper" -srcfolder "16Core Character Mapper.app" -ov -format UDZO "${{ matrix.output_name }}_v${{ env.APP_VERSION }}.dmg"
+        DMG_NAME="16Core_Character_Mapper_v${{ env.APP_VERSION }}_${{ matrix.suffix }}.dmg"
+        hdiutil create -volname "16Core Character Mapper" -srcfolder "16Core Character Mapper.app" -ov -format UDZO "$DMG_NAME"
 
     # 6. Create Linux Archive
     - name: Create Linux Archive
       if: matrix.os == 'ubuntu-latest'
       run: |
         cd publish_output
-        tar -czvf ../${{ matrix.output_name }}_v${{ env.APP_VERSION }}.tar.gz *
+        tar -czvf ../16Core_Character_Mapper_v${{ env.APP_VERSION }}_${{ matrix.suffix }}.tar.gz *
 
     # --- Upload Artifacts ---
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.output_name }}_v${{ env.APP_VERSION }}
+        name: 16Core_Character_Mapper_v${{ env.APP_VERSION }}_${{ matrix.suffix }}
         path: |
-          *_v${{ env.APP_VERSION }}.dmg
-          *_v${{ env.APP_VERSION }}.tar.gz
+          *.dmg
+          *.tar.gz
