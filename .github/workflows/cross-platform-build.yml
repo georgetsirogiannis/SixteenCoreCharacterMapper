@@ -1,129 +1,165 @@
-name: Build MacOS and Linux Binaries
+name: Build Multi-Platform
 
 on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
   workflow_dispatch:
 
-env:
-  # CHANGE THIS VERSION NUMBER FOR EVERY RELEASE
-  APP_VERSION: "2.0.0"
-  APP_NAME: "16Core Character Mapper"
-
 jobs:
-  build-macos:
-    runs-on: macos-latest
+  build:
+    name: Build for ${{ matrix.os_name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            os_name: macOS
+            rid: osx-x64
+            output_name: 16CoreCharacterMapper-macOS-x64
+          - os: ubuntu-latest
+            os_name: Linux
+            rid: linux-x64
+            output_name: 16CoreCharacterMapper-Linux-x64
+
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
 
-      - name: Install create-dmg
-        run: brew install create-dmg
+    # NEW STEP: Extract Version from .csproj
+    - name: Get Version
+      id: get_version
+      shell: bash
+      run: |
+        # Extract content between <Version> tags
+        VERSION=$(sed -n 's/.*<Version>\(.*\)<\/Version>.*/\1/p' SixteenCoreCharacterMapper.Avalonia/SixteenCoreCharacterMapper.Avalonia.csproj | tr -d '\r' | xargs)
+        echo "Detected App Version: $VERSION"
+        echo "APP_VERSION=$VERSION" >> $GITHUB_ENV
 
-      - name: Generate .icns Files
-        run: |
-          create_icns() {
-            SOURCE=$1; NAME=$2; mkdir "$NAME.iconset"
-            for RES in 16 32 128 256 512; do
-              sips -z $RES $RES "$SOURCE" --out "$NAME.iconset/icon_${RES}x${RES}.png"
-              sips -z $((RES*2)) $((RES*2)) "$SOURCE" --out "$NAME.iconset/icon_${RES}x${RES}@2x.png"
-            done
-            iconutil -c icns "$NAME.iconset" && rm -rf "$NAME.iconset"
-          }
-          create_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core Logo v3 Retina.png" "AppIcon"
-          create_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core File Icon v1 Retina.png" "FileIcon"
+    - name: Publish
+      run: |
+        dotnet publish SixteenCoreCharacterMapper.Avalonia/SixteenCoreCharacterMapper.Avalonia.csproj \
+        -c Release \
+        -r ${{ matrix.rid }} \
+        --self-contained true \
+        -p:PublishSingleFile=true \
+        -p:IncludeNativeLibrariesForSelfExtract=true \
+        -o publish_output
 
-      - name: Build & Package DMG (Intel & ARM)
-        run: |
-          package_dmg() {
-            ARCH=$1; OUTPUT_FILENAME=$2
-            # Added -p:SupportedOSPlatformVersion=10.15 for compatibility
-            dotnet publish SixteenCoreCharacterMapper.Avalonia/SixteenCoreCharacterMapper.Avalonia.csproj \
-              -c Release -r $ARCH --self-contained true -p:PublishSingleFile=true \
-              -p:SupportedOSPlatformVersion=10.15 --output ./publish-$ARCH
+    # --- macOS Specific Steps ---
+    - name: Generate Icons (macOS)
+      if: matrix.os == 'macos-latest'
+      run: |
+        generate_icns() {
+            local src="$1"
+            local name="$2"
+            local iconset="${name}.iconset"
             
-            DIR_NAME="${{ env.APP_NAME }}.app"
-            mkdir -p "$DIR_NAME/Contents/MacOS"
-            mkdir -p "$DIR_NAME/Contents/Resources"
-            cp -R ./publish-$ARCH/* "$DIR_NAME/Contents/MacOS/"
-            cp AppIcon.icns "$DIR_NAME/Contents/Resources/"
-            cp FileIcon.icns "$DIR_NAME/Contents/Resources/"
-            cp SixteenCoreCharacterMapper.Avalonia/Info.plist "$DIR_NAME/Contents/Info.plist"
+            mkdir "$iconset"
+            sips -z 16 16     "$src" --out "${iconset}/icon_16x16.png"
+            sips -z 32 32     "$src" --out "${iconset}/icon_16x16@2x.png"
+            sips -z 32 32     "$src" --out "${iconset}/icon_32x32.png"
+            sips -z 64 64     "$src" --out "${iconset}/icon_32x32@2x.png"
+            sips -z 128 128   "$src" --out "${iconset}/icon_128x128.png"
+            sips -z 256 256   "$src" --out "${iconset}/icon_128x128@2x.png"
+            sips -z 256 256   "$src" --out "${iconset}/icon_256x256.png"
+            sips -z 512 512   "$src" --out "${iconset}/icon_256x256@2x.png"
+            sips -z 512 512   "$src" --out "${iconset}/icon_512x512.png"
+            sips -z 1024 1024 "$src" --out "${iconset}/icon_512x512@2x.png"
             
-            # Find and rename binary
-            find "$DIR_NAME/Contents/MacOS" -type f -maxdepth 1 -not -name "*.*" -exec mv {} "$DIR_NAME/Contents/MacOS/${{ env.APP_NAME }}" \;
-            chmod +x "$DIR_NAME/Contents/MacOS/${{ env.APP_NAME }}"
+            iconutil -c icns "$iconset" -o "${name}.icns"
+            rm -rf "$iconset"
+        }
 
-            create-dmg \
-              --volname "${{ env.APP_NAME }} - v${{ env.APP_VERSION }}" \
-              --window-pos 200 120 \
-              --window-size 600 400 \
-              --icon-size 100 \
-              --icon "${{ env.APP_NAME }}.app" 175 190 \
-              --hide-extension "${{ env.APP_NAME }}.app" \
-              --app-drop-link 425 190 \
-              "$OUTPUT_FILENAME" \
-              "$DIR_NAME"
-          }
+        if [ -f "SixteenCoreCharacterMapper.Avalonia/Assets/16Core Logo v3 Retina.png" ]; then
+            generate_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core Logo v3 Retina.png" "AppIcon"
+        fi
 
-          package_dmg "osx-x64" "16Core-v${{ env.APP_VERSION }}-macOS-Intel.dmg"
-          package_dmg "osx-arm64" "16Core-v${{ env.APP_VERSION }}-macOS-AppleSilicon.dmg"
+        if [ -f "SixteenCoreCharacterMapper.Avalonia/Assets/16Core File Icon v1 Retina.png" ]; then
+            generate_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core File Icon v1 Retina.png" "FileIcon"
+        fi
 
-      - name: Upload macOS DMGs
-        uses: actions/upload-artifact@v4
-        with:
-          name: 16Core-v${{ env.APP_VERSION }}-macOS-DMGs
-          path: "*.dmg"
+    - name: Create macOS App Bundle
+      if: matrix.os == 'macos-latest'
+      run: |
+        APP_NAME="16Core Character Mapper"
+        EXECUTABLE_NAME="SixteenCoreCharacterMapper.Avalonia"
+        
+        mkdir -p "$APP_NAME.app/Contents/MacOS"
+        mkdir -p "$APP_NAME.app/Contents/Resources"
+        
+        cp -a publish_output/. "$APP_NAME.app/Contents/MacOS/"
+        
+        if [ -f "AppIcon.icns" ]; then cp "AppIcon.icns" "$APP_NAME.app/Contents/Resources/"; fi
+        if [ -f "FileIcon.icns" ]; then cp "FileIcon.icns" "$APP_NAME.app/Contents/Resources/"; fi
+        
+        # Info.plist now uses ${{ env.APP_VERSION }}
+        cat > "$APP_NAME.app/Contents/Info.plist" <<EOF
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+        <dict>
+            <key>CFBundleExecutable</key>
+            <string>$EXECUTABLE_NAME</string>
+            <key>CFBundleIconFile</key>
+            <string>AppIcon.icns</string>
+            <key>CFBundleIdentifier</key>
+            <string>com.georgetsirogiannis.16core</string>
+            <key>CFBundleName</key>
+            <string>$APP_NAME</string>
+            <key>CFBundlePackageType</key>
+            <string>APPL</string>
+            <key>CFBundleShortVersionString</key>
+            <string>${{ env.APP_VERSION }}</string>
+            <key>LSMinimumSystemVersion</key>
+            <string>10.15</string>
+            <key>NSHighResolutionCapable</key>
+            <true/>
+            <key>CFBundleDocumentTypes</key>
+            <array>
+                <dict>
+                    <key>CFBundleTypeExtensions</key>
+                    <array>
+                        <string>16core</string>
+                    </array>
+                    <key>CFBundleTypeIconFile</key>
+                    <string>FileIcon.icns</string>
+                    <key>CFBundleTypeName</key>
+                    <string>16Core Project</string>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>LSHandlerRank</key>
+                    <string>Owner</string>
+                </dict>
+            </array>
+        </dict>
+        </plist>
+        EOF
 
-  build-linux:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    - name: Create DMG (macOS)
+      if: matrix.os == 'macos-latest'
+      # Output filename now includes version
+      run: |
+        hdiutil create -volname "16Core Character Mapper" -srcfolder "16Core Character Mapper.app" -ov -format UDZO "${{ matrix.output_name }}_v${{ env.APP_VERSION }}.dmg"
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
+    # --- Linux Specific Steps ---
+    - name: Create Linux Archive
+      if: matrix.os == 'ubuntu-latest'
+      # Output filename now includes version
+      run: |
+        cd publish_output
+        tar -czvf ../${{ matrix.output_name }}_v${{ env.APP_VERSION }}.tar.gz *
 
-      - name: Build & Package AppImage
-        run: |
-          dotnet publish SixteenCoreCharacterMapper.Avalonia/SixteenCoreCharacterMapper.Avalonia.csproj \
-            -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true --output ./publish-linux
-          
-          mkdir -p AppDir/usr/bin
-          cp -R ./publish-linux/* AppDir/usr/bin/
-          find AppDir/usr/bin -type f -maxdepth 1 -not -name "*.*" -exec mv {} AppDir/usr/bin/16CoreCharacterMapper \;
-          chmod +x AppDir/usr/bin/16CoreCharacterMapper
-          
-          cat <<EOF > AppDir/16Core.desktop
-          [Desktop Entry]
-          Name=16Core Character Mapper
-          Exec=16CoreCharacterMapper
-          Icon=16core
-          Type=Application
-          Categories=Utility;
-          EOF
-          
-          cp "SixteenCoreCharacterMapper.Avalonia/Assets/16Core Logo v3 Retina.png" AppDir/16core.png
-          
-          cat <<EOF > AppDir/AppRun
-          #!/bin/sh
-          cd "\$(dirname "\$0")"
-          exec ./usr/bin/16CoreCharacterMapper "\$@"
-          EOF
-          chmod +x AppDir/AppRun
-
-          wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O appimagetool
-          chmod +x appimagetool
-          ./appimagetool --appimage-extract
-          ARCH=x86_64 ./squashfs-root/AppRun AppDir "16Core-v${{ env.APP_VERSION }}-Linux.AppImage"
-
-      - name: Upload Linux AppImage
-        uses: actions/upload-artifact@v4
-        with:
-          name: 16Core-v${{ env.APP_VERSION }}-Linux-AppImage
-          path: "*.AppImage"
+    # --- Upload Artifacts ---
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.output_name }}_v${{ env.APP_VERSION }}
+        path: |
+          *_v${{ env.APP_VERSION }}.dmg
+          *_v${{ env.APP_VERSION }}.tar.gz
