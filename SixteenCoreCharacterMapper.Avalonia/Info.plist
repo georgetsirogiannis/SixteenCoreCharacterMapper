@@ -10,29 +10,11 @@
     <string>16Core Character Mapper</string>
     <key>CFBundleVersion</key>
     <string>2.0.0</string>
+    <key>CFBundleExecutable</key>
+    <string>16Core Character Mapper</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
-    <key>CFBundleSignature</key>
-    <string>????</string>
-    <key>CFBundleExecutable</key>
-    <string>SixteenCoreCharacterMapper.Avalonia</string>
-    
-    <key>CFBundleDocumentTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleTypeName</key>
-            <string>16Core Project</string>
-            <key>CFBundleTypeExtensions</key>
-            <array>
-                <string>16core</string>
-            </array>
-            <key>CFBundleTypeIconFile</key>
-            <string>FileIcon.icns</string>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>LSHandlerRank</key>
-            <string>Owner</string>
-        </dict>
-    </array>
+    <key>CFBundleShortVersionString</key>
+    <string>2.0.0</string>
 </dict>
 </plist>
