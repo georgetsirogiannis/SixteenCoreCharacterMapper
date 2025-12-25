@@ -1,10 +1,9 @@
 name: Build MacOS and Linux Binaries
 
 on:
-  workflow_dispatch: # This allows you to click a button to start the build manually
+  workflow_dispatch:
 
 jobs:
-  # --- MACOS BUILD ---
   build-macos:
     runs-on: macos-latest
     steps:
@@ -19,47 +18,63 @@ jobs:
       - name: Install DotNetBundle Tool
         run: dotnet tool install -g DotNetBundle
 
-      - name: Build & Bundle macOS (Intel & Apple Silicon)
-        # This builds for both architectures. macOS users on M1/M2/M3 need arm64 for best performance.
+      - name: Generate .icns Files from Retina PNGs
         run: |
-          # Intel Version
-          dotnet bundle -c Release -r osx-x64 --self-contained true -p:PublishSingleFile=true
-          mv bin/Release/net8.0-windows/osx-x64/publish/*.app "16Core Character Mapper.app"
-          zip -r 16Core-Character-Mapper-macOS-Intel.zip "16Core Character Mapper.app"
-          rm -rf "16Core Character Mapper.app"
+          # Function to convert PNG to ICNS
+          create_icns() {
+            SOURCE=$1; NAME=$2; mkdir "$NAME.iconset"
+            for RES in 16 32 128 256 512; do
+              sips -z $RES $RES "$SOURCE" --out "$NAME.iconset/icon_${RES}x${RES}.png"
+              sips -z $((RES*2)) $((RES*2)) "$SOURCE" --out "$NAME.iconset/icon_${RES}x${RES}@2x.png"
+            done
+            iconutil -c icns "$NAME.iconset" && rm -rf "$NAME.iconset"
+          }
 
-          # Apple Silicon Version
-          dotnet bundle -c Release -r osx-arm64 --self-contained true -p:PublishSingleFile=true
-          mv bin/Release/net8.0-windows/osx-arm64/publish/*.app "16Core Character Mapper.app"
-          zip -r 16Core-Character-Mapper-macOS-ARM.zip "16Core Character Mapper.app"
+          # Using your specific Retina PNG paths
+          create_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core Logo v3 Retina.png" "AppIcon"
+          create_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core File Icon v1 Retina.png" "FileIcon"
+
+      - name: Build & Bundle macOS (Intel & ARM)
+        run: |
+          PROJECT_DIR="SixteenCoreCharacterMapper.Avalonia"
+          PROJECT_FILE="$PROJECT_DIR/SixteenCoreCharacterMapper.Avalonia.csproj"
+          
+          # Build both architectures
+          dotnet bundle $PROJECT_FILE -c Release -r osx-x64 --self-contained true -p:PublishSingleFile=true
+          dotnet bundle $PROJECT_FILE -c Release -r osx-arm64 --self-contained true -p:PublishSingleFile=true
+          
+          # Inject Icons and Info.plist into the resulting .app folders
+          find . -name "*.app" -type d | while read app; do
+            cp AppIcon.icns "$app/Contents/Resources/AppIcon.icns"
+            cp FileIcon.icns "$app/Contents/Resources/FileIcon.icns"
+            cp "$PROJECT_DIR/Info.plist" "$app/Contents/Info.plist"
+          done
+
+          # Package them for download
+          zip -r 16Core-macOS-Intel.zip $(find . -path "*osx-x64/*.app" -type d)
+          zip -r 16Core-macOS-AppleSilicon.zip $(find . -path "*osx-arm64/*.app" -type d)
 
       - name: Upload macOS Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: 16Core-macOS-Builds
-          path: |
-            16Core-Character-Mapper-macOS-Intel.zip
-            16Core-Character-Mapper-macOS-ARM.zip
+          path: "*.zip"
 
-  # --- LINUX BUILD ---
   build-linux:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
       - name: Setup .NET
         uses: actions/setup-net@v4
         with:
           dotnet-version: 8.0.x
-
       - name: Build Linux
         run: |
-          dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true
-          cd bin/Release/net8.0-windows/linux-x64/publish/
-          # We create a tarball (standard Linux zip) of the contents
-          tar -czvf ../../../../16Core-Character-Mapper-Linux.tar.gz .
-
+          PROJECT_FILE="SixteenCoreCharacterMapper.Avalonia/SixteenCoreCharacterMapper.Avalonia.csproj"
+          dotnet publish $PROJECT_FILE -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true
+          PUBLISH_DIR=$(find . -path "*/linux-x64/publish" -type d | head -n 1)
+          tar -czvf 16Core-Character-Mapper-Linux.tar.gz -C "$PUBLISH_DIR" .
       - name: Upload Linux Artifact
         uses: actions/upload-artifact@v4
         with:
