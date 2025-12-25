@@ -19,6 +19,7 @@
     <AssemblyName>16Core Character Mapper</AssemblyName>
     <AssemblyTitle>16Core Character Mapper</AssemblyTitle>
     <RootNamespace></RootNamespace>
+    <PackageIcon>16Core logo icon v3.ico</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -43,5 +44,12 @@
 
   <ItemGroup>
     <Content Include="Assets\16Core logo icon v3.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\16Core logo icon v3.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 </Project>
