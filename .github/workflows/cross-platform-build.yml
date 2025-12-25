@@ -38,12 +38,10 @@ jobs:
 
       - name: Build & Package DMG (Intel & ARM)
         run: |
-          # Define build function to avoid repetition
           package_dmg() {
             ARCH=$1; OUTPUT_FILENAME=$2
             dotnet publish SixteenCoreCharacterMapper.Avalonia/*.csproj -c Release -r $ARCH --self-contained true -p:PublishSingleFile=true --output ./publish-$ARCH
             
-            # Create .app structure
             DIR_NAME="${{ env.APP_NAME }}.app"
             mkdir -p "$DIR_NAME/Contents/MacOS"
             mkdir -p "$DIR_NAME/Contents/Resources"
@@ -52,11 +50,9 @@ jobs:
             cp FileIcon.icns "$DIR_NAME/Contents/Resources/"
             cp SixteenCoreCharacterMapper.Avalonia/Info.plist "$DIR_NAME/Contents/Info.plist"
             
-            # Rename binary and set permissions
-            mv "$DIR_NAME/Contents/MacOS/SixteenCoreCharacterMapper"* "$DIR_NAME/Contents/MacOS/${{ env.APP_NAME }}"
+            find "$DIR_NAME/Contents/MacOS" -type f -maxdepth 1 -not -name "*.*" -exec mv {} "$DIR_NAME/Contents/MacOS/${{ env.APP_NAME }}" \;
             chmod +x "$DIR_NAME/Contents/MacOS/${{ env.APP_NAME }}"
 
-            # Create the DMG
             create-dmg \
               --volname "${{ env.APP_NAME }} - v${{ env.APP_VERSION }}" \
               --window-pos 200 120 \
@@ -69,7 +65,6 @@ jobs:
               "$DIR_NAME"
           }
 
-          # Execute for both architectures
           package_dmg "osx-x64" "16Core-v${{ env.APP_VERSION }}-macOS-Intel.dmg"
           package_dmg "osx-arm64" "16Core-v${{ env.APP_VERSION }}-macOS-AppleSilicon.dmg"
 
@@ -97,9 +92,10 @@ jobs:
           
           # 2. Prepare AppDir structure
           mkdir -p AppDir/usr/bin
-          mkdir -p AppDir/usr/share/icons/hicolor/256x256/apps
           cp -R ./publish-linux/* AppDir/usr/bin/
-          mv AppDir/usr/bin/SixteenCoreCharacterMapper* AppDir/usr/bin/16CoreCharacterMapper
+          
+          # Find and rename binary
+          find AppDir/usr/bin -type f -maxdepth 1 -not -name "*.*" -exec mv {} AppDir/usr/bin/16CoreCharacterMapper \;
           chmod +x AppDir/usr/bin/16CoreCharacterMapper
           
           # 3. Create Desktop File
@@ -114,13 +110,21 @@ jobs:
           
           # 4. Copy Icon
           cp "SixteenCoreCharacterMapper.Avalonia/Assets/16Core Logo v3 Retina.png" AppDir/16core.png
-          ln -s 16core.png AppDir/.DirIcon
+          
+          # Create AppRun script (Essential for AppImage)
+          cat <<EOF > AppDir/AppRun
+          #!/bin/sh
+          cd "\$(dirname "\$0")"
+          exec ./usr/bin/16CoreCharacterMapper "\$@"
+          EOF
+          chmod +x AppDir/AppRun
 
-          # 5. Download AppImageTool and Build
-          wget -O appimagetool https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage
+          # 5. Download AppImageTool and Build (using the FUSE-bypass flag)
+          wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O appimagetool
           chmod +x appimagetool
-          export ARCH=x86_64
-          ./appimagetool AppDir "16Core-v${{ env.APP_VERSION }}-Linux.AppImage"
+          ./appimagetool --appimage-extract
+          
+          ARCH=x86_64 ./squashfs-root/AppRun AppDir "16Core-v${{ env.APP_VERSION }}-Linux.AppImage"
 
       - name: Upload Linux AppImage
         uses: actions/upload-artifact@v4
