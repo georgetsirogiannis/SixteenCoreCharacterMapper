@@ -17,7 +17,7 @@ jobs:
 
       - name: Build & Package macOS
         run: |
-          # 1. Generate Icons
+          # 1. Generate Icons using the specific paths provided
           create_icns() {
             SOURCE=$1; NAME=$2; mkdir "$NAME.iconset"
             for RES in 16 32 128 256 512; do
@@ -26,10 +26,12 @@ jobs:
             done
             iconutil -c icns "$NAME.iconset" && rm -rf "$NAME.iconset"
           }
+          
+          # Target the specific path in your repo
           create_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core Logo v3 Retina.png" "AppIcon"
           create_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core File Icon v1 Retina.png" "FileIcon"
 
-          # 2. Build for Intel (x64)
+          # 2. Build for Intel (x64) targeting the Avalonia project specifically
           dotnet publish SixteenCoreCharacterMapper.Avalonia/SixteenCoreCharacterMapper.Avalonia.csproj -c Release -r osx-x64 --self-contained true -p:PublishSingleFile=true --output ./publish-intel
           
           # 3. Build for Apple Silicon (ARM64)
