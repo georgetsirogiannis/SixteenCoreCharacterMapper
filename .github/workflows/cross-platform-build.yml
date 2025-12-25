@@ -10,12 +10,13 @@ jobs:
     strategy:
       matrix:
         include:
-          # 1. macOS Intel (x64) - Using macos-13 to ensure Intel runner
-          - os: macos-13
+          # 1. macOS Intel (x64) 
+          # We use macos-latest (ARM) to build for Intel (osx-x64) via .NET cross-compilation
+          - os: macos-latest
             os_name: macOS-Intel
             rid: osx-x64
             suffix: macOS-Intel
-          # 2. macOS Apple Silicon (arm64) - Using macos-latest (ARM runner)
+          # 2. macOS Apple Silicon (arm64)
           - os: macos-latest
             os_name: macOS-AppleSilicon
             rid: osx-arm64
@@ -89,7 +90,7 @@ jobs:
             generate_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core File Icon v1 Retina.png" "FileIcon"
         fi
 
-    # 4. Create macOS App Bundle Structure (UPDATED WITH FIXES)
+    # 4. Create macOS App Bundle Structure
     - name: Create macOS App Bundle
       if: startsWith(matrix.os, 'macos')
       run: |
@@ -156,13 +157,10 @@ jobs:
         </plist>
         EOF
 
-        # --- CRITICAL FIXES FOR "DAMAGED" ERROR ---
-        
         # 1. Ensure the binary is executable
         chmod +x "$APP_NAME.app/Contents/MacOS/$EXECUTABLE_NAME"
         
         # 2. Ad-hoc code signing
-        # This tells macOS the app structure is valid, even if the developer is unknown.
         codesign --force --deep --sign - "$APP_NAME.app"
 
     # 5. Create DMG (macOS)
