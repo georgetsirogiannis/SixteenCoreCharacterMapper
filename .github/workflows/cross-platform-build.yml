@@ -1,23 +1,26 @@
 name: Build Multi-Platform
 
 on:
-  push:
-    branches: [ "master", "main" ]
-  pull_request:
-    branches: [ "master", "main" ]
-  workflow_dispatch:
+  workflow_dispatch: # Runs only manually
 
 jobs:
   build:
-    name: Build for ${{ matrix.os_name }}
+    name: Build ${{ matrix.os_name }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         include:
+          # 1. macOS Intel
           - os: macos-latest
-            os_name: macOS
+            os_name: macOS-Intel
             rid: osx-x64
             output_name: 16CoreCharacterMapper-macOS-x64
+          # 2. macOS Apple Silicon
+          - os: macos-latest
+            os_name: macOS-AppleSilicon
+            rid: osx-arm64
+            output_name: 16CoreCharacterMapper-macOS-arm64
+          # 3. Linux
           - os: ubuntu-latest
             os_name: Linux
             rid: linux-x64
@@ -31,16 +34,16 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    # NEW STEP: Extract Version from .csproj
+    # 1. Extract Version from .csproj
     - name: Get Version
       id: get_version
       shell: bash
       run: |
-        # Extract content between <Version> tags
         VERSION=$(sed -n 's/.*<Version>\(.*\)<\/Version>.*/\1/p' SixteenCoreCharacterMapper.Avalonia/SixteenCoreCharacterMapper.Avalonia.csproj | tr -d '\r' | xargs)
         echo "Detected App Version: $VERSION"
         echo "APP_VERSION=$VERSION" >> $GITHUB_ENV
 
+    # 2. Publish the App
     - name: Publish
       run: |
         dotnet publish SixteenCoreCharacterMapper.Avalonia/SixteenCoreCharacterMapper.Avalonia.csproj \
@@ -52,8 +55,10 @@ jobs:
         -o publish_output
 
     # --- macOS Specific Steps ---
+    
+    # 3. Generate .icns from PNGs (macOS only)
     - name: Generate Icons (macOS)
-      if: matrix.os == 'macos-latest'
+      if: startsWith(matrix.os, 'macos')
       run: |
         generate_icns() {
             local src="$1"
@@ -84,8 +89,9 @@ jobs:
             generate_icns "SixteenCoreCharacterMapper.Avalonia/Assets/16Core File Icon v1 Retina.png" "FileIcon"
         fi
 
+    # 4. Create macOS App Bundle Structure
     - name: Create macOS App Bundle
-      if: matrix.os == 'macos-latest'
+      if: startsWith(matrix.os, 'macos')
       run: |
         APP_NAME="16Core Character Mapper"
         EXECUTABLE_NAME="SixteenCoreCharacterMapper.Avalonia"
@@ -98,7 +104,13 @@ jobs:
         if [ -f "AppIcon.icns" ]; then cp "AppIcon.icns" "$APP_NAME.app/Contents/Resources/"; fi
         if [ -f "FileIcon.icns" ]; then cp "FileIcon.icns" "$APP_NAME.app/Contents/Resources/"; fi
         
-        # Info.plist now uses ${{ env.APP_VERSION }}
+        # Determine Minimum System Version based on Architecture
+        if [ "${{ matrix.rid }}" == "osx-arm64" ]; then
+            MIN_OS="11.0"
+        else
+            MIN_OS="10.15"
+        fi
+
         cat > "$APP_NAME.app/Contents/Info.plist" <<EOF
         <?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -117,7 +129,7 @@ jobs:
             <key>CFBundleShortVersionString</key>
             <string>${{ env.APP_VERSION }}</string>
             <key>LSMinimumSystemVersion</key>
-            <string>10.15</string>
+            <string>$MIN_OS</string>
             <key>NSHighResolutionCapable</key>
             <true/>
             <key>CFBundleDocumentTypes</key>
@@ -141,16 +153,15 @@ jobs:
         </plist>
         EOF
 
+    # 5. Create DMG (macOS)
     - name: Create DMG (macOS)
-      if: matrix.os == 'macos-latest'
-      # Output filename now includes version
+      if: startsWith(matrix.os, 'macos')
       run: |
         hdiutil create -volname "16Core Character Mapper" -srcfolder "16Core Character Mapper.app" -ov -format UDZO "${{ matrix.output_name }}_v${{ env.APP_VERSION }}.dmg"
 
-    # --- Linux Specific Steps ---
+    # 6. Create Linux Archive
     - name: Create Linux Archive
       if: matrix.os == 'ubuntu-latest'
-      # Output filename now includes version
       run: |
         cd publish_output
         tar -czvf ../${{ matrix.output_name }}_v${{ env.APP_VERSION }}.tar.gz *
