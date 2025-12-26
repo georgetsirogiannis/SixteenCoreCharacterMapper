@@ -7,9 +7,10 @@ By placing character bubbles on a chart, you can easily see how different charac
 ### Features
 * **Intuitive Interface:** Map characters onto a chart of 16 core personality traits.
 * **Customizable Characters:** Add, edit, and delete characters, and adjust their name, color, and bubble size.
-* **Export Functionality:** Save your character map as a high-quality PNG image for use in your creative projects, and optionally select specific characters or categories to include in the exported PNG.
-* **Trait Notes:** Add and export per-trait notes for characters (exportable as `.txt`).
-* **Localization:** The trait grid is available in 9 languages.
+* **Built-in Questionnaire:** Use an optional science-backed questionnaire to help determine character placements on the trait grid.
+* **Trait Notes:** Add per-trait notes for characters (exportable as `.txt` or `.rtf`).
+* **Image Export:** Save your character map as a high-quality PNG image for use in your creative projects, and optionally select specific characters or categories to include in the exported PNG.
+* **Localization:** The trait grid and questionnaire are available in 9 languages.
 * **Donationware Model:** The app is completely free to use, with optional donations.
 * **Privacy-Focused:** The application operates entirely on your local computer and does not collect or transmit any of your personal data or user-generated content.
 
@@ -23,8 +24,7 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
 
 ### System Requirements
 * **Operating System:** Windows 10 or later, macOS 10.15 (Catalina) or later, or a modern 64-bit Linux distribution.
-* **Runtime:** This application is built on the .NET 8.0 platform. You can either install the .NET 8 runtime for your OS or use a self-contained/platform-specific build that includes the runtime. The Windows installer can install the runtime automatically when required; macOS and Linux packages are provided as self-contained binaries when available.
-* **Architecture:** x64 is supported; arm64 builds are available where noted in the releases.
+* **Runtime:** This application is built on the .NET 8.0 platform. The installer handles the installation of any required runtimes automatically.
 * **Display:** For the best user experience, a screen resolution of 1920x1080 or higher is recommended.
 
 ---
@@ -57,12 +57,12 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
   * Fixed a bug where the Project Title wasn't saved and reverted back to the savefile name the next time the savefile was loaded.
   * Fixed the Update Check functionality. 
 
-**Version 2.0.0** (Yet unreleased / Committed December 24, 2025)
+**Version 2.0.0** (December 25, 2025)
 * This is a major update that transitions 16Core Character Mapper to a natively cross-platform architecture:
 	* **Native Cross-Platform Support**: The app has been fully migrated from WPF to the Avalonia UI framework. This major architectural shift means 16Core Character Mapper is now natively cross-platform, featuring a completely restructured code-behind to ensure high performance and stability across different operating systems.
 	* **Reimagined User Interface**: The UI has been rebuilt from the ground up. While preserving the intuitive design language of v1.1.0, the interface is now optimized for better scaling and a smoother user experience across various display resolutions.
 	* **Enhanced File Management**: Introducing the new .16core file extension for project saves. This custom format allows for better file association and organization. To ensure a seamless transition for early adopters, full support for loading and saving "legacy" .json files has been retained.
 * The update also introduces several new features to enhance character development and export capabilities:
-	* **Questionnaire**: A built-in questionnaire has been added to help determine character placements on the trait grid. This feature provides a science-backed starting point for character development.
+	* **Questionnaire**: An optional built-in questionnaire has been added to help determine character placements on the trait grid. This feature provides a science-backed starting point for character development.
 	* **Trait Notes**: A dedicated space has been integrated for each personality trait to document character-specific decisions, trait manifestations, or narrative dynamics. All entries can be exported as an .rtf or .txt file for external reference.
 	* **Improved Export Image Functionality**: The PNG export functionality now offers advanced filtering options. Rather than exporting the entire project by default, the application allows for the selection of specific character categories or a custom list of individual characters to be included in the exported map.
