@@ -14,6 +14,9 @@ By placing character bubbles on a chart, you can easily see how different charac
 * **Donationware Model:** The app is completely free to use, with optional donations.
 * **Privacy-Focused:** The application operates entirely on your local computer and does not collect or transmit any of your personal data or user-generated content.
 
+### See it in Action
+Watch the [16Core Character Mapper Walkthrough](https://youtu.be/46K9wWfktts) on YouTube to see how to map your cast's personalities.
+
 ### Disclaimer
 This application is a creative tool, not a scientific or diagnostic instrument. It is not intended for psychological assessment, and the personality-related information is provided for creative inspiration only. The terminology used is based on public-domain concepts, primarily drawn from the International Personality Item Pool (IPIP).
 
