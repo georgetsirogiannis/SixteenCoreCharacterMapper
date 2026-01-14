@@ -4,6 +4,15 @@
 
 By placing character bubbles on a chart, you can easily see how different characters compare and interact, making it a valuable tool for understanding their similarities and differences.
 
+<br>
+<div align="center">
+  <img src="https://georgetsirogiannis.com/wp-content/uploads/2026/01/16Core-Character-Mapper-v2-screenshot.png" width="800" alt="16Core Character Mapper Interface Overview">
+  <p><i>16Core Character Mapper v2.0.0 in action (screenshot)</i></p>
+</div>
+<br>
+
+---
+
 ### Features
 * **Intuitive Interface:** Map characters onto a chart of 16 core personality traits.
 * **Customizable Characters:** Add, edit, and delete characters, and adjust their name, color, and bubble size.
@@ -22,7 +31,7 @@ This application is a creative tool, not a scientific or diagnostic instrument. 
 
 ### Support & Contact
 * **Website:** For more information, visit the official website at https://georgetsirogiannis.com/16corecharactermapper.
-* **Donations:** If you find this tool helpful, please consider making an optional donation via PayPal: https://www.paypal.com/donate/?hosted_button_id=9QWZ6U22CL9KA.
+* **Donations:** If you find this tool helpful, please consider making an [optional donation via PayPal](https://www.paypal.com/donate/?hosted_button_id=9QWZ6U22CL9KA).
 * **Email:** For questions, support, or feedback, you can contact me at 16core@georgetsirogiannis.com.
 
 ### System Requirements
