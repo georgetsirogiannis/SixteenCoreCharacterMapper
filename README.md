@@ -4,6 +4,15 @@
 
 By placing character bubbles on a chart, you can easily see how different characters compare and interact, making it a valuable tool for understanding their similarities and differences.
 
+<br>
+<div align="center">
+  <img src="https://georgetsirogiannis.com/wp-content/uploads/2026/01/16Core-Character-Mapper-v2-screenshot.png" width="800" alt="16Core Character Mapper Interface Overview">
+  <p><i>16Core Character Mapper v2.0.0 in action (screenshot)</i></p>
+</div>
+<br>
+
+---
+
 ### Features
 * **Intuitive Interface:** Map characters onto a chart of 16 core personality traits.
 * **Customizable Characters:** Add, edit, and delete characters, and adjust their name, color, and bubble size.
@@ -14,12 +23,15 @@ By placing character bubbles on a chart, you can easily see how different charac
 * **Donationware Model:** The app is completely free to use, with optional donations.
 * **Privacy-Focused:** The application operates entirely on your local computer and does not collect or transmit any of your personal data or user-generated content.
 
+### See it in Action
+Watch the [16Core Character Mapper Walkthrough](https://youtu.be/46K9wWfktts) on YouTube to see how to map your cast's personalities.
+
 ### Disclaimer
 This application is a creative tool, not a scientific or diagnostic instrument. It is not intended for psychological assessment, and the personality-related information is provided for creative inspiration only. The terminology used is based on public-domain concepts, primarily drawn from the International Personality Item Pool (IPIP).
 
 ### Support & Contact
 * **Website:** For more information, visit the official website at https://georgetsirogiannis.com/16corecharactermapper.
-* **Donations:** If you find this tool helpful, please consider making an optional donation via PayPal: https://www.paypal.com/donate/?hosted_button_id=9QWZ6U22CL9KA.
+* **Donations:** If you find this tool helpful, please consider making an [optional donation via PayPal](https://www.paypal.com/donate/?hosted_button_id=9QWZ6U22CL9KA).
 * **Email:** For questions, support, or feedback, you can contact me at 16core@georgetsirogiannis.com.
 
 ### System Requirements
