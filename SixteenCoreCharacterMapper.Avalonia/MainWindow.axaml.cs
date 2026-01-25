@@ -22,6 +22,7 @@ using Avalonia.Controls.Primitives;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Avalonia.Styling;
+using System.Threading.Tasks;
 
 namespace SixteenCoreCharacterMapper.Avalonia
 {
@@ -339,7 +340,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
             ;
                 Grid.SetColumn(leftLabel, 0);
                 
-                var rightLabel = new TextBlock { Text = trait.HighLabel, TextAlignment = TextAlignment.Right, VerticalAlignment = VerticalAlignment.Top, HorizontalAlignment = HorizontalAlignment.Right, FontSize = 9, FontStyle = FontStyle.Italic, FontWeight = FontWeight.Medium, LetterSpacing = -0.2, TextWrapping = TextWrapping.Wrap, Classes = { "TraitLabel" }, Padding = new Thickness(0, 0, 2, 0) };
+                var rightLabel = new TextBlock { Text = trait.HighLabel + "\u00A0", TextAlignment = TextAlignment.Right, VerticalAlignment = VerticalAlignment.Top, HorizontalAlignment = HorizontalAlignment.Stretch, FontSize = 9, FontStyle = FontStyle.Italic, FontWeight = FontWeight.Medium, LetterSpacing = -0.2, TextWrapping = TextWrapping.Wrap, Classes = { "TraitLabel" }, Padding = new Thickness(0, 0, 2, 0) };
                 Grid.SetColumn(rightLabel, 2);
                 
                 labelsGrid.Children.Add(leftLabel);
@@ -749,7 +750,7 @@ namespace SixteenCoreCharacterMapper.Avalonia
             if (projectNameTextBox != null)
             {
                 projectNameTextBox.Background = isDarkMode ? new SolidColorBrush(Color.FromRgb(50, 50, 50)) : Brushes.White;
-                projectNameTextBox.BorderBrush = isDarkMode ? new SolidColorBrush(Color.FromRgb(85, 85, 85)) : new SolidColorBrush(Color.Parse("#ABADB3"));
+                projectNameTextBox.BorderBrush = isDarkMode ? new SolidColorBrush(Color.FromRgb(85, 85, 85)) : new SolidColorBrush(Color.Parse("#ABABD3"));
                 projectNameTextBox.Foreground = isDarkMode ? Brushes.White : Brushes.Black;
             }
 
@@ -1444,6 +1445,61 @@ namespace SixteenCoreCharacterMapper.Avalonia
             {
                 _isResizingPopup = false;
                 e.Pointer.Capture(null);
+            }
+        }
+
+        protected override async void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+
+            // Developer Export: Ctrl + Alt + Shift + E
+            if (e.Key == Key.E &&
+                e.KeyModifiers.HasFlag(KeyModifiers.Control) &&
+                e.KeyModifiers.HasFlag(KeyModifiers.Alt) &&
+                e.KeyModifiers.HasFlag(KeyModifiers.Shift))
+            {
+                await ExportLayoutAsVectorAsync();
+            }
+        }
+
+        private async Task ExportLayoutAsVectorAsync()
+        {
+            if (_viewModel?.Project == null) return;
+
+            var saveOptions = new FilePickerSaveOptions
+            {
+                Title = "Export Layout (Developer)",
+                DefaultExtension = "pdf",
+                FileTypeChoices = new List<FilePickerFileType>
+                {
+                    new FilePickerFileType("PDF Document") { Patterns = new[] { "*.pdf" } },
+                    new FilePickerFileType("SVG Image") { Patterns = new[] { "*.svg" } },
+                    new FilePickerFileType("HTML Document") { Patterns = new[] { "*.html", "*.htm" } }
+                }
+            };
+
+            var file = await StorageProvider.SaveFilePickerAsync(saveOptions);
+            if (file != null)
+            {
+                try
+                {
+                    string? localPath = file.Path.LocalPath;
+                    if (localPath != null)
+                    {
+                        bool isSvg = localPath.EndsWith(".svg", StringComparison.OrdinalIgnoreCase);
+                        bool isHtml = localPath.EndsWith(".html", StringComparison.OrdinalIgnoreCase) || localPath.EndsWith(".htm", StringComparison.OrdinalIgnoreCase);
+                        var service = new SkiaLayoutExportService();
+                        service.Export(this, localPath, isSvg, isHtml);
+
+                        var msgBox = new SimpleMessageBox("Layout exported successfully!", "Export Complete", SimpleMessageBox.MessageBoxButtons.OK);
+                        await msgBox.ShowDialog(this);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var msgBox = new SimpleMessageBox($"Error: {ex.Message}", "Export Error", SimpleMessageBox.MessageBoxButtons.OK);
+                    await msgBox.ShowDialog(this);
+                }
             }
         }
     }

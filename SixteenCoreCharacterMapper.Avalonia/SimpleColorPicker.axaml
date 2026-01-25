@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="150"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="220"
              x:Class="SixteenCoreCharacterMapper.Avalonia.SimpleColorPicker"
              x:Name="Root">
     <StackPanel>
@@ -11,7 +11,8 @@
                 <SolidColorBrush Color="{Binding #Root.SelectedColor}" />
             </Border.Background>
         </Border>
-        <Grid Margin="5" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
+
+        <Grid Margin="5,0,5,0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
             <TextBlock x:Name="RLabel" Text="R:" VerticalAlignment="Center" Margin="0,0,5,0" Grid.Row="0" Grid.Column="0"/>
             <Slider Name="SliderR" Minimum="0" Maximum="255" Grid.Row="0" Grid.Column="1"/>
             
@@ -21,5 +22,19 @@
             <TextBlock x:Name="BLabel" Text="B:" VerticalAlignment="Center" Margin="0,0,5,0" Grid.Row="2" Grid.Column="0"/>
             <Slider Name="SliderB" Minimum="0" Maximum="255" Grid.Row="2" Grid.Column="1"/>
         </Grid>
+
+        <StackPanel Orientation="Horizontal" 
+                     HorizontalAlignment="Right" 
+                     Margin="5,10,5,5">
+            <TextBlock x:Name="HexLabel" 
+                       Text="Hex: #" 
+                       VerticalAlignment="Center" 
+                       Margin="0,0,5,0"/>
+            <TextBox Name="HexInput" 
+                     MaxLength="6" 
+                     Watermark="RRGGBB"
+                     Width="80"
+                     VerticalAlignment="Center"/>
+        </StackPanel>
     </StackPanel>
 </UserControl>
