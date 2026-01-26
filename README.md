@@ -26,6 +26,9 @@ By placing character bubbles on a chart, you can easily see how different charac
 ### See it in Action
 Watch the [16Core Character Mapper Walkthrough](https://youtu.be/46K9wWfktts) on YouTube to see how to map your cast's personalities.
 
+### Explore Iconic Ensembles
+Subscribe to [Mapped Out](https://16core.substack.com), the app's official companion Substack, to read trait analyses of iconic casts from film, TV, and literature.
+
 ### Disclaimer
 This application is a creative tool, not a scientific or diagnostic instrument. It is not intended for psychological assessment, and the personality-related information is provided for creative inspiration only. The terminology used is based on public-domain concepts, primarily drawn from the International Personality Item Pool (IPIP).
 
